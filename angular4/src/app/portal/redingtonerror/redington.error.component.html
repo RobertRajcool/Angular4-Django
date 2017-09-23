@@ -1,0 +1,9 @@
+<!--<section class="offer-outline widget windget-padding-lg">
+    <header></header>
+    <div class="widget-body clearfix" *ngIf="showerrorMsgStatus==true">
+        <h3 class="fw-semi-bold">{{ errorMsg }} </h3>
+    </div>
+</section>-->
+<alert class="errorMsg" *ngIf="showerrorMsgStatus==true" [type]="'danger alert-sm'" dismissible="true">
+    <div [innerHTML]="errorMsg"></div>
+</alert>

@@ -1,0 +1,46 @@
+<section class="card notifications">
+	<header class="card-header">
+		<div class="text-xs-center mb-sm">
+			<strong>You have {{ total_unread_messages + total_unread_alerts }} notifications</strong>
+		</div>
+		<div class="btn-group btn-group-sm btn-group-justified" id="notifications-toggle" data-toggle="buttons">
+			<label class="btn btn-secondary" data-ajax="true" (click)="changeType('messages')" [ngClass]="{active: filters['type'] === 'messages'}">
+                <span class="tag-btn">Messages</span>  <span class="tag tag-pill tag-white float-xs-right">{{ total_unread_messages }}</span>
+            </label>
+			<label class="btn btn-secondary" data-ajax="true" (click)="changeType('alerts')" [ngClass]="{active: filters['type'] === 'alerts'}">
+                <span class="tag-btn">Alerts</span>  <span class="tag tag-pill tag-danger float-xs-right">{{ total_unread_alerts }}</span>
+
+            </label>
+		</div>
+	</header>
+	<!-- notification list with .thin-scroll which styles scrollbar for webkit -->
+	<div *ngIf="notifications" class="list-group thin-scroll popup-notifications-list">
+		<div *ngFor="let notification of notifications; let i = index;" class="list-group-item">
+
+			<span *ngIf="(notification['viewed_by'] | in_comma_seperated: user_details.id)" class="thumb-sm float-xs-left mr clearfix"><i class="fa fa-check-circle"></i></span>
+			<span *ngIf="!(notification['viewed_by'] | in_comma_seperated: user_details.id)" class="thumb-sm float-xs-left mr clearfix">
+                <i class="fa fa-check-circle-o link" appTooltip data-toggle="tooltip" data-placement="right" data-ajax="true" title="Mark as read" (click)="markAsRead(i)"></i>
+            </span>
+			<div class="no-margin overflow-hidden">
+				<div class="row no-margin row1 overflow-hidden">
+					<span class="purpose overflow-hidden">
+                        {{ notification['purpose'] | capitalize}}
+                    </span>
+					<app-nf-actions class="actions overflow-hidden" [design]="'popup'" [notification]="notification" (refresh)="getNotifications()"></app-nf-actions>
+				</div>
+				<div class="row2 overflow-hidden">
+					<span class="datetime help-text">{{ notification['posted_at'] | timeline_datetime }}</span>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="notifications.length == 0" class="not-available">
+			No new {{ filters['type'] }}.
+		</div>
+	</div>
+	<footer class="card-footer text-sm">
+		<button class="btn btn-xs btn-link float-xs-right btn-notifications-reload" data-ajax="true" type="button" (click)="getNotifications()">
+      <i class="fa fa-refresh" [ngClass]="{'fa-spin': synchronizing}"></i>
+    </button>
+		<span class="fs-mini">Synced at: {{ last_sync | format_datetime: 'dd mmm yyyy hh:mm'}}</span>
+	</footer>
+</section>

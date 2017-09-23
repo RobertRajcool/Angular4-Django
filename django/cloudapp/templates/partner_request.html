@@ -1,0 +1,17 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {% if type == 'Customer' %}
+       Customer Registration Completed
+    {% else %}
+       Partner Registration Completed
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <p>Hello <strong>{{ username }}</strong>! </p>
+    <p>Congratulations !</p>
+    <p>Your registration process is completed successfully. </p>
+    <p>Your Account will be activated soon. </p>
+{% endblock %}
+

@@ -1,0 +1,40 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Invoice Details
+{% endblock %}
+
+{% block content %}
+    <p>Dear Partner,</p>
+
+    <p>Greetings from Redington (India) Limited!</p>
+
+
+    <p>Please find attached the Invoice for the cloud services subscribed by you.</p>
+
+    <p>Invoice No: {{ invoice_number }}</p>
+
+    <p>Invoice Date: {{ invoice_data }}</p>
+
+    <p>Invoice Amount: {{ invoice_amount }}</p>
+
+    <p>Invoice Due Date: {{ invoice_due_data }}</p>
+
+{#    <p>You can pay your invoice using this link : {{ payz_app_link }}#}
+
+    <p>This is digitally signed invoice and requires no physical signature.You may download the invoice from your Redington Cloud Portal login under Invoices -> Invoices List</p>
+
+    <p>This Invoice shall be treated as a valid document for all Taxation purpose and legally valid as per the provisions of the Information Technology Act, 2000 and subsequent amendments.</p>
+
+    <p>You may use the below link for remitting your payment</p>
+
+
+    <p>For Registered users: https://www.redingtoncloud.com/cloud/frm_Login.aspx</p>
+
+    <p>To Register: https://www.redingtoncloud.com/cloud/
+        If you have any queries related to this invoice, feel free to touch base with our Sales Managers or write to us in this email Id Cloudbilling@redington.co.in</p>
+
+
+    <p>Thank You</p>
+
+{% endblock %}

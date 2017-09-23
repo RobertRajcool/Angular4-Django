@@ -1,0 +1,38 @@
+<div class="row profile">
+	<div class="col-lg-6 col-xs-12">
+		<section class="widget">
+			<div class="widget-body">
+				<div class="widget-top-overflow text-white">
+					<div class="height-250 overflow-hidden">
+						<img class="img-fluid" src="../../../assets/img/pictures/20.jpg">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-xs-12 text-xs-center">
+						<div class="post-user post-user-profile">
+							<span class="thumb-xlg">
+                                <img class="rounded-circle" src="../../../assets/img/people/user3.png" alt="...">
+                            </span>
+							<h5 class="fw-normal">{{ user_details.first_name }} <span class="fw-semi-bold">{{ user_details.last_name }}</span></h5>
+							<p [ngSwitch]="user_details.user_type">
+								<span *ngSwitchDefault>Redington Admin</span>
+								<span *ngSwitchCase="'R'">Redington Employee</span>
+								<span *ngSwitchCase="'P'">Redington Partner</span>
+								<span *ngSwitchCase="'C'">Redington Customer</span>
+							</p>
+
+							<!--<a href="#" class="btn btn-danger btn-sm mt">
+                                &nbsp;Send
+                                <i class="fa fa-envelope ml-xs"></i>&nbsp;
+                            </a>-->
+							<ul class="contacts">
+								<li><i class="fa fa-envelope fa-fw mr-xs"></i><a href="#"> {{ user_details.email }}</a></li>
+								<li><i class="fa fa-map-marker fa-fw mr-xs"></i><a href="#"> {{ user_details.address }}, {{ user_details.user_location }}</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+/***********************/
+/*        Theme       */
+/***********************/
+.theme-select .sidebar {
+    background:#0b534f;
+    color:#a7b1c2;
+	font-weight:400;
+  }
+.theme-select .sidebar-nav li a {
+  	color:#a7b1c2;
+  }
+.theme-select .sidebar-nav > li > a {
+  	border-top:1px solid #126862;
+  }  
+.theme-select .sidebar-nav > li:last-child > a {
+    border-bottom:1px solid #126862;
+  }
+.theme-select .sidebar-nav > li > a:hover {
+  	background:#07734b;
+  }
+.theme-select .sidebar-nav > .active > a {
+  	background:#07734b;
+  }
+.theme-select .sidebar-nav > .active > a .icon {
+  	background:#a7b1c2;
+  }
+.theme-select .sidebar-nav > .active > a .icon .fa, .sidebar-nav > .active > a .icon .glyphicon {
+  	color:#000000;
+  }
+.theme-select .sidebar-nav > li > a .icon .fa, .sidebar-nav > li > a .icon .glyphicon {
+  	color:#a7b1c2;
+  }
+.theme-select .content {
+   background:#d3ebe2;
+ }
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+<carousel>
+  <slide *ngFor="let image of images">
+    <img src="{{image.url}}" (click)="navigate_isv_product(image.id)" alt="{{image.title}}">
+  </slide>
+</carousel>

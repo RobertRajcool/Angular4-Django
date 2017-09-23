@@ -1,0 +1,83 @@
+<div class="row">
+	<div class="col-lg-6">
+		<div class="form-horizontal form_class no-form created-roles-screen">
+			<div class="form_class_fieldset_div">
+				<div class="title">List of roles</div>
+				<div class="row-fluid row">
+					<div class="col-lg-12">
+						<fieldset>
+							<div class="widget-body scroll-content no-padding no-margin-bottom" style="height: 40rem;">
+								<div class="list-group list-group-lg" [ngClass]="{'border-top': roles.length < 1}">
+									<a *ngFor="let role of roles; let i=index" class="list-group-item" [ngClass]="{'selected': role.id == selectedId}" href="javascript:void(0);">
+										<span class="thumb-sm float-xs-left mr"></span>
+										<span (click)="editRole(role)" class="btn btn-danger edit-btn fa float-xs-right mt-sm">Edit</span>
+										<h6 class="no-margin">{{ role.alias }}</h6>
+										<small class="description-text">{{ role.description }}</small>
+									</a>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6">
+		<form class="form-horizontal form_class" role="form" [formGroup]="rolesForm" (ngSubmit)="submitForm()">
+			<div class="form_class_fieldset_div">
+				<div class="title">{{ action }} role</div>
+				<div class="row-fluid row">
+					<div class="col-lg-12">
+						<section class="widget" widget="" style="margin-bottom:0px;">
+							<header>
+								<div class="widget-controls">
+									<div style="margin:-10px -10px 0px 0px; float:right;"><a (click)="resetForm()" href="#" appTooltip data-toggle="tooltip" data-title="Reset form" data-placement="left"
+											class="btn btn-primary btn-xs mb-xs"><i class="fa fa-repeat icon-link-text-white"></i></a></div>
+								</div>
+							</header>
+							<div class="widget-body scroll-content border-top">
+
+								<div class="form-group row">
+									<label for="normal-field" class="col-md-4 required col-form-label text-md-left">Role name</label>
+									<div class="col-md-7">
+										<input type="text" formControlName="alias" id="normal-field" class="form-control" placeholder="Please enter role name">
+										<span *ngIf="rolesForm.controls.alias.disabled" class="help-block">
+                                    <span class="text-info">Predefined role name is non editable.</span>
+										</span>
+										<control-messages [control]="rolesForm.controls.alias"></control-messages>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="description" class="col-md-4  col-form-label text-md-left">Description</label>
+									<div class="col-md-7">
+										<textarea id="description" class="form-control" formControlName="description" id="default-textarea" placeholder="Please enter description"
+											rows="4"></textarea>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="normal-field" class="col-md-4 required col-form-label text-md-left">Permissions</label>
+									<div class="col-lg-8 permissions-section">
+										<div class="abc-checkbox abc-checkbox-primary" *ngFor="let permission of permissionList">
+											<input [checked]="permission.checked == true ? 'checked': null" type="checkbox" (change)="handleSelect($event)" value="{{ permission.name }}"
+												id="{{ permission.name }}">
+											<label for="{{ permission.name }}">{{ permission.text | u_to_space | capitalize }}</label>
+										</div>
+										<control-messages [control]="rolesForm.controls.accesses"></control-messages>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions new-actions1">
+				<button type="submit" [disabled]="!rolesForm.valid || processing" class="btn btn-primary">
+                        <span [hidden]="processing">Save</span>
+                        <span [hidden]="!processing">Saving &ensp; <i class="fa fa-spinner fa-spin"></i></span>
+                    </button>
+				<button (click)="resetView()" [disabled]="processing" class="btn btn-inverse" type="button">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

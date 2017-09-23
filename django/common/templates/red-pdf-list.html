@@ -1,0 +1,360 @@
+
+{% load commonfilters %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{ screenName|upper }}</title>
+    <style type="text/css">
+        .break {
+            page-break-before: avoid;
+        }
+
+        .must-break {
+            page-break-before: always;
+        }
+        @media print {
+            thead {display: table-header-group;}
+        }
+        p {
+            margin:0px;
+            padding:0px;
+        }
+        .certificate-wrapper-main {
+            width: 100%;
+        }
+        .certificate-default-margin {
+            padding: 0px 18px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+            border: 0;
+            -ms-interpolation-mode: bicubic;
+        }
+        .right-logo-img {
+            width: 164px;
+            height: 68px;
+        }
+        .engineer-signature {
+            max-height:36px;
+            max-width:180px;
+        }
+        .clearfix {
+            clear: both;
+        }
+        .certificate-wrapper {
+            width: 1230px;
+            padding:0%;
+            margin: 0 auto;
+            color: #333333;
+            background: #FFFFFF;
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .certificate-wrapper .row-fluid {
+            padding:0px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .certificates_header {
+            margin-bottom: 10px;
+        }
+        .certificates_header .brand-title {
+            width: 64%;
+            float: left;
+            font-family:arial;
+        }
+        .certificates_header .brand-title-2 {
+            width: 70%;
+            float: left;
+            font-family: arial;
+        }
+        .certificates_header .brand-logo {
+            width: 68px;
+            height:68px;
+            float: right;
+            text-align: right;
+        }
+        .certificates_header .right-logo {
+            width: 164px;
+            height:68px;
+            float: right;
+            text-align: right;
+        }
+        .certificates_header .title {
+            font-size: 24px;
+            line-height: 29px;
+            margin-bottom: 8px;
+        }
+        .certificates_header p {
+            margin: 0px;
+            font-size: 12px;
+            line-height: 14px;
+        }
+        .data-row-section {
+            margin: 0;
+            padding: 0;
+        }
+        .data-row-section p {
+            font-family: arial;
+            font-size: 12px;
+            color: #333333;
+        }
+        .certificates-table {
+            border-right: 1px solid #afafaf;
+            border-left: 1px solid #afafaf;
+            border-top: none;
+            border-bottom: none;
+            margin-top: -1px;
+            width: 100%;
+            border-collapse: 0px;
+        }
+        .certificates-table thead {
+            background: none;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            border-bottom: none;
+        }
+        .certificates-table thead .no-th-right-border {
+            border-right: none;
+        }
+        .certificates-table thead th {
+            font-weight: bold;
+            font-size: 12px;
+            font-family: arial;
+            line-height: 12px;
+            letter-spacing: 0px;
+            margin: 0;
+            padding: 5px 4px;
+            text-align: left;
+            border-right: 1px solid #888888;
+        }
+        .certificates-table thead th:first-child {
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+        }
+        .certificates-table thead th:last-child {
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            border-right: none;
+        }
+        .certificates-table tbody tr {
+            border-bottom: none;
+        }
+        .certificates-table tbody tr:nth-child(odd) {
+            background: none;
+        }
+        .certificates-table tbody tr:hover {
+            background: none;
+        }
+        .certificates-table tbody .tr-no-style {
+            border-top: none !important;
+            background: none !important;
+        }
+        .certificates-table tbody .tr-no-style:hover {
+            background: none !important;
+        }
+        .certificates-table tbody .text-style-italic {
+            font-style: italic;
+        }
+        .certificates-table tbody .need-td-padding-space-1 {
+            padding-left: 20px;
+        }
+        .certificates-table tbody .no-td-right-border {
+            border-right: none;
+        }
+        .certificates-table tbody .no-td-bottom-border {
+            border-bottom: none;
+        }
+        .certificates-table tbody .no-td-left-border {
+            border-left: none;
+        }
+        .certificates-table tbody .td-sub-title {
+            background: #ededed;
+            padding: 2px 4px;
+        }
+        .certificates-table tbody .td-sub-title-deicc {
+            background: #ededed;
+            padding: 0px;
+        }
+        .certificates-table tbody .none-td-border {
+            border-top: none;
+            border-right: none;
+        }
+        .certificates-table tbody .blank-field-td {
+            height: 18px;
+        }
+        .certificates-table tbody td {
+            padding: 2px 4px;
+            border-bottom: 1px solid #afafaf;
+            border-right: 1px solid #afafaf;
+            font-size: 12px;
+            color: #333333;
+            font-family: arial;
+            vertical-align: top;
+            text-align: left;
+            word-break: break-all;
+        }
+        .certificates-table tbody td:last-child {
+            border-right: none;
+        }
+        .certificates-table tbody td p strong {
+            color: #333333;
+        }
+        .certificates-table tbody td strong {
+            color: #333333;
+        }
+        .certificates-table tbody td label {
+            float: left;
+        }
+        .certificates-table tbody td p {
+            margin: 0 0 10px 0;
+        }
+        .certificates-table tbody td p:last-child {
+            margin: 0;
+        }
+        .certificates-table tbody td .certificates-table_tr-td-no-style tbody tr td {
+            padding: 0px 0px;
+            border-right: none;
+            border-bottom: none;
+            background: #FFFFFF;
+        }
+        .certificates-table .no-column {
+            width: 20px;
+            min-width: 20px;
+            max-width: 20px;
+        }
+        .branding-colours {
+            background: #6393b5;
+            color: #ffffff;
+        }
+
+
+
+        .products-list-row .sku_code {
+            width: 15%;
+        }
+        .products-list-row .name {
+            width: auto;
+        }
+        .products-list-row .vendor {
+            width: 15%;
+        }
+        .products-list-row .billing_type {
+            width: 10%;
+        }
+        .products-list-row .jba_code {
+            width: 12%;
+        }
+        .products-list-row .unitcost {
+            width: 8%;
+        }
+        .products-list-row .unitprice {
+            width: 8%;
+        }
+        .products-list-row .discount {
+            width: 8%;
+        }
+        table, tr, td, th, tbody, thead, tfoot {
+            page-break-inside: avoid !important;
+        }
+        tr {
+            page-break-inside: avoid !important;
+        }
+        .break{
+            display: block;
+            clear: both;
+            page-break-after: always;
+        }
+        table:last-of-type {
+            page-break-after: auto
+        }
+        body > *:last-child {
+            page-break-after: auto
+        }
+
+    </style>
+    <script>
+        var vars={};
+        var x=window.location.search.substring(1).split('&');
+        for (var i in x) {
+            var z=x[i].split('=',2);
+            vars[z[0]] = unescape(z[1]);
+        }
+        document.getElementById('current_page').innerHTML = vars.page;
+        document.getElementById('total_page').innerHTML = vars.topage;
+    </script>
+    <script>
+        function subst() {
+            var vars={};
+            var x=document.location.search.substring(1).split('&');
+            for (var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+            for (var i in x) {
+                var y = document.getElementsByClassName(x[i]);
+                for (var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="certificate-wrapper">
+    <div class="row-fluid">
+        <div class="certificates_header clearfix">
+            <div class="brand-title">
+                <div class="title">{{ screenName|title }}</div>
+            </div>
+            <div class="right-logo">
+                <img class="right-logo-img" src="https://portal.redingtoncloud.com/uploads/order_images/logo.jpg" />
+            </div>
+        </div>
+        <section class="data-row-section " >
+            <div>
+
+                <table class="responsive-table certificates-table products-list-row break">
+                    <thead>
+                    <tr>
+                        {% comment %} <th class="branding-colours sku_code">SKU Code</th>
+            <th class="branding-colours name">Name</th>
+            <th class="branding-colours vendor">Vendor</th>
+            <th class="branding-colours billing_type">Billing Type(per)</th>
+            <th class="branding-colours jba_code">JBA Code</th>
+            <th class="branding-colours unitcost">UnitCost</th>
+            <th class="branding-colours unitprice">UnitPrice</th>
+            <th class="branding-colours discount">Discount</th>{% endcomment %}
+                        {% for headerkey,values in tableheaders.items %}
+                            <th class="branding-colours ">{{ values }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for each_model in tablebodycontent %}
+                        <tr style="page-break-inside:avoid;">
+                            {% for headerkey,values in tableheaders.items %}
+                                <td>{{ each_model|return_item:headerkey }}</td>
+                            {% endfor %}
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        {% comment %}<section class="data-row-section">
+            <div class="page-continuous-row page-continuous-mpdf-margin-2">
+                <p>Products List</p>
+                <p class="page-navigation-numbers page-continuous-mpdf-margin">
+                    Page <span class="page"></span> of <span class="topage"></span>
+                </p>
+            </div>
+        </section>{% endcomment %}
+    </div>
+</div>
+</body>
+</html>

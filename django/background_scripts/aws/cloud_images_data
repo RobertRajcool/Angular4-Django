@@ -1,0 +1,85 @@
+To list Images from aws-marketplace
+===================================
+aws ec2 describe-images --owner=aws-marketplace --query 'Images[*].{ImageName:Name,ImageID:ImageId}' --output table
+
+To list Images from amazon
+==========================
+aws ec2 describe-images --owner=amazon --query 'Images[*].{ImageName:Name,ImageID:ImageId}' --output table
+
+
+To List Images from Amazon with give Location
+==============================================
+
+aws ec2 --region=ap-south-1 describe-images --owner=aws-marketplace --filter "Name=manifest-location,Values=aws-marketplace/CentOS72-Minimal-HVM-c8c6caea-4811-48df-bc58-02dc4c752c29-ami-4f39af58.3" --query 'Images[*].{ImageName:Name,ImageID:ImageId}' --output table
+
+
+aws ec2 --region=ap-south-1 describe-images --owner=aws-marketplace --filter "Name=manifest-location,Values=aws-marketplace/CentOS Linux 7 x86_64 HVM EBS 1602-b7ee8a69-ee97-4a49-9e68-afaee216db2e-ami-d7e1d2bd.3" --query 'Images[*].{ImageName:Name,ImageID:ImageId}' --output=table
+
+aws ec2 --region=ap-south-1 describe-images --owner=aws-marketplace --filter "Name=manifest-location,Values=aws-marketplace/CentOS Linux 6 x86_64 HVM EBS 1602-74e73035-3435-48d6-88e0-89cc02ad83ee-ami-21e6d54b.3" --query 'Images[*].{ImageName:Name,ImageID:ImageId}' --output=table
+
+
+To List Images from Amazon for RHEL
+===================================
+aws ec2 --region=ap-south-1 describe-images --filter "Name=owner-id,Values=309956199498" --query 'Images[*].{ImageName:Name,ImageID:ImageId}' --output=table
+
+
+Raja:
+-----
+Ubuntu EBS with HVM-Virtualized non-testing non-kernel images in us-west1:
+
+aws ec2 describe-images --owners 099720109477
+         --query 'Images[?VirtualizationType==`hvm`]|[?Name!=`null`]|[?contains(Name, `testing`) == `false`]|[?contains(Name, `sandbox`) == `false`]|[?contains(Name,`ubuntu/images/hvm-ssd`) == `true`]|[?RootDeviceType==`ebs`].[Name, ImageId,OwnerId]'
+         --region="us-west-1"
+         --output text | sort | sed -e 's|ubuntu/images/hvm-ssd/||; s|-server-\(.*\)\(ami-.*\)|-server \2|' |
+         awk 'BEGIN{FS=" "} {array[$1] = $2}END {for (a in array) print a " "  array[a]}'
+
+Debian images:
+aws ec2 describe-images --owners 379101102735
+        --query 'Images[?VirtualizationType==`hvm`]|[?Name!=`null`]|[?contains(Name, `testing`) == `false`]|[?contains(Name, `sandbox`) == `false`]|[?contains(Name,`debian-`) == `true`]|[?RootDeviceType==`ebs`].[Name, ImageId]'
+        --region="us-west-1"
+        --output text | sort | sed -e 's|-hvm-\(.*\)\(ami-.*\)|-server \2|'  |
+        awk 'BEGIN{FS=" "} {array[$1] = $2}END {for (a in array) print a " "  array[a]}'
+
+Fedora Images: (They do nightly builds, so what we ahve is a hack. Needs to see what can be done (Grep -v <year> to skip nightly builds)
+aws ec2 describe-images --owners 125523088429
+        --query 'Images[?VirtualizationType==`hvm`]|[?Name!=`null`]|[?contains(Name, `hide`) == `false`]|[?contains(Name, `Atomic`) == `false`]|[?contains(Name, `Alpha`) == `false`]|[?contains(Name, `Beta`) == `false`]|[?contains(Name, `gp2-`) == `true`]|[?RootDeviceType==`ebs`].[Name, ImageId]'
+        --region="us-west-1"
+        --output text | grep -v -e '201[5|6|7|8]' | sort  |
+        sed -e 's|-1\.\(.*\)\(ami-.*\)|-1 \2|' | awk 'BEGIN{FS=" "} {array[$1] = $2}END {for (a in array) print a " "  array[a]}'
+
+RHEL Images:
+aws ec2 describe-images --owners 309956199498
+        --query 'Images[?VirtualizationType==`hvm`]|[?Name!=`null`]|[?contains(Name, `HVM_GA`) == `true`]|[?contains(Name, `Beta`) == `false`]|[?RootDeviceType==`ebs`].[Name, ImageId]'
+        --region="us-west-1"
+        --output text | sort  | sed -e 's|HVM_GA-\(.*\)\(ami-.*\)|HVM_GA \2|' |
+        awk 'BEGIN{FS=" "} {array[$1] = $2}END {for (a in array) print a " "  array[a]}'
+
+CentOS Images:
+aws ec2 describe-images --owners aws-marketplace --query 'Images[?VirtualizationType==`hvm`]|[?Name!=`null`]|[?starts_with(Name, `CentOS Linux `) == `true`]|[?RootDeviceType==`ebs`].[Name, ImageId]'
+        --region="us-west-1"
+        --output text | sort
+
+Windows Images: (Only Base, no SQL Server)
+aws ec2 describe-images --owners amazon
+        --filters Name=platform,Values=windows
+        --query 'Images[?VirtualizationType==`hvm`]|[?Name!=`null`]|[?starts_with(Name, `Windows_Server`) == `true`]|[?contains(Name, `English`) == `true`]|[?RootDeviceType==`ebs`].[Name, ImageId]'
+        --region="us-west-1" --output text |
+        grep '\-Base\-'| sort |
+        sed -e 's|-Base-\(.*\)\(ami-.*\)|-Base \2|' |
+        awk 'BEGIN{FS=" "} {array[$1] = $2}END {for (a in array) print a " "  array[a]}'
+
+AZURE:
+RHEL:
+az vm image list-skus --offer RHEL -p RedHat -l westus
+
+Debian:
+az vm image list-skus -p credativ --offer Debian -l westus
+
+Ubuntu:
+az vm image list-skus -p Canonical --offer UbuntuServer  -l westus
+
+Windows:
+az vm image list-skus --offer WindowsServer -p MicrosoftWindowsServer  -l westus
+
+CentOS:
+az vm image list-skus --offer CentOS -p OpenLogic  -l westus

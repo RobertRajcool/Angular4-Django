@@ -1,0 +1,91 @@
+/***********************/
+/*        Theme       */
+/***********************/
+.theme-select .sidebar {
+    background:#2f4050;
+    color:#a7b1c2;
+	font-weight:400;
+  }
+.theme-select .sidebar-nav li a {
+  	color:#a7b1c2;
+  }
+.theme-select .sidebar-nav > li > a {
+  	border-top:1px solid #374a5b;
+  }  
+.theme-select .sidebar-nav > li:last-child > a {
+    border-bottom:1px solid #374a5b;
+  }
+.theme-select .sidebar-nav > li > a:hover {
+  	background:#293846;
+  }
+.theme-select .sidebar-nav > .active > a .icon {
+  	background:#a7b1c2;
+  }
+.theme-select .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  	color:#FFFFFF;
+	background:#2f4050;
+  }
+.pagination > li > a {
+    color: #555555;
+	border-radius: 2px;
+}
+.theme-select .sidebar-nav > li > a .icon .fa, .sidebar-nav > li > a .icon .glyphicon {
+  	color:#a7b1c2;
+  }
+.theme-select .content {
+   background:#e2f0fe;
+ }
+ 
+ 
+.theme-select .paginate-bg {
+	background: #849db4;
+}
+.theme-select .displaying-page .text {
+    color: #ffffff;
+}
+
+ 
+.table > thead > tr > th {
+	background: #2f4050;
+	color:#FFFFFF;
+    font-weight: 600;
+    text-transform: none;
+    border-bottom-width: 1px;
+	border-right:1px solid #aea8ce;
+	border-bottom: 1px solid #aea8ce;
+}
+.table > tbody > tr.search-title-section {
+	background:#8db0d0 !important;
+	border-right: 1px solid #91aac2;
+}
+.table > tbody > tr > td {
+	color:#333333 !important;
+    font-weight: normal;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #e2f0fe;
+}
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: #f9fbfd;
+}
+.table-hover tbody tr:hover {
+    background-color: #e2f0fe;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.theme-select .bg-gray-lighter {
+    background: #f4f4f4 !important;
+	height: 100% !important;
+	color: #333333;
+}
+

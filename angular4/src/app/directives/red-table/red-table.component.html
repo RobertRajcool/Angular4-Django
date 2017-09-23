@@ -1,0 +1,81 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="form-horizontal form_class" role="form">
+			<div class="form_class_fieldset_div">
+				<div class="title">{{ screenName }}</div>
+				<div class="row-fluid row">
+					<section class="widget new-widget" widget>
+						<header>
+							<div *ngIf="displayCommonFilter" class="list-search">
+								<div class="form-group">
+									<div class="input-group input-group-no-border">
+										<input [ngTableFiltering]="config.filtering" [(ngModel)]="searchText" (tableChanged)="onChangeTable(config, '', 'topSearch')"
+											class="form-control" placeholder="{{ config.filtering.placeholder }}" type="text">
+									</div>
+								</div>
+							</div>
+							<div class="add-and-download">
+								<span *ngIf="exchange_rate != 0" class="ng-table-usd-price-note">
+									USD Rate :{{exchange_rate}} <!--{{ exchange_rate | Currency:2:'INR':true}}-->
+								</span>
+                                 <!--Export raw button-->
+                                <button *ngIf="config['buttons'] && (config['buttons'] | keys | array_contains:'export-raw')" (click)="exportSelectedRecords('raw')" [disabled]="!config['buttons']['export-raw'][1] || false" class="btn btn-primary btn-sm mb-xs add-user" type="button">
+                                    {{ config['buttons']['export-raw'][0] }} &ensp;
+                                    <i [hidden]="!config['buttons']['export-raw'][2]" class="fa fa-spinner fa-spin"></i>
+                                </button>
+								<!--Add new button-->
+                                <button *ngIf="addButtonInfo && addButtonInfo.text" class="btn btn-primary btn-sm mb-xs add-user" type="button" (click)="navigateToAddScreen()">{{ addButtonInfo.text }}</button>
+								<app-red-pdf-report [backend_fetchUrl_pdf]="backend_pdfreport_fetchUrl" [commonFilter_Pdf]="backend_pdfreport_Filters" [screenName]="screenName"></app-red-pdf-report>
+								<app-red-excel-report [backend_fetchUrl_excel]="backend_excereport_fetchUrl" [commonFilter_Excel]="backend_excereport_Filters"
+									[screenName]="screenName"></app-red-excel-report>
+							</div>
+						</header>
+						<div class="widget-body">
+							<div class="mt">
+								<div class="dataTables_wrapper">
+									<ng-table [rows]="rows" [columns]="columns" (tableChanged)="onChangeTable(config, '', 'column')" (linkClicked)="linkClicked($event)"
+										[config]="config" (selectedRecords)="updateSelectedRecords($event)" (valueChanges)="publishValueChanges($event)"></ng-table>
+									<div *ngIf="!rows.length && !isSearchEnabled && dataLoaded" class="no-results-wrap">
+										<div class="warning-icon-wrap ">
+											<i class="fa fa-info-circle with-info-icon"></i>
+											<span class="helper-arrow" *ngIf="addButtonInfo && addButtonInfo.text">&nbsp;</span>
+										</div>
+										<div class="no-records">No records found <span *ngIf="addButtonInfo && addButtonInfo.text">, you can add one here</span></div>
+									</div>
+									<div *ngIf="!rows.length && isSearchEnabled">No records found for this search</div>
+                                    <div class="loading-wrap" *ngIf="!dataLoaded">
+                                        <span class="circle1"></span>
+                                        <span class="circle2"></span>
+                                        <span class="circle3"></span>
+                                        <p class="loading-text">
+                                            Fetching records...
+                                        </p>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="row paginate-bg-1" *ngIf="config.paging && rows.length">
+				<div class="col-lg-6 style-padding-nospace">
+					<div class="displaying-page">
+						<div class="text">Limit</div>
+						<div class="number">
+							<select [(ngModel)]="limit" class="form-control" (change)="changeLimit()">
+                                <option *ngFor="let limit of limitOptions" [value]="limit">{{limit}}</option>
+                            </select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 style-padding-nospace">
+					<div class="dataTables_paginate paging_bootstrap">
+						<pagination class="pagination no-margin" [(ngModel)]="page" [totalItems]="totalRecords" [itemsPerPage]="itemsPerPage" [maxSize]="maxSize"
+							[boundaryLinks]="true" [rotate]="false" (pageChanged)="onChangeTable(config, $event, 'page')" (numPages)="numPages = $event">
+						</pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

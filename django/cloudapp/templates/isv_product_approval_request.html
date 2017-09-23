@@ -1,0 +1,11 @@
+{% extends 'base_email.html' %}
+
+{% block title %}
+    Approval Request
+{% endblock %}
+
+{% block content %}
+    <p>Dear Team,</p>
+    <div style="text-indent: 70px;"><strong>{{ isv.company_name }}</strong> published a product <strong>({{ product_details.name }})</strong> & requesting for approval. Login into <a href="https://portal.redingtoncloud.com">portal.redingtoncloud.com</a> to approve the product.</div>
+
+{% endblock %}

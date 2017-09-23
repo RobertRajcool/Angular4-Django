@@ -1,0 +1,10 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Title
+{% endblock %}
+
+{% block content %}
+    <p><strong>Partner:</strong> {{ partner_name }} has requested a {{ message }} for <strong>Customer:</strong> {{ customer_name }} </p>
+    <br><br><p>Please visit the {{ domain_name }} and click on Account Requests to activate them.</p>
+{% endblock %}

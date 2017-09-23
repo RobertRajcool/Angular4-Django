@@ -1,0 +1,5 @@
+Hello {{ company_name }}! - your account is activated.
+
+Login details:
+    UserName : {{ username }}
+    Password : RedPartner@123

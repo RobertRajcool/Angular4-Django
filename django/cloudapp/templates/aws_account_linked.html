@@ -1,0 +1,22 @@
+{% extends 'base_email.html' %}
+
+{% block title %}
+    AWS Account Linked
+{% endblock %}
+
+{% block content %}
+
+
+    <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 0px;">
+                        <![endif]-->
+    <div style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 0px;">
+        <div style="font-size:12px;line-height:14px;color:#555555;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;text-align:left;">
+            <p style="margin: 0;font-size: 12px;line-height: 14px"><span
+                    style="font-size: 14px; line-height: 16px;"><span
+                    style="line-height: 16px; font-size: 14px;">Linking request for <strong>{{ customer.company_name }} ( Account Id: {{ account_details.account_id }} )</strong> is now successfully linked with Redington. Please proceed to the redington portal to provision your infrastructure.</span></span>
+            </p>
+        </div>
+    </div>
+    <!--[if mso]></td></tr></table><![endif]-->
+
+{% endblock %}

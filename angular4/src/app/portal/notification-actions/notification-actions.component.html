@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-lg-12 notification-actions-screen">
+        <div class="form-horizontal form_class no-form">
+            <div class="form_class_fieldset_div">
+                <div class="title">Notification - Actions</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-12">
+                        <div class="widget-body no-padding no-margin">
+                            <!--loader-->
+                            <div *ngIf="actions.length < 1" class="loader animated fadeIn handle ui-sortable-handle">
+                            <span class="spinner">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </span>
+                        </div>
+                        <!--Wizard-->
+                        <div *ngIf="actions.length > 0" class="row">
+                        <div class="col-lg-12 col-xs-12">
+                            <!--Wizard steps-->
+                            <div class="pull-left wizard-steps" style="border: 1px solid #dedede; width: 29%; margin-right:1%;">
+                                <div class="wizard-nav-container scroll-content" style="height: 34rem;">
+                                    <ul class="nav wizard-nav-list">
+                                        <li *ngFor="let action of actions" class="wizard-nav-item" [ngClass]="{'active': action[0] == selectedAction }"><a (click)="changeAction(action[0])" class="wizard-nav-link"><span class="glyphicon glyphicon-chevron-right"></span> {{ action[1] }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                                    
+                            <!--Wizard content-->
+                            <div class="pull-left wizard-content">
+                                <div class="widget" style="margin-bottom:0px;">
+                                    <div class="widget-body">
+                                        <!--mapping form-->
+                                        <a [routerLink]="['/app/notification-groups']" appTooltip data-placement="top" data-title="Create new group" data-toggle="tooltip"
+                                        class="thumb-sm title-links float-xs-right mr">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        </a>
+                                        <p><strong>Action & Group mapping</strong></p>
+                                        <hr class="horizantal-divider">
+                                        <form class="form-horizantal">
+                                            <div class="form-group row">
+                                                <label class="col-md-4  col-form-label text-md-left" for="appended-input">Select a group to map</label>
+                                                <div class="col-md-7">
+                                                    <div class="input-group">
+                                                        <select name="selectedGroup" [(ngModel)]="selectedGroup" class="form-control">
+                                                        <option *ngFor="let group of unmappedUfGroups" [value]="group.id">{{ group.name }}</option>
+                                                        </select>
+                                                        <span class="input-group-btn">
+                                                            <button (click)="map()" class="btn btn-secondary" type="button">Map</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!--previously mapped groups list-->
+                                        <p><strong>Mapped groups</strong></p>
+                                        <hr class="horizantal-divider" style="padding:0px;">
+                                        <div class="groups-list">
+                                            <section *ngIf="nfAction" class="widget scroll-content">
+                                            <div class="widget-body no-padding no-margin-bottom">
+                                                <div class="list-group list-group-lg">
+                                                    <a *ngFor="let group of nfAction.groups; let i=index" class="list-group-item" href="javascript:void(0);">
+                                                    <span (click)="unMap(group.id)" appTooltip data-placement="left" data-title="Unmap" data-toggle="tooltip" class="thumb-sm float-xs-right mr btn-inverse view-info-icon">
+                                                    <i class="fa fa-minus-circle"></i>
+                                                    </span>
+                                                    <a (click)="navigate(group.id)" appTooltip data-placement="left" data-title="View group details"
+                                                    data-toggle="tooltip" class="thumb-sm float-xs-right mr btn-info view-info-icon">
+                                                    <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <div class="no-margin mapped-groups-title">{{ group.name }}</div>
+                                                    <small class="description-text">{{ group.description }}</small>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

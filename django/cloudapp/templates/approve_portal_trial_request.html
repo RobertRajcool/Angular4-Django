@@ -1,0 +1,10 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Trial Account {{ status }}
+{% endblock %}
+
+{% block content %}
+    <p>Hello <strong>{{ partner }}</strong>! </p>
+    <p>Your trail account creation is {{ status }} </p>
+{% endblock %}

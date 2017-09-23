@@ -1,0 +1,434 @@
+<div class="row">
+    <div class="col-lg-12">
+        <form *ngIf="partnerDetailForm" [formGroup]="partnerDetailForm" class="form-horizontal form_class" #f="ngForm" (ngSubmit)="submitForm(f)">
+            <div class="form_class_fieldset_div">
+                <div class="title">Company details</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-6">
+                        <fieldset>
+                            <legend>Company details</legend>
+                            <div *ngIf='show_primary_details=="view"'>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Name</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.name }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Email</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.email }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Contact number</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.mobile }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Dealer Code</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.jba_code }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">MPN ID</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.mpn_id }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">APN ID</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.apn_id }}</label>
+                                </div>
+
+                                <div *access="['partner.change_partner']" class="form-actions new-type-actions-3">
+                                    <button [hidden]="userData.user_type=='P'" type="button" (click)="showPrimaryDetails('edit')" id="edit" class="btn btn-warning">Edit</button>
+                                    <button *ngIf="userData.is_superuser" type="button" (click)="resetPassword(partner)" id="reset-password" class="btn btn-success">Reset Password</button>
+                                </div>
+                            </div>
+                            <div *ngIf='show_primary_details=="edit"' formGroupName="companyGroup">
+                                <div [formGroupName]=0>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">Name</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="Please enter name" formControlName="name">
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <control-messages [control]="partnerDetailForm.controls.companyGroup.controls[0].controls.name"></control-messages>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">Email</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="email" formControlName="email">
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <control-messages [control]="partnerDetailForm.controls.companyGroup.controls[0].controls.email"></control-messages>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">Contact number</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="mobile" formControlName="mobile">
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <control-messages [control]="partnerDetailForm.controls.companyGroup.controls[0].controls.mobile"></control-messages>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">Dealer Code</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="jba_code" formControlName="jba_code" [readonly]="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-actions new-type-actions-3">
+                                        <button [disabled]="!partnerDetailForm.controls.companyGroup.controls[0].valid" type="submit" class="btn btn-success">Save</button>
+                                        <button type="button" (click)="showPrimaryDetails('view')" id="cancel" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right">MPN ID</label>
+                                <label class="col-md-7 col-form-label text-md-left">{{ partner.mpn_id }}</label>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right">APN ID</label>
+                                <label class="col-md-7 col-form-label text-md-left">{{ partner.apn_id }}</label>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                        <fieldset>
+                            <legend>Primary contact details</legend>
+                            <div *ngIf='show_company_details=="view"'>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Company name</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.company_name }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">City, State</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.city }}, {{ partner.state }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Address</label>
+                                    <label class="col-md-7 col-form-label text-md-left">
+                                        <ul>
+                                            <li>{{ partner.address_1 }}</li>
+                                            <li *ngIf="partner.address_2">{{ partner.address_2 }}</li>
+                                            <li *ngIf="partner.address_3">{{ partner.address_3 }}</li>
+                                        </ul>
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Pincode</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.pin_code }}</label>
+                                </div>
+                                <div class="form-actions new-type-actions-3">
+                                    <button *access="['partner.change_partner']" type="button" (click)="showCompanyDetails('edit')" id="edit" class="btn btn-warning">Edit</button>
+                                </div>
+                            </div>
+                            <div *ngIf='show_company_details=="edit"' formGroupName="primaryContactGroup">
+                                <div [formGroupName]=0>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">Company name</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="Please enter company name" formControlName="company_name" [readonly]="true">
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <control-messages [control]="partnerDetailForm.controls.primaryContactGroup.controls[0].controls.company_name"></control-messages>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">Pincode</label>
+                                        <div class="col-md-7">
+                                            <app-locality-select property="pincode" formControlName="pin_code" [relDisCtrl]="partnerDetailForm.controls.primaryContactGroup.controls[0].controls.city"
+                                                [relStateCtrl]="partnerDetailForm.controls.primaryContactGroup.controls[0].controls.state"></app-locality-select>
+                                                <div class="margin-bottom-10 margin-top-10">
+                                                    <control-messages [control]="partnerDetailForm.controls.primaryContactGroup.controls[0].controls.pin_code"></control-messages>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">City</label>
+                                        <div class="col-md-7">
+                                            <app-locality-select property="district" formControlName="city" [readonly]="true"></app-locality-select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">State</label>
+                                        <div class="col-md-7">
+                                            <app-locality-select property="state" formControlName="state" [readonly]="true"></app-locality-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right required">Address line 1</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="address_1" formControlName="address_1">
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <control-messages [control]="partnerDetailForm.controls.primaryContactGroup.controls[0].controls.address_1"></control-messages>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right">Address line 2</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="address_2" formControlName="address_2">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label text-md-right">Address line 3</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" placeholder="address_3" formControlName="address_3">
+                                        </div>
+                                    </div>
+                                    <div class="form-actions new-type-actions-3">
+                                        <button [disabled]="!partnerDetailForm.controls.primaryContactGroup.controls[0].valid" type="submit" class="btn btn-success">Save</button>
+                                        <button type="button" (click)="showCompanyDetails('view')" id="cancel" class="btn btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="form_class_fieldset_div">
+                <div class="title">Contact details</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-12">
+                        <div class="col-lg-4 style-float-left partner-contact-details-box" *ngFor="let contact of partner.contacts; let i=index">
+                            <div class="partner-registration-contact-box-2">
+                                <div *ngIf='edit_contact != contact.type'>
+                                    <div *ngIf="contact.type == 'D/O'" class="title">Director/Owner</div>
+                                    <div *ngIf="contact.type == 'A&amp;O'" class="title">Accounts Person &amp; Operation Executive</div>
+                                    <div *ngIf="contact.type == 'S'" class="title">Sales Person</div>
+                                    <div *ngIf="contact.type == 'O'" class="title">Others</div>
+                                    <div class="field">
+                                        <label class="field-label">Name</label>
+                                        <label>{{ contact.name }}</label>
+                                    </div>
+                                    <div class="field">
+                                        <label class="field-label">Email</label>
+                                        <label>{{ contact.email }}</label>
+                                    </div>
+                                    <div class="field">
+                                        <label class="field-label">Contact number</label>
+                                        <label>{{ contact.mobile }}</label>
+                                    </div>
+                                    <div class="form-actions new-type-actions-3">
+                                        <button *access="['partner.change_partner']" type="button" (click)="showContactDetails(contact,i,'edit')" id="edit" class="btn btn-warning">Edit</button>
+                                    </div>
+                                </div>
+                                <div *ngIf='edit_contact == contact.type' formGroupName="contactGroup">
+                                    <div *ngIf="contact.type == 'D/O'" class="abc-checkbox abc-checkbox-info">
+                                        <input type="checkbox" id="director" name="director-owner" checked>
+                                        <label for="director">
+                                                                    Director/Owner
+                                                                </label>
+                                    </div>
+                                    <div *ngIf="contact.type == 'A&amp;O'" class="abc-checkbox abc-checkbox-info">
+                                        <input type="checkbox" id="director" name="director-owner" checked>
+                                        <label for="director">
+                                                                    Accounts Person &amp; Operation Executive
+                                                                </label>
+                                    </div>
+                                    <div *ngIf="contact.type == 'S'" class="abc-checkbox abc-checkbox-info">
+                                        <input type="checkbox" id="director" name="director-owner" checked>
+                                        <label for="director">
+                                                                    Sales Person
+                                                                </label>
+                                    </div>
+                                    <div *ngIf="contact.type == 'O'" class="abc-checkbox abc-checkbox-info">
+                                        <input type="checkbox" id="director" name="director-owner" checked>
+                                        <label for="director">
+                                                                    Others
+                                                                </label>
+                                    </div>
+                                    <div [formGroupName]="i">
+                                        <div class="form-group">
+                                            <label for="con-name1" class="required">Name</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa fa-user field-font-size2"></i></span>
+                                                <input type="text" class="form-control" placeholder="Please enter name" formControlName="name">
+                                            </div>
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <control-messages [control]="partnerDetailForm.controls.contactGroup.controls[i].controls.name"></control-messages>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="con-email1" class="required">Email</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa fa-envelope field-font-size2"></i></span>
+                                                <input type="text" class="form-control" placeholder="Please enter Email" formControlName="email">
+                                            </div>
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <control-messages [control]="partnerDetailForm.controls.contactGroup.controls[i].controls.email"></control-messages>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="con-contact1" class="required">Contact number</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-phone field-font-size2"></i></span>
+                                                <input type="text" class="form-control" placeholder="Please enter mobile number" formControlName="mobile">
+                                            </div>
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <control-messages [control]="partnerDetailForm.controls.contactGroup.controls[i].controls.mobile"></control-messages>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions new-type-actions-3">
+                                            <button [disabled]="!partnerDetailForm.controls.contactGroup.controls[i].valid" type="submit" class="btn btn-success">Save</button>
+                                            <button type="button" (click)="showContactDetails(contact,i,'cancel')" id="cancel" class="btn btn-default">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form_class_fieldset_div">
+                <div class="title">Business details</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-6">
+                        <div class="widget-body">
+                            <table class="table partner-contact-details-list actions-list">
+                                <thead>
+                                    <tr>
+                                        <th class="no">No</th>
+                                        <th>File Name</th>
+                                        <th class="actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let document of partner.documents; let i=index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{document.type}}</td>
+                                        <td>
+                                            <div class="input-group-btn">
+                                                <a class="actions-button btn btn-info" target="_blank" href="{{document.file_data}}"><i class="fa fa-eye"></i></a>
+                                                <a class="actions-button btn btn-success" href="{{document.file_data}}"><i class="fa fa-download"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!--<legend><strong>What type of partner are you?</strong></legend>-->
+                        <div *ngIf='show_business_details=="view"'>
+                            <div class="field">
+                                <label class="field-label">What type of partner are you?</label>
+                                <label>
+                                    <ul *ngFor="let type of partner.partner_type; let i=index">
+                                        <li>{{type.text}}</li>
+                                        </ul>
+                                </label>
+                            </div>
+                            <div class="field margin-top-2">
+                                <label class="field-label">Your core business</label>
+                                <label>
+                                    <ul *ngFor="let biz_type of partner.business_type; let i=index">
+                                        <li>{{biz_type.text}}</li>
+                                    </ul>
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="field-label">Focused customer vertical</label>
+                                <label>
+                                    <ul *ngFor="let customer of partner.focused_customer; let i=index">
+                                        <li>{{customer.text}}</li>
+                                    </ul>
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="field-label">Select your interested workloads to work with Redington</label>
+                                <label>
+                                    <ul *ngFor="let workload of partner.interested_workload; let i=index">
+                                        <li>{{workload.text}}</li>
+                                    </ul>
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label class="field-label">GST registration number</label>
+                                <label>{{ partner.gst_number }}</label>
+                            </div>
+                            <div class="form-actions new-type-actions-3">
+                                <button *access="['partner.change_partner']" type="button" (click)="showBusinessDetails('edit')" id="edit1" class="btn btn-warning">Edit</button>
+                            </div>
+                        </div>
+
+                        <div *ngIf='show_business_details!="view"' formGroupName="businessDetailsGroup">
+                            <div [formGroupName]=0>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label for="partner_type" class="required">What type of partner are you?</label>
+                                            <div *ngFor="let type of partnerTypes; let i=index">
+                                                <div class="col-lg-6 style-float-left style-padding-nospace">
+                                                    <div class="abc-checkbox abc-checkbox-info style-padding-nospace">
+                                                        <input formControlName="partner_type" [checked]="type.checked == true ? 'checked':null" type="checkbox" (change)="handleSelect($event)"
+                                                            value="{{type.id}}" id="{{ type.text }}">
+                                                            <label for="{{ type.text }}">{{ type.text }}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <p *ngIf="partner_type_values.length <= 0" class="form-error">Please Select the partner type</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="focused" class="required">Your core business</label>
+                                            <div class="col-sm-12">
+                                                <ng-select [multiple]="true" [items]="items" (data)="refreshValue($event)" (selected)="selected($event)" (removed)="removed($event)"
+                                                    (typed)="typed($event)" placeholder="Core Business" formControlName="business_type">
+                                                    </ng-select>
+                                            </div>
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <p *ngIf="value.length <= 0" class="form-error">Please Select your core business</p>
+                                                <!--<control-messages [control]="partnerDetailForm.controls.businessDetailsGroup.controls[0].controls.business_type"></control-messages>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="focused" class="required">Focused customer vertical</label>
+                                            <div class="col-sm-12">
+                                                <ng-select [multiple]="true" [items]="customerItems" (data)="customerRefreshValue($event)" (selected)="customerSelected($event)"
+                                                    (removed)="customerRemoved($event)" (typed)="customerTyped($event)" placeholder="Focused Customer"
+                                                    formControlName="focused_customer">
+                                                    </ng-select>
+                                            </div>
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <p *ngIf="customerValue.length <= 0" class="form-error">Please Select your customer vertical</p>
+                                                <!--<control-messages [control]="partnerDetailForm.controls.businessDetailsGroup.controls[0].controls.focused_customer"></control-messages>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="interested-redington" class="required">Select your interested workloads to work with Redington</label>
+                                            <div class="col-sm-12">
+                                                <ng-select [multiple]="true" [items]="workloadItems" (data)="workloadRefreshValue($event)" (selected)="workloadSelected($event)"
+                                                    (removed)="workloadRemoved($event)" (typed)="workloadTyped($event)" placeholder="Interested workloads"
+                                                    formControlName="interested_workload">
+                                                    </ng-select>
+                                            </div>
+                                            <div class="margin-bottom-10 margin-top-10">
+                                                <p *ngIf="partnerTypeValue.length <= 0" class="form-error">Please Select your interested workloads</p>
+                                                <!--<control-messages [control]="partnerDetailForm.controls.businessDetailsGroup.controls[0].controls.interested_workload"></control-messages>-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="gst_number">GST registration number</label>
+                                            <div class="col-sm-12">
+                                                <input type="text" class="form-control" placeholder="Please enter GST number" formControlName="gst_number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions new-type-actions-3">
+                                    <!--<button [disabled]="!partnerDetailForm.controls.businessDetailsGroup.controls[0].valid || partner_type_values.length <= 0"
+                                        type="submit" class="btn btn-success">Save</button>-->
+                                        <button [disabled]="value.length<=0 || customerValue.length <=0 || partnerTypeValue.length <=0 || partner_type_values.length <= 0"
+                                        type="submit" class="btn btn-success">Save</button>
+                                        <button type="button" (click)="showBusinessDetails('cancel')" id="cancel1" class="btn btn-default">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

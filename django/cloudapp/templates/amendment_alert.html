@@ -1,0 +1,24 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+   Order Amendment
+{% endblock %}
+
+{% block content %}
+
+    {% if receiver == 'Business team' %}
+        <p>Hello,</p>
+    {% else %}
+        <p>Dear <strong>{{ receiver }}</strong>!</p>
+    {% endif %}
+
+    <p><strong>Your order amendment has been successful </strong></p>
+    <h5>Order No: {{ order.order_number }} </h5>
+    <h5>Partner Name: {{ order.partner_details.company_name }}</h5>
+    <h5>Customer Name: {{ order.customer_details.company_name }}</h5>
+    <h5>Existing Qty: {{ amendment.ex_quantity }}</h5>
+    <h5>Amended Qty: {{ amendment.am_quantity }}</h5>
+    <h5>Total Qty:  {{ amendment.total_quantity }}</h5>
+
+
+{% endblock %}

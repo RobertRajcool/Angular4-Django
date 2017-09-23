@@ -1,0 +1,47 @@
+.textarea {
+    min-height: 50px;
+    cursor: pointer;
+
+    .placeholder {
+        color: rgba(0, 0, 0, 0.4);
+    }
+    .selected-item {
+        position: relative;
+        outline: 0;
+        margin: 0 3px 3px 0;
+        width: 100%;
+    }
+    .btn-default {
+        color: #333;
+        background: white;
+        border-color: #ccc;
+        border-radius: 3px;
+    }
+    .btn-default:hover {
+        background-color: #e6e6e6;
+    }
+    .btn .text {
+        position: relative;
+        display: inline-block;
+        padding: 0.1em;
+    }
+}
+
+.collect-form{
+    form {
+        padding: 0px;
+    }
+    .dropdown-menu {
+        position: relative;
+        min-width: 100%;
+        display: block;
+        max-height: 250px;
+        top: -4px;
+    }
+    .form-control {
+        border-top: none;
+        border-right: none;
+        border-left: none; 
+    }
+}
+

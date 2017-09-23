@@ -1,0 +1,112 @@
+.toast-message {
+  position: fixed;
+  float: left;
+  z-index: 22;
+  left: 50%;
+  top: 25%;
+  .success {
+    border: 2px solid #3c763d;
+    background: #ecfaec;
+    color:#3c763d;
+  }
+  .info {
+    border: 2px solid #31708f;
+    background: #f2fafa;
+    color:#31708f;
+  }
+  .warning {
+    border: 2px solid #8a6d3b;
+    background: #fdf7e6;
+    color:#8a6d3b;
+  }
+  .danger {
+    border: 2px solid #a94442;
+    background: #fff2ef;
+    color:#a94442;
+  }
+  .message_main {
+    position: relative;
+    float: left;
+    left: -50%;
+    visibility: visible;
+    min-width: 350px;
+    text-align: center;
+    font-weight: 200;
+    border-radius: 6px;
+    padding: 0px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    .check-icon {
+      float: left;
+      background: #8eb021;
+      font-weight: 400;
+      padding: 3px 10px;
+      border-radius: 3px 0px 0px 3px;
+      border: 1px solid #8eb021;
+      .fa {
+        color: #ffffff;
+        font-size: 30px;
+      }
+    }
+    .message {
+      float: left;
+      text-align: left;
+      font-weight: 500;
+      padding: 8px 10px;
+      font-size: 15px;
+      width: 100%;
+      .close {
+        font-size: 25px;
+        color: #666666;
+        float: right;
+        opacity: inherit;
+      }
+      .close:focus {
+        outline:none;
+      }
+    }
+    .close-icon {
+      width:auto;
+      float: right;
+      font-weight: 500;
+      padding: 7px 10px;      
+      opacity: inherit;
+      .close {
+        font-size: 25px;
+        color: #666666;
+        margin: 0px;
+        opacity: inherit;
+      }
+      .close:focus {
+        outline:none;
+      }
+    }
+  }
+}
+
+.help_video_list {
+  width:auto;
+  height:auto;
+  margin:0px;
+  padding: 0 0 0 22px;
+}
+.help_video_list ul {
+  margin:0px;
+  padding:0px;
+}
+.help_video_list ul li {
+  width:auto;
+  height:auto;
+  margin:0px;
+  padding:0px;
+  list-style-type: square;
+}
+.help_video_list ul li a {
+  padding: 6px 8px 6px 0px;
+  color: #1d2939;
+  display: block;
+  font-size: 15px;
+}
+.help_video_list ul li a:hover {
+  color:#666666;
+  text-decoration:underline;
+}

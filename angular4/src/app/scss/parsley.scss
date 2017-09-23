@@ -1,0 +1,77 @@
+
+/***********************************/
+/**            PARSLEY            **/
+/***********************************/
+
+
+input.parsley-error{
+  border-color: $brand-danger;
+  @include box-shadow(inset 0 1px 1px rgba($brand-danger,.075));
+}
+
+.parsley-errors-list {
+  font-size: $font-size-smaller;
+  padding-left: 0;
+  margin-bottom: 5px;
+
+  li{
+    list-style: none;
+    color: $brand-danger;
+  }
+}
+
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  color: red;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+.parsley-errors-list li {
+    color: red;
+}
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+  font-size: $font-size-smaller;
+  padding-left: 0;
+  margin-bottom: 5px;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}
+
+// Custom form error control message 
+.form-error {
+  color: red;
+  margin: 2px 0 3px;
+  padding: 5px 0 5px 10px;
+  padding-left: 10px;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 1;
+
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}

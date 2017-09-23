@@ -1,0 +1,35 @@
+NG2-SELECT EXTENDED
+-------------------
+
+1.Purpose of this directive is to add new features to the ng2-select directive
+
+2.Added features
+    -> Remote data search
+
+3.To implement this directive add `extendNg2Select` in ng-select element
+    ex: `<ng-select
+            extendNg2Select
+            formControlName="recipients"
+            allowClear="true"
+            [(items)]="recipientOptions"
+            [multiple]="true" remote="true"
+            [remoteConfig]="remoteConfig"
+			placeholder="Select recipients"
+		></ng-select>`
+
+4.Don't forget to set items like this [(items)]="list" , while implementing this directive
+
+5.Remote data search
+    -> To enable remote search add `remote="true"`
+    -> And also configure remote parameters as following
+        remoteConfig: {
+            url: string;                # Remote url
+            searchField: string;        # Which remote field have to be searched
+            debounceTime?: number;      # Waiting time in milliseconds
+            authentication: boolean;    # Do need authentication
+            tokenId?: string;           # Authentication token name
+            tokenStorage?: string;      # Authentication storage
+            idField: string;            # Field name in remote response to set to id_field
+            textField: string;          # Field name in remote response to set to text_field
+            queryParams: object;        # Query params for filtering
+        }

@@ -1,0 +1,44 @@
+<!--Login Form-->
+
+<div class="login_form_selection">
+<form *ngIf="loginForm" [formGroup]="loginForm" (submit)="login()">
+	<div class="">
+		<div class="input-group margin-top-20">
+			<span class="input-group-addon rounded-left"><i class="icon-user"></i></span>
+			<input type="text" formControlName="username" class="form-control rounded-right" placeholder="Please enter username">
+		</div>
+		<control-messages [control]="loginForm.controls.username"></control-messages>
+
+		<div class="input-group margin-top-20">
+			<span class="input-group-addon rounded-left"><i class="icon-lock"></i></span>
+			<input type="password" formControlName="password" class="form-control rounded-right" placeholder="Please enter password">
+		</div>
+		<control-messages [control]="loginForm.controls.password"></control-messages>
+
+		<!--Error message-->
+		<div class="login-error">
+			<div *ngIf="!loginError" class="form-error"> &ensp;</div>
+			<div *ngIf="loginError" class="form-error">{{loginError}}</div>
+		</div>
+        
+		<div class="row margin-bottom-20" style="margin-top: -16px;">
+			<div class="col-md-12">
+				<button type="submit" [disabled]="!loginForm.valid || process == 'checking'" class="btn sign_in btn-xs mb-xs">
+                    <span *ngIf="process != 'checking'"> Sign In >> </span>
+                        <span *ngIf="process == 'checking'">
+                            Signing In
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+			</div>
+		</div>
+
+		<div class="text-left">
+			<p>
+            <a class="btn btn-xs mb-xs reset" [routerLink]="['/auth/password/reset']">Reset Password</a>
+              &nbsp; 
+            <a class="btn btn-xs mb-xs become_partner" [routerLink]="['/registration']">Become a Partner</a></p>
+		</div>
+	</div>
+</form>
+</div>

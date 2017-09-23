@@ -1,0 +1,20 @@
+<div class="form-control textarea">
+	<span *ngIf="placeholder && ( innerValue && (innerValue.length <= 0)) || !innerValue || innerValue == ''" class="placeholder">{{ placeholder }}</span>
+
+	<span *ngFor="let item of innerValue; let i = index" class="selected-item btn btn-default btn-secondary btn-xs">
+        <a (click)="popItem(i)"  class="close" href="javascript:void(0);" style="margin-left: 5px; padding: 0;">×</a>
+        <span class="">{{ item['name'] }} <{{ item['email'] }}></span>
+	</span>
+</div>
+<div *ngIf="enableCollector" class="collect-form">
+	<form *ngIf="collectForm" [formGroup]="collectForm" (keypress)="onKeyPress($event, nameInput)" class="collect-form-group dropdown-menu"
+		role="menu">
+		<input type="text" formControlName="name" class="form-control form-control-sm text-center" placeholder="Enter name of the recipient"
+			#nameInput/>
+		<input type="email" formControlName="email" class="form-control form-control-sm text-center" placeholder="Enter email of the recipient"
+		/>
+	</form>
+	<ul *ngIf="errorMessage.length > 0" class="parsley-errors-list filled">
+		<li *ngFor="let msg of errorMessage" class="parsley-type">{{ msg }}.</li>
+	</ul>
+</div>

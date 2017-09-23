@@ -1,0 +1,41 @@
+<section class="widget" widget>
+
+    <!--Header-->
+    <header>
+    <h4><span class="fw-semi-bold">{{ screenName }}</span></h4>
+    <div class="widget-controls">
+      <a data-widgster="expand" title="Expand" href="#"><i class="glyphicon glyphicon-chevron-up"></i></a>
+      <a data-widgster="collapse" title="Collapse" href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+      <a data-widgster="close" title="Close" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+    </div>
+  </header>
+  <!--/.Header-->
+
+  <div class="widget-body">
+
+      <p>
+        <input *ngIf="config.commonFilter && config.filtering"
+                [ngTableFiltering]="config.filtering"
+                (tableChanged)="onChangeTable(config)"
+                class="form-control input-no-border bg-gray-lighter"
+                placeholder="Filter table" type="text">
+    </p>
+
+    <ng-table [rows]="rows" [columns]="columns" (tableChanged)="onChangeTable(config)" (linkClicked)="linkClicked($event)" [config]="config.sorting"></ng-table>
+
+    <pagination *ngIf="config.paging"
+                class="pagination-sm"
+                [(ngModel)]="page"
+                [totalItems]="config.length"
+                [itemsPerPage]="itemsPerPage"
+                [maxSize]="maxSize"
+                [boundaryLinks]="true"
+                [rotate]="false"
+                (pageChanged)="onChangeTable(config, $event)"
+                (numPages)="numPages = $event">
+    </pagination>
+    <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
+
+  </div>
+  <!--ng2-table body-->
+</section>

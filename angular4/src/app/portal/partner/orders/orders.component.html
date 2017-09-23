@@ -1,0 +1,10 @@
+<div>
+    <app-red-table [screenName]="'List of Orders'"
+                   [columns]="columns"
+                   [fetchUrl]="fetchUrl"
+                   [addButtonInfo]="addButtonInfo"
+                   [commonFilter]="commonFilter"
+                   [limit]= "5"
+                   (event)="eventListener($event)">
+    </app-red-table>
+</div>

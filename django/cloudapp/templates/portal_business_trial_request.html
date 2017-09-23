@@ -1,0 +1,20 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Trial Account Request Creation
+{% endblock %}
+
+{% block content %}
+
+
+    <p>Dear <strong>Team</strong>!</p>
+
+    <p><strong>Please find the below trial account details below. </strong></p>
+
+    <p><strong>Partner: </strong> {{ username }} </p> has requested a trial account for
+
+    <p><strong>Customer Name: </strong> {{ customer }} </p>
+    <p><strong>Product: </strong> {{ product }} </p>
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {{ subject }}
+{% endblock %}
+
+{% block content %}
+    {% if receiver == 'Business team' %}
+        <p>Hello,</p>
+    {% elif receiver == 'customer' %}
+        <p>Dear {{ subscription.customer.company_name }}!</p>
+    {% else %}
+        <p>Dear {{ receiver }}!</p>
+    {% endif %}
+
+    The below subscription will be expire within {{ days }} days.
+
+    <p><strong>Subscription details</strong></p>
+
+    <table>
+        {% if receiver == 'Business team' %}
+            <tr>
+                <td>Partner</td>
+                <td>{{ subscription.customer.partner.company_name }}</td>
+            </tr>
+        {% endif %}
+        {% if receiver != 'customer' %}
+            <tr>
+                <td>Customer</td>
+                <td>{{ subscription.customer.company_name }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td>Product</td>
+            <td>{{ subscription.product.product_name }}</td>
+        </tr>
+        <tr>
+            <td>Subscription</td>
+            <td>{{ subscription.subscription }}</td>
+        </tr>
+        <tr>
+            <td>End date</td>
+            <td>{{ end_date }}</td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Title
+{% endblock %}
+
+{% block content %}
+    <div>
+    <p>Dear <strong>{{ partner_name }}</strong><p>
+    <p>This is to inform you that your account request for <strong>Customer: {{ customer_name }}</strong>
+        has been rejected by Redington, due to the following reason</p>
+     <p>{{ reject_msg }}</p>
+    <p>Please login to the portal and go to 'Market place' and change the inputs</p>
+    </div>
+{% endblock %}

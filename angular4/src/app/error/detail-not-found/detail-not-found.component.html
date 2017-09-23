@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="col-xl-4 col-md-6 col-xs-10 offset-xl-4 offset-md-3 offset-xs-1">
+		<div class="error-container">
+			<h1 class="error-code">404</h1>
+			<p class="error-info">
+                Oops, it seems the requested data is not found.
+			</p>
+			<p class="error-help mb">
+				If you are sure it should exist, please contact the administrator: administrator@redingtoncloud.com
+			</p>
+			<form (ngSubmit)="searchResult()" method="get">
+				<div class="form-group">
+					<input class="form-control input-no-border" type="text" placeholder="Search page">
+				</div>
+				<button type="button" class="btn btn-inverse" (click)="goBack()">
+                    <i class="fa fa-angle-double-left text-warning ml-xs"></i>
+			        Back 
+			    </button>
+				<button type="submit" class="btn btn-inverse">
+                    Search <i class="fa fa-search text-warning ml-xs"></i>
+                </button>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+Angular2:
+
+* All filenames should start with lowercase name , followed by camel cases. For e.g. vendorListComponent.ts or vendorListComponent.html
+* Try to keep the template file name and the component name similar so its easy to follow
+
+* When dividing a component into list,create, edit, delete components, maintain a consistent way. Some of us put multiple functions into
+  a single template separated by *ngIf. This isnt a good approach, its better to keep them separated (Reuse the templates but lets not
+  put all functionalities into a single one)
+
+* All Variable names should start with lower case and then followed by camel case.
+
+* All Method names should start with lower case and then followed by camel case
+
+* Put all the private methods at the end and the public methods before that (or the other way). Just maintain an order as otherwise it 
+  becomes hard to find out which are exposed methods to the templates
+
+* If you are not sure about Error Messages to provide in the UI, pls check with Raja.
+
+

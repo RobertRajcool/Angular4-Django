@@ -1,0 +1,16 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Title
+{% endblock %}
+
+{% block content %}
+    <div>
+    <p>Dear <strong>{{ partner_name }}</strong><p>
+    <p>This is to inform you that your Request Id <strong>{{ reference_number }}</strong>
+        for account request with <strong>Customer: {{ customer_name }}</strong> with discount
+        <strong>{{ standard_discount }}</strong>
+        has been approved by Redington
+    </p>
+    </div>
+{% endblock %}

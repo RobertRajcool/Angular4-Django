@@ -1,0 +1,11 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    APN Updated
+{% endblock %}
+
+{% block content %}
+    Partner <strong>{{ partner.company_name }}</strong> has updated their APN account ID.<br><br>
+    Please visit the Portal to initiate the APN process with {{  partner.company_name }}
+
+{% endblock %}

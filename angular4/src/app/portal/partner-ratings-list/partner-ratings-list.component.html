@@ -1,0 +1,44 @@
+<div class="row">
+
+  <div class="col-xl-9 col-xs-12">
+    <section class="rating-result-item" *ngFor="let rating of ratings;">
+      <div class="rating-result-item-body">
+        <div class="row">
+          <div class="col-md-9 col-xs-12">
+            <h5 class="rating-result-item-heading">
+                <a [routerLink]="['/app/partner/'+rating.partner_details.id+'/details']">{{ rating.partner_details.company_name }}</a>
+                <span style="float: right;" class="rating-static rating-{{ rating.rating }}"></span>
+              </h5>
+              <p class="info">{{ rating.partner_details.city }}, {{ rating.created_date }}</p>
+              <p class="description">{{ rating.feedback }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="col-xl-3 col-xs-12">
+    <h5><span class="fw-semi-bold">Rating Status</span></h5>
+    <div style="margin-top: 15px" class="row text-muted fs-mini" *ngFor="let count of counts; let i = index;">
+      <div class="col-lg-5"><span class="rating-static rating-{{ count[0] }}"></span></div>
+      <div class="col-lg-5"><span><strong>{{ count[1] }}</strong></span></div>
+    </div>
+    <!--<div style="margin-top: 15px" class="row text-muted fs-mini">
+      <div class="col-lg-5"><span class="rating-static rating-4"></span></div>
+      <div class="col-lg-5"><span><strong>5</strong></span></div>
+    </div>
+    <div style="margin-top: 15px" class="row text-muted fs-mini">
+      <div class="col-lg-5"><span class="rating-static rating-3"></span></div>
+      <div class="col-lg-5"><span><strong>5</strong></span></div>
+    </div>
+    <div style="margin-top: 15px" class="row text-muted fs-mini">
+      <div class="col-lg-5"><span class="rating-static rating-2"></span></div>
+      <div class="col-lg-5"><span><strong>5</strong></span></div>
+    </div>
+    <div style="margin-top: 15px" class="row text-muted fs-mini">
+      <div class="col-lg-5"><span class="rating-static rating-1"></span></div>
+      <div class="col-lg-5"><span><strong>5</strong></span></div>
+    </div>
+  </div>-->
+  
+</div>

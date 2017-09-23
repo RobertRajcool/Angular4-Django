@@ -1,0 +1,45 @@
+<div>
+    <app-red-table [screenName]="'List of Customers'"
+                   [columns]="columns"
+                   [fetchUrl]="fetchUrl"
+                   [addButtonInfo]="addButtonInfo"
+                   [commonFilter]="commonFilter"
+                   [limit]= "5"
+                   (event)="eventListener($event)">
+    </app-red-table>
+</div>
+
+<div class="modal fade" role="dialog" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete customer</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this customer?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                <button type="button" data-dismiss="modal" (click)="deleteCustomer()" class="actions-button btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="warningModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete customer</h4>
+            </div>
+            <div class="modal-body">
+                <p>You cannot delete this customer as there are some orders placed.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

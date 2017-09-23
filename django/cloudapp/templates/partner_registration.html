@@ -1,0 +1,23 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {% if type == 'Customer' %}
+       Customer Registration
+    {% else %}
+       Partner Registration
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <p>Hello <strong>{{ username }}</strong>! </p>
+
+    {% if type == 'Customer' %}
+       <p>You have begun the process of registering as a customer with Redington.</p>
+    {% else %}
+       <p>You have begun the process of registering as a partner with Redington.</p>
+    {% endif %}
+
+    <p><strong>Please click below url to continue registration at any point</strong></p>
+
+    <a target="_blank" href={{ url }}>Registration page</a>
+{% endblock %}

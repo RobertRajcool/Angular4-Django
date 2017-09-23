@@ -1,0 +1,20 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Feedback From Partner
+{% endblock %}
+
+{% block content %}
+    Partner <strong>{{ username }}</strong> has updated their feedback.<br><br>
+    The Feedback number is <strong>{{ feedback_number }}</strong>
+    <p>Contact Number: <strong>{{ mobile }}</strong></p>
+    <p>Email Address: <strong> {{ email }}</strong></p>
+    <p>Help related to: <strong> {{ feedback }}</strong></p>
+    <div>
+    <p style="border-bottom: black dashed 1px ">
+        <strong>Feedback</strong>
+    </p>
+    {{ description }}
+    </div>
+
+{% endblock %}

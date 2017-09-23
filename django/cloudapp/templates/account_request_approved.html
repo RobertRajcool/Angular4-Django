@@ -1,0 +1,13 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Title
+{% endblock %}
+
+{% block content %}
+    <p><strong>Partner:</strong>{{ partner_name }} Account request Approved for this <strong>Customer:</strong> {{ customer_name }}</p>
+    <p><strong>Following Details</strong></p>
+    <p>Request Id : <strong>{{ reference_number }}</strong></p>
+    <p>Discount : <strong>{{ standard_discount }}</strong></p>
+
+{% endblock %}

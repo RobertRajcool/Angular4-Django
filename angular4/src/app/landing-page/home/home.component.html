@@ -1,0 +1,15 @@
+<div class="container-fluid">
+	<div class="navbar-header">
+		<img src="../../../assets/img/logo.png">
+	</div>
+	<span style="float: right">
+        <label>Home</label>
+        <label style="margin-left: 10px; cursor: pointer">Cloud services</label>
+        <label style="margin-left: 10px; cursor: pointer">Join us</label>
+        <label [routerLink]=" ['/login'] " style="margin-left: 10px; cursor: pointer">Sign in</label>
+        <label [routerLink]=" ['/registration'] " style="margin-left: 10px; cursor: pointer">Become a partner</label>
+    </span>
+</div>
+<form #form="ngForm">
+    <app-locality-select property="district" disabled></app-locality-select>
+</form>

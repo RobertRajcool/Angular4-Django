@@ -1,0 +1,11 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {{ subject }}
+{% endblock %}
+
+{% block content %}
+    <p>Dear Team,</p>
+
+    <p>{{ data }}</p>
+{% endblock %}

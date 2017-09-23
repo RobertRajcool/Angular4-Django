@@ -1,0 +1,140 @@
+<div>
+    <app-red-table [screenName]="'List of Unlinked Customers'"
+                   [columns]="cols"
+                   [fetchUrl]="fetchUrl"
+                   [addButtonInfo]="addButtonInfo"
+                   [commonFilter]="commonFilter"
+                   [limit]= "5"
+                   [refreshRedTable]= "refreshRedTable"
+                   (event)="eventListener($event)"
+    >
+    </app-red-table>
+</div>
+
+<div id="modal" class="modal right fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!--Modal content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button (click)="buildForm()" type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" *ngIf="process=='Add'">ORC Linking - {{ customer.company_name }}</h4>
+                <h4 class="modal-title" *ngIf="process=='View'">{{ customer.company_name }}</h4>
+                <h4 class="modal-title" *ngIf="process=='Delink'">ORC DeLinking - {{ customer.company_name }}</h4>
+            </div>
+
+            <!--Add Link content-->
+            <div class="modal-body" *ngIf="process=='Add'">
+                <form class="form-horizontal" [formGroup]="orcLinkingForm" (ngSubmit)="submit()">
+                    <div class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Customer</label>
+                        <div class="col-lg-9 col-form-label">
+                            <label>{{ customer.company_name }}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label class="col-lg-3  col-form-label text-md-right">Partner</label>
+                        <div class="col-lg-9">
+                            <div class="form-group">
+                                <ng-select extendNg2Select allowClear="true" [(items)]="recipientOptions" [multiple]="false" remote="true"
+                                  [remoteConfig]="remoteConfig" placeholder="Search Partner" formControlName="partner" (selected)="selected($event)"
+                                  id="dashboard-search"></ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="dealerCode!=undefined" class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Dealer Code</label>
+                        <div class="col-lg-9 col-form-label">
+                            <label><strong>{{ dealerCode }}</strong></label>
+                        </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button *ngIf="progress==undefined" type="button" (click)="buildForm()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button *ngIf="progress==undefined" type="submit" [disabled]="!orcLinkingForm.valid" class="btn btn-primary">Done</button>
+                        <button *ngIf="progress=='linking'" type="submit" [disabled]="!orcLinkingForm.valid" class="btn btn-primary">
+                            Linking &ensp;
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </div>
+                    <!--/. Footer-->
+
+                </form>
+            </div>
+            <!--/. Add Link content-->
+
+            <!--View Linked content-->
+            <div class="modal-body" *ngIf="process=='View'">
+                <form class="form-horizontal">
+                    <div class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Customer</label>
+                        <div class="col-lg-9 col-form-label">
+                            <label><strong>{{ customer.company_name }}</strong></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Partner Code</label>
+                        <div class="col-lg-9 col-form-label">
+                            <a style="cursor: pointer; color: dodgerblue" (click)="navigate()">{{ customer.orc_link_code }}</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Contact name</label>
+                        <div class="col-lg-9 col-form-label">
+                            <label><strong>{{ customer.name }}</strong></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Email</label>
+                        <div class="col-lg-9 col-form-label">
+                            <label><strong>{{ customer.email }}</strong></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Mobile</label>
+                        <div class="col-lg-9 col-form-label">
+                            <label><strong>{{ customer.mobile }}</strong></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--/. View Linked content-->
+
+            <!--DeLink content-->
+            <div class="modal-body" *ngIf="process=='Delink'">
+                <form class="form-horizontal" (ngSubmit)="delink()">
+                    <div class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Customer</label>
+                        <div class="col-lg-9 col-form-label">
+                            <label>{{ customer.company_name }}</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-lg-3 col-form-label text-md-right">Partner Code</label>
+                        <div class="col-lg-9 col-form-label">
+                            <!--<label></label>-->
+                            <a style="cursor: pointer; color: dodgerblue" (click)="navigate()">{{ customer.orc_link_code }}</a>
+                        </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button *ngIf="progress==undefined" type="submit" class="btn btn-primary">Delink</button>
+                        <button *ngIf="progress=='delinking'" type="submit" [disabled]="true" class="btn btn-primary">
+                            Delinking &ensp;
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </button>
+                    </div>
+                    <!--/. Footer-->
+
+                </form>
+            </div>
+            <!--/. DeLink content-->
+
+        </div>
+        <!--/. Modal content-->
+    </div>
+</div>

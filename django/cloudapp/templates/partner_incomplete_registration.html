@@ -1,0 +1,18 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Registration In-completed
+{% endblock %}
+
+{% block content %}
+    <p>Dear {{ username }} !</p><br>
+    <p>You didn't complete the registration in Redington cloud portal</p><br>
+    <p>Below I have attached the link for continuing your process</p><br>
+    <p>Please find the link...</p><br>
+
+    <a href={{ url }}>
+        <strong>Registration continue link</strong>
+    </a>
+{% endblock %}
+
+

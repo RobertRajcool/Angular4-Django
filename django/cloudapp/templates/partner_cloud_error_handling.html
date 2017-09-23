@@ -1,0 +1,14 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Order {{ order.order_number }} failed
+{% endblock %}
+
+{% block content %}
+    <p>Hello <strong>{{ partner.company_name }}</strong>! </p><br><br>
+
+    <p>Your order {{ order.order_number }} has been failed for some technical reasons.</p> <br><br>
+
+    <p><strong>Please contact redington business team for additional information</strong></p>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+@import "../../scss/vertical-tabs";
+@import "../../scss/scrollbar.scss";
+
+a {
+    cursor: pointer !important;
+}
+.widget {
+    height: 34rem;
+}
+.scroll-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.wizard-nav-container {
+    padding-bottom: 0;
+}
+.wizard-steps {
+    height: 34rem;
+
+    .scroll-content {
+        height: 28rem;
+    }
+}
+h6 {
+    padding: 10px 10px 0 10px;
+    color: black;
+    font-weight: 400;
+}
+.title-links.mr {
+    margin-right: 25px;
+    color: black;
+}
+.form-group {
+    color: grey;
+
+    label {
+        padding-left: 50px;
+    }
+
+    .form-control {
+        height: 35px !important;
+    }
+
+    select {
+        cursor: pointer;
+    }
+}
+
+.groups-list {
+    padding: 0 10px;
+
+    .scroll-content {
+        height: 21rem;
+    }
+
+    .list-group-item {
+        padding: 10px 15px;
+    }
+
+    h6 {
+        font-weight: 100;
+        padding: 0 0 0 10px;
+    }
+
+    .text-muted {
+        padding-left: 10px;
+    }
+
+    .mr {
+        margin-right: 0;
+    }
+}

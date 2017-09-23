@@ -1,0 +1,196 @@
+
+<div class="row" *ngIf="showpagecontent">
+<div class="col-lg-12">
+    <form [formGroup]="userForm" class="form-horizontal form_class"
+    (ngSubmit)="submitForm(f)" data-parsley-priority-enabled="false"
+    novalidate="novalidate" data-parsley-validate>
+    <div class="form_class_fieldset_div">
+        <div class="title">{{ title }}</div>
+        <div class="row-fluid row">
+            <div class="col-lg-6">
+<fieldset>
+<legend>User details</legend>
+                <div class="form-group row" *ngIf="showEmployeDetails=='True'"
+                [hidden]="userData.user_type=='P'">
+                <label class="col-md-4 col-form-label text-md-right required" for="basic">Employee Id</label>
+                <div class="input-group" style="margin-left: 15px">
+                    <input type="text" class="form-control" id="employee_id" name="employee_id" #employee
+                           placeholder="Enter employee id" formControlName="employee_id">
+                    <div class="modal fade" role="dialog" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close"
+                                            data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"> Employee details</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Sorry, the given employee code does not exist in the system. Please talk to an administrator.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button  type="button" data-dismiss="modal" class="btn btn-default">Ok
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-warning" [disabled]="employee.value.length==0" (click)="eventListener($event,myModal)">Fetch</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required" for="basic">Username</label>
+                <div class="col-md-7">
+                    <input type="text" id="username" name="username" class="form-control"
+                           placeholder="Please enter your username" formControlName="username"
+                    (keyup)="checkUsername($event)" required="required" [readonly]="isreadonly">
+                    <control-messages [control]="userForm.controls.username"></control-messages>
+                    <span *ngIf="checknameErrorMsg" class="text-danger help-block">
+                    {{ checknameErrorMsg }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required" for="basic">First name</label>
+                <div class="col-md-7">
+                    <input type="text" id="firstname" name="firstname" class="form-control"
+                           placeholder="Please enter your firstname" formControlName="firstName"
+                           data-parsley-trigger="change" required="required">
+                    <control-messages [control]="userForm.controls.firstName"></control-messages>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required" for="basic">Last name</label>
+                <div class="col-md-7">
+                    <input type="text" id="lastname" name="lastname" class="form-control"
+                           placeholder="Please enter your lastname" formControlName="lastName"
+                           data-parsley-trigger="change" required="required">
+                    <control-messages [control]="userForm.controls.lastName"></control-messages>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required" for="email">Email</label>
+                <div class="col-md-7">
+                    <input type="email" id="email" name="email" class="form-control"
+                           placeholder="Please enter your email" formControlName="email" data-parsley-trigger="change"
+                           data-parsley-validation-threshold="1">
+                    <control-messages [control]="userForm.controls.email"></control-messages>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right" for="basic">Address</label>
+                <div class="col-md-7">
+                    <input type="text" id="address" name="address" class="form-control"
+                           placeholder="Please enter your address" formControlName="address">
+                </div>
+            </div>
+            <div class="form-group row" [hidden]="userData.user_type!=='P'">
+            <label class="col-md-4 col-form-label text-md-right" for="basic">User location</label>
+            <div class="col-md-7">
+                <input type="text" id="location" name="location" class="form-control"
+                       placeholder="Please enter your location" formControlName="location">
+            </div>
+        </div>
+</fieldset>
+        </div>
+
+        <div class="col-lg-6">
+<fieldset>
+<legend>Roles and User Type</legend>
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required" for="role">Roles</label>
+                <div class="col-md-7">
+                    <ng-select [multiple]="true" [items]="roleslist" (data)="refreshValue($event)"
+                    (selected)="selected($event)" (removed)="removed($event)"
+                    (typed)="typed($event)" placeholder=" No roles selected"
+                    formControlName="roleId">
+                    </ng-select>
+                    <span *ngIf="userForm.controls.roleId.errors && (userForm.controls.roleId.dirty || userForm.controls.roleId.touched)"
+                    class="help-block">
+                    <span [hidden]="!userForm.controls.roleId.errors.required" class="text-danger">
+                    Roles are required
+                    </span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required" for="default-select ">User
+                    type</label>
+                <div class="col-md-8">
+                    <select2 id="default-select" (valueChanged)="select2Changed($event)"
+                    [data]="getSelect2DefaultList()" [options]="select2Options"
+                    [width]="250">
+                    </select2>
+                </div>
+            </div>
+
+        <div *ngIf="showvendorCategoryStatus==false && showVendorDetails == true"
+        [hidden]="userData.user_type!=='P'">
+        <legend>Prefered vendor</legend>
+        <div class="form-group row">
+            <label class="col-md-4 col-form-label text-md-right required">Vendor category</label>
+            <div class="col-md-8">
+                <ng-select [multiple]="true" [items]="vendorList"
+                (data)="refreshvendorlistValue($event)"
+                (selected)="vendorListselected($event)"
+                (removed)="vendorListremoved($event)" (typed)="vendorListtyped($event)"
+                placeholder=" No vendor selected"
+                formControlName="vendorCategory">
+                </ng-select>
+                <span *ngIf="userForm.controls.vendorCategory.errors && (userForm.controls.vendorCategory.dirty || userForm.controls.vendorCategory.touched)"
+                class="help-block">
+                <span [hidden]="!userForm.controls.vendorCategory.errors.required"
+                class="text-danger">
+                Vendor is required
+                </span>
+                </span>
+            </div>
+        </div>
+</div>
+ <div *ngIf="showEmployeDetails=='True'" [hidden]="userData.user_type=='P'">
+<legend>Vendor category and location</legend>
+<div class="col-lg-12 margin-top-1">
+    <section class="widget" widget>
+        
+        <div class="widget-body">
+            <div class="row">
+                <table class="table add-new-user-vendor-category-row actions-list">
+                    <thead>
+                    <tr>
+                        <th class="vendor">Vendor</th>
+                        <th class="region">Region</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let vendorname of keyArray">
+                    <td>{{ vendorname.key }}</td>
+                    <td>{{ vendorname.value }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div> 
+</div>
+</fieldset>
+</div>
+</div>
+</div>
+<div class="form-actions new-actions1">
+    <button [disabled]="!userForm.valid || value.length <= 0 || isNameExist" type="submit"
+    class="btn btn-primary">Submit
+    </button>
+    <button type="button" [routerLink]=" ['/app/users'] " class="btn btn-inverse">
+    Cancel
+    </button>
+</div>
+</form>
+</div>
+</div>
+

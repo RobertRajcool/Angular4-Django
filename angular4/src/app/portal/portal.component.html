@@ -1,0 +1,22 @@
+<nav sidebar id="sidebar" role="navigation" class="sidebar">
+</nav>
+<nav navbar (toggleSidebarEvent)="toggleSidebarListener($event)" (toggleCartEvent)="toggleCartListener()" class="page-controls navbar navbar-dashboard">
+</nav>
+<aside chat-sidebar (toggleCartEvent)="toggleCartListener()" class="shopping-cart-left chat-sidebar shopping-cart"></aside>
+<div class="content-wrap" id="content-wrap">
+    <!--Toast Message-->
+    <div *ngIf="toastMessage[0]" class="toast-message no-margin animated bounceInDown" style="">
+        <div class="message_main {{toastMessage[1]}}">
+            <!--<div class="check-icon"><i class="fa fa-check-square-o"></i></div>-->
+            <div class="message">
+                <button type="button" class="ml-lg close" (click)="closeToastMessage()" data-dismiss="alert" aria-hidden="true">×</button>
+                {{ toastMessage[0] }}
+            </div>
+        </div>
+    </div>
+    <main id="content" class="content" role="main">
+        <app-breadcrumb [hidden]="router.url=='/app/dashboard'"></app-breadcrumb>
+        <redington-error-app [errorMsg]="errorMsg" [showerrorMsgStatus]="iserrorStatus"></redington-error-app>
+        <router-outlet></router-outlet>
+    </main>
+</div>

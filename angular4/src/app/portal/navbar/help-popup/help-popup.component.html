@@ -1,0 +1,19 @@
+<section class="card notifications">
+	<header class="card-header">
+		<div class="text-xs-center mb-sm">
+			<strong>Help Videos</strong>
+		</div>
+	</header>
+	<!-- Help video links list with .thin-scroll which styles scrollbar for webkit -->
+	<div class="list-group thin-scroll popup-notifications-list">
+		<div *ngFor="let video of helpVideos" class="list-group-item">
+			<div class="no-margin overflow-hidden">
+				<div class="row no-margin row1 overflow-hidden">
+					<a target="_blank" [href]="video['url']">{{ video['label'] }}</a>
+                </div>
+			</div>
+		</div>
+	</div>
+	<!--<footer class="card-footer text-sm">
+	</footer>-->
+</section>

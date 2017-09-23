@@ -1,0 +1,11 @@
+{% extends 'base_email.html' %}
+
+{% block title %}
+    {{ title | safe }}
+{% endblock %}
+
+
+{% block content %}
+    Hi,
+    <p style="padding-left: 30px;">{{ message | safe }}</p>
+{% endblock %}

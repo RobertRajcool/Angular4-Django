@@ -1,0 +1,18 @@
+LOCALITY DIRECTIVE
+------------------
+
+1. This directive is used for search and select pincodes, districts or states.
+2. Example:
+    -> Basic configuration
+        <app-locality-select property="district" formControlName="location"></app-locality-select>
+    -> Auto fill configuration
+        <app-locality-select property="pincode" formControlName="location" [relDisCtrl]="form.controls.district" [relStateCtrl]="form.controls.state"></app-locality-select>
+
+3. Description
+    -> `property` attribute defines the which property you are going to search.
+        available opt: 'pincode', 'district', 'state'.
+    -> `formControlName` attribute in the binding property , It may replaced by [(ngModel)].
+    -> `[relDisCtrl]` & `[relStateCtrl]` attribute are used to auto filling these properties on option select on input,
+        To achieve auto filling option you have to pass corresponding form control.
+
+

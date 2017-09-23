@@ -1,0 +1,35 @@
+.abc-checkbox{
+  padding-left: 5px;
+}
+.permissions-section {
+  padding-top: 2%;
+}
+.roles-header {
+    margin: -15px -20px !important;
+    padding: 15px 20px !important;
+}
+form {
+    padding-top: 20px;
+}
+/***********************************/
+/**           SCROLLBAR           **/
+/***********************************/
+
+.scroll-content {
+    height: 34rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.border-top {
+    border-top: 1px solid #ddd;
+}
+.border-bottom {
+    border-bottom: 1px solid #ddd;
+}
+.no-margin-bottom {
+    margin-bottom: 0px !important;
+}
+.selected {
+    background-color: #f5f5f5;
+}
+@import "../../scss/scrollbar.scss";

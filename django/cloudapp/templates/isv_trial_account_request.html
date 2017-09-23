@@ -1,0 +1,18 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Free Trial Account Request
+{% endblock %}
+
+{% block content %}
+
+
+    <p>Dear <strong>{{ isv_name }}</strong>,</p>
+
+    <p>Partner <strong>"{{ username }}"</strong> has requested a Trial account.Please find the details below:</p>
+    <p><strong>Partner Email: </strong> {{ email }} </p>
+    <p><strong>Partner Mobile: </strong> {{ mobile }} </p>
+
+
+
+{% endblock %}

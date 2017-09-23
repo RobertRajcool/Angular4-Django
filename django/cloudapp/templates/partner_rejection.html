@@ -1,0 +1,21 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {% if type == 'Customer' %}
+       Customer Activation Rejected
+    {% else %}
+       Partner Activation Rejected
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <p>Hello <strong>{{ username }}</strong>! </p>
+
+    <p>Your account cannot be activated at this time due to: </p>
+    <div>
+    "{{ rejection_reason }}"
+    </div>
+    <p><strong>Please click below link to resubmit registration </strong></p>
+
+    <a target="_blank" href={{ url }}>Registration page</a>
+{% endblock %}

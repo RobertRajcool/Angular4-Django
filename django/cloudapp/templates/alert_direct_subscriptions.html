@@ -1,0 +1,48 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {{ subject }}
+{% endblock %}
+
+{% block content %}
+    <p>Hello,</p>
+
+    The below subscription has been added directly in MPC.
+
+    <p><strong>Subscription details</strong></p>
+
+    <table>
+        <tr>
+            <td style="padding: 10px 0;">Partner</td>
+            <td style="padding: 10px 0;">{{ customer.customer.partner.company_name }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px 0;">Customer</td>
+            <td style="padding: 10px 0;">{{ customer.customer.company_name }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px 0;">Product</td>
+            <td style="padding: 10px 0;">{{ subscription.offerName }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px 0;">Subscription</td>
+            <td style="padding: 10px 0;">{{ subscription.id }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px 0;">Domain Name</td>
+            <td style="padding: 10px 0;">{{ customer.details.domain_name }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px 0;">Creation date</td>
+            <td style="padding: 10px 0;">{{ subscription.creationDate }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px 0;">Quantity</td>
+            <td style="padding: 10px 0;">{{ subscription.quantity }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px 0;">Status</td>
+            <td style="padding: 10px 0;">{{ subscription.status }}</td>
+        </tr>
+    </table>
+{% endblock %}

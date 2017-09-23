@@ -1,0 +1,33 @@
+<!--Action buttons for popup notifications-->
+<div *ngIf="design == 'popup'" [ngSwitch]="notification.subject">
+	<!--Orders notification action buttons-->
+	<div *ngSwitchCase="'Orders'">
+		<button *ngIf="notification.details.status != 'Quote'" (click)="viewOrder()" class="btn btn-xs btn-success">View order</button>
+	</div>
+	<!--Instance notificatin action buttons-->
+	<div *ngSwitchCase="'Instances'">
+		<button (click)="viewInstance()" class="btn btn-xs btn-success">View instance</button>
+	</div>
+
+    <!--Isv Product notificatin action buttons-->
+	<div *ngSwitchCase="'IsvProduct'">
+		<button (click)="viewIsvProduct()" class="btn btn-xs btn-success">View product</button>
+	</div>
+</div>
+
+<!--Action buttons for normal notifications-->
+<div *ngIf="design == 'normal'" [ngSwitch]="notification.subject">
+	<!--Orders notification action buttons-->
+	<div *ngSwitchCase="'Orders'">
+		<button *ngIf="notification.details.status != 'Quote'" (click)="viewOrder()" class="btn btn-xs btn-success">View order</button>
+	</div>
+	<!--Instance notification action buttons-->
+	<div *ngSwitchCase="'Instances'">
+		<button (click)="viewInstance()" class="btn btn-xs btn-success">View instance</button>
+	</div>
+
+     <!--Isv Product notificatin action buttons-->
+	<div *ngSwitchCase="'IsvProduct'">
+		<button (click)="viewIsvProduct()" class="btn btn-xs btn-success">View product</button>
+	</div>
+</div>

@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-horizontal form_class no-form created-roles-screen">
+            <div class="form_class_fieldset_div">
+                <div class="title">Created groups</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-12">
+                        <fieldset>
+                            <div class="widget-body scroll-content no-padding no-margin-bottom" style="height: 39.55rem;">
+                                <div class="list-group list-group-lg" [ngClass]="{'border-top': nfGroupList.length < 1}">
+                                <a *ngFor="let group of nfGroupList; let i=index" class="list-group-item" [ngClass]="{'selected': i == selectedForEdit}" href="javascript:void(0);">
+                                <span class="thumb-sm float-xs-left mr"></span>
+                                <span (click)="selectForEdit(i)" class="btn btn-danger edit-btn fa float-xs-right mt-sm">Edit</span>
+                                <h6 class="no-margin">{{ group.name }}</h6>
+                                <small class="description-text">{{ group.description }}</small>
+                                </a>
+                            </div>
+                    </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6 created-roles-screen">
+    <form *ngIf="nfGroupForm" [formGroup]="nfGroupForm" (ngSubmit)="submitForm()" class="form-horizontal form_class">
+    <div class="form_class_fieldset_div">
+        <div class="title">{{ action }} group</div>
+        <div class="row-fluid row">
+            <section class="widget new-widget" widget>
+                <header style="padding-bottom:30px;">
+                    <div class="widget-controls">
+                        <div style="margin:-10px -10px 0px 0px; float:right;"><a (click)="resetForm()" href="#" appTooltip data-toggle="tooltip" data-title="Reset form" data-placement="left" class="btn btn-primary btn-xs mb-xs"><i class="fa fa-repeat icon-link-text-white"></i></a></div>
+                    </div>
+                </header>
+                <div class="widget-body scroll-content border-top padding-top-2">
+                    <!--<legend></legend>-->
+                    <!--Group name input-->
+                    <div class="form-group">
+                        <label class="required" for="group-name">Group name</label>
+                        <input formControlName="name" class="form-control" id="group-name" placeholder="Please enter group name" type="text">
+                        <control-messages [control]="nfGroupForm.controls.name"></control-messages>
+                    </div>
+                    <!--Group description input-->
+                    <div class="form-group">
+                        <label class="" for="description">Description</label>
+                        <textarea formControlName="description" class="form-control" id="description" placeholder="Please add what the group does"></textarea>
+                        <control-messages [control]="nfGroupForm.controls.description"></control-messages>
+                    </div>
+                    <!--Existing user recipients input-->
+                    <div class="form-group">
+                        <label class="" for="existing-users">Existing users</label>
+                        <ng-select extendNg2Select formControlName="recipients" allowClear="true" [(items)]="recipientOptions" [multiple]="true"
+                        remote="true" [remoteConfig]="remoteConfig" placeholder="Please select recipients" id="existing-users"></ng-select>
+                        <control-messages [control]="nfGroupForm.controls.recipients"></control-messages>
+                    </div>
+                    <!--Group non existing users recipients input-->
+                    <div class="form-group">
+                        <label class="" for="non-existing-users">Non portal users</label>
+                        <app-mail-recipient-collector formControlName="non_user_recipients" [placeholder]="'Add recipients'" id="non-existing-users"></app-mail-recipient-collector>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="form-actions new-actions1">
+        <button (click)="discard()" class="btn btn-inverse" type="button">Cancel</button>
+        <button *ngIf="action == 'Edit'" (click)="delete()" class="btn btn-danger" type="button">Delete</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!nfGroupForm.valid">Save</button>
+    </div>
+    </form>
+</div>
+</div>

@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-horizontal form_class">
+            <div class="form_class_fieldset_div">
+                <div class="title">Notifications</div>
+                <div class="row-fluid row">
+                    <section class="widget new-widget" widget>
+                        <header>
+                            <h5 class="notifications-page-title">{{ filters['type'] | capitalize }} - <span class="fw-semi-bold">{{filters['status'] | capitalize}}</span></h5>
+                        </header>
+                        <div class="widget-body">
+                            <div class="mt">
+                                <div class="dataTables_wrapper">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-xl-2 col-xs-12">
+                                            <header>&ensp;</header>
+                                            <ul class="nav nav-pills nav-stacked nav-email-folders mt" id="folders-list">
+                                                <li class="nav-item" [ngClass]="{active: filters['status']==='unread'}">
+                                                <a class="nav-link" [routerLink]="['/app/notifications', filters['type'], 'unread']">
+                                                <span class="tag tag-pill tag-white float-xs-right">
+                                                    <span *ngIf="filters['type'] == 'messages'">{{total_unread_messages}}</span>
+                                                <span *ngIf="filters['type'] == 'alerts'">{{total_unread_alerts}}</span>
+                                                </span> Unread
+                                                </a>
+                                                </li>
+                                                <li class="nav-item" [ngClass]="{active: filters['status']==='read'}">
+                                                <a class="nav-link" [routerLink]="['/app/notifications', filters['type'], 'read']">Read</a>
+                                                </li>
+                                                <li class="nav-item" [ngClass]="{active: filters['status']==='pending'}">
+                                                <a class="nav-link" [routerLink]="['/app/notifications', filters['type'], 'pending']">
+                                                <span class="tag tag-pill tag-danger float-xs-right">{{total_pending}}</span> Pending
+                                                </a>
+                                                </li>
+                                                <li class="nav-item" [ngClass]="{active: filters['status']==='completed'}">
+                                                <a class="nav-link" [routerLink]="['/app/notifications', filters['type'], 'completed']">
+                                                <span class="tag tag-pill tag-white float-xs-right">{{total_completed_unread}}</span> Completed
+                                                </a>
+                                                </li>
+                                            </ul>
+                                            <!--<h6 class="mt notifications-title">QUICK VIEW</h6>
+                                            <ul class="nav nav-pills nav-stacked nav-email-folders mb-lg fs-mini">
+                                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-circle text-white float-xs-right"></i> Invoices </a></li>
+                                                <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-circle text-gray-light float-xs-right"></i> Bills </a></li>
+                                            </ul>-->
+                                        </div>
+                                        <div class="col-lg-9 col-xl-10 col-xs-12">
+                                            <div class="clearfix mb-xs">
+                                                <!--Tabs-->
+                                                <div class="notifications-tabs float-xs-left col-xs-5">
+                                                    <a [routerLink]="['/app/notifications', 'messages']" class="tab-item btn btn-sm col-xs-6" [ngClass]="{active: filters['type']==='messages'}">Messages</a>
+                                                    <a [routerLink]="['/app/notifications', 'alerts']" class="tab-item btn btn-sm col-xs-5" [ngClass]="{active: filters['type']==='alerts'}">Alerts</a>
+                                                </div>
+                                            </div>
+                                            <section class="widget widget-email">
+                                                <!--<header id="widget-email-header">
+				<div class="row">
+					<div class="col-sm-6"></div>
+					<div class="col-sm-6">
+						<input class="form-control form-control-sm width-200 float-xs-right" id="mailbox-search" [(ngModel)]="searchText" type="text"
+							[placeholder]="filters['type'] == 'messages'? 'Search Messages': 'Search Alerts'">
+					</div>
+				</div>
+			</header>-->
+                                                <div *ngIf="notifications" class="widget-body" id="mailbox-content">
+                                                <ul class="notifications-list">
+                                                    <li *ngFor="let notification of notifications; let i = index;" class="list-item" [ngClass]="{'readed': notification['viewed_by'] | in_comma_seperated: user_details.id}">
+                                                    <div *ngIf="notification && user_details" class="row no-margin list-item-row">
+                                                    <div class="read-status overflow-hidden">
+                                                        <span *ngIf="(notification['viewed_by'] | in_comma_seperated: user_details.id)"><i class="fa fa-check-circle"></i></span>
+                                                        <span *ngIf="!(notification['viewed_by'] | in_comma_seperated: user_details.id)">
+                                                        <i class="fa fa-check-circle-o link" appTooltip data-toggle="tooltip" data-placement="right" title="Mark as read" (click)="markAsRead(i)"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="subject overflow-hidden">{{notification.subject | capitalize}}</div>
+                                                    <div class="purpose overflow-hidden">{{notification.purpose | capitalize}}</div>
+                                                    <app-nf-actions class="actions text-right overflow-hidden" [notification]="notification" (refresh)="getNotifications()"></app-nf-actions>
+                                                    <time class="datetime help-block no-margin text-right overflow-hidden">
+                                                        {{notification.posted_at | timeline_datetime }}
+                                                    </time>
+                                        </div>
+                                        </li>
+                                        <li *ngIf="notifications.length == 0" class="list-item">
+                                        <div>
+                                            Nothing here yet
+                                        </div>
+                                        </li>
+                                        </ul>
+                                    </div>
+                    </section>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!--Pagination-->
+<div class="paginate-bg-1 notifications-paginate-limit" id="folder-stats">
+    <div class="col-lg-6 style-padding-nospace">
+        <p class="widget-email-count">
+            Showing
+            <span *ngIf="total_filtered_nf > 10">
+            {{first_record + 1}} -
+            <span *ngIf="last_record > total_filtered_nf">{{total_filtered_nf}}</span>
+            <span *ngIf="last_record <= total_filtered_nf">{{last_record}}</span>
+            </span>
+            <span *ngIf="total_filtered_nf <= 10">{{total_filtered_nf}}</span>
+            of {{total_filtered_nf}} messages
+        </p>
+    </div>
+    <div class="col-lg-6 tyle-padding-nospace style-float-right notifications-paginate-number">
+        <ul class="pagination pagination-sm widget-email-pagination">
+            <li class="prev page-item" [ngClass]="{'disabled': filters['page_number'] <= 1 }">
+            <a [routerLink]="['/app/notifications', filters['type'], filters['status'], 'page', filters['page_number']-1]" class="page-link"><i class="fa fa-chevron-left"></i></a>
+            </li>
+            <li *ngFor="let btn of pagination_btns" class="page-item" [ngClass]="{'active': btn == filters['page_number'] }">
+            <a [routerLink]="['/app/notifications', filters['type'], filters['status'], 'page', btn]" class="page-link">{{ btn }}</a>
+            </li>
+            <li class="next page-item" [ngClass]="{'disabled': filters['page_number'] >= total_filtered_pages }">
+            <a [routerLink]="['/app/notifications', filters['type'], filters['status'], 'page', filters['page_number']+1]" class="page-link"><i class="fa fa-chevron-right"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+

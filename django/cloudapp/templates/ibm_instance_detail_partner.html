@@ -1,0 +1,18 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <p>Thank you for your order. Your instance is provisioned now.. Please log in to your account to review that all of the services were provisioned correctly  by using the account credentials sent by IBM.</p>
+
+
+    <p>https://control.softlayer.com/devices</p>
+    <p>Customer:       {{ username }}</p>
+    <p>Account Number: {{ account_id }}</p>
+    <p>Location:       {{ region }}</p>
+    <p> Hostname:       {{ full_host_name }}</p>
+    <p>If you need any further assistance for managed services, please write to cloud@redington.co.in or call to + 91 81 4411 2222</p>
+    <p>We look forward to working with you.</p>
+{% endblock %}

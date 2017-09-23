@@ -1,0 +1,230 @@
+@import "../../../../node_modules/bootstrap/scss/_variables";
+@import "../../scss/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+
+.nav-email-folders{
+  > li > .nav-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: $border-radius;
+    color: $gray-semi-light;
+    font-weight: $font-weight-normal;
+    &:hover{
+      background-color: #e5e5e5;
+      color: $text-color;
+    }
+
+    > .fa-circle{
+      margin-top: 3px;
+    }
+  }
+
+  > li > .nav-link > .label {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  > li.active > .nav-link{
+    &,
+    &:hover,
+    &:focus {
+      background-color: $gray-semi-lighter;
+      color: $text-color;
+      font-weight: $font-weight-semi-bold;
+
+      > .label{
+        color: $text-color;
+        background-color: $white;
+      }
+    }
+  }
+
+  .tag-white {
+    color: #555;
+  }
+}
+
+// List styles
+
+.widget-email-count{
+  display: inline-block;
+  margin: 0;
+  font-size: $font-size-mini;
+  color: $text-muted;
+  line-height: 29px;
+
+  + .widget-email-pagination{
+    margin-left: 10px;
+    border-left: 1px solid $gray-semi-lighter;
+    padding-left: 15px;
+    border-radius: 0;
+    vertical-align: -9px;
+  }
+}
+
+.widget-email {
+  header {
+
+    .form-control {
+      font-size: 0.8571rem;
+      border: 1px solid #ccc;
+      &:focus {
+        border-color: #66afe9;
+        outline: none;
+      }
+    }
+  }
+}
+
+.widget-email-pagination{
+  margin: 0;
+
+  .page-link {
+    color: #888;
+  }
+}
+
+.table-emails{
+  margin-bottom: 0;
+
+  tbody > tr > td:first-child {
+    width: 45px;
+  }
+
+  td,
+  th {
+    padding: 7px 5px 7px 5px;
+  }
+
+  td > .abc-checkbox,
+  th > .abc-checkbox{
+    left: -18px;
+
+    > label:before,
+    > label:after {
+      margin-left: 0px;
+    }
+  }
+
+  .name,
+  .subject,
+  .date{
+    cursor: pointer;
+  }
+
+  .date{
+    text-align: right;
+    min-width: 65px;
+  }
+
+  .unread{
+    font-weight: $font-weight-semi-bold;
+    color: $text-color;
+  }
+
+  .starred{
+    color: $text-muted;
+    cursor: pointer;
+    @include transition(color .2s);
+    &:hover{
+      color: $text-color;
+    }
+
+    .fa-star{
+      color: $brand-warning;
+    }
+  }
+}
+
+// Custom styles
+.notifications-tabs {
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+.notifications-tabs .tab-item {
+    background-color: transparent;
+    border: 1px solid gainsboro;
+    color: gainsboro;
+    box-shadow: 0 0 0;
+}
+.notifications-tabs .tab-item.active {
+    background-color: white;
+    color: #55595c;
+}
+.readed {
+    background-color: #f3f3f3;
+}
+.link {
+    cursor: pointer;
+}
+.notifications-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+.notifications-list .list-item {
+    display: block;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding: 0.55rem;
+}
+.notifications-list .list-item:hover {
+    background-color: #f3f3f3;
+}
+.read-status {
+    width: 25px;
+    color: #ddd;
+}
+.tag-white {
+    color: #555;
+}
+.subject {
+    width: 15%;
+    padding-left: 20px;
+}
+.purpose {
+    font-weight: bold;
+    width: 53%;
+    padding-left: 20px;
+}
+.actions {
+    width: 15%;
+}
+.datetime {
+    width: 13%;
+    text-align: right;
+}
+.help-text {
+    font-size: 85%;
+    color: #999999;
+}
+
+// popup notifications styles....
+.popup-notifications-list .list-group-item .purpose {
+    width: 60%;
+    padding-left: 0;
+    font-weight: normal;
+}
+.popup-notifications-list .list-group-item .actions {
+    width: 40%;
+    text-align: right;
+}
+.popup-notifications-list .list-group-item .thumb-sm {
+    color: #ddd;
+}
+.popup-notifications-list .not-available {
+    width: 100%;
+    color: #ddd;
+    text-align: center;
+    padding-top: 100px;
+}
+.tag-btn {
+    top: 0;
+    padding-top: 3px;
+    display: inline-block;
+    position: relative;
+}
+.tag {
+    min-width: 23px;
+}

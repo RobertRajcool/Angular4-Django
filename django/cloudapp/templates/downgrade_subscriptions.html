@@ -1,0 +1,23 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Downgrade Subscription
+{% endblock %}
+
+{% block content %}
+
+
+    <p>Dear <strong>{{ receiver }}</strong>!</p>
+
+    <p><strong>Please find the downgrade request details below. </strong></p>
+
+    <h5>Order No: {{ order.order_number }} </h5>
+    <h5>Subscription ID: {{ subscription_no }} </h5>
+    <h5>Partner Name: {{ order.partner.company_name }}</h5>
+    <h5>Customer Name: {{ order.customer.company_name }}</h5>
+    <h5>Existing Qty: {{ subscription.existing_quantity }}</h5>
+    <h5>Downgrade Qty: {{ downgrade_quantity }}</h5>
+    <h5>Total Qty:  {{ subscription.quantity }}</h5>
+
+
+{% endblock %}

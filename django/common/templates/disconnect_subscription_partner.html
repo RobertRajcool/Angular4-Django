@@ -1,0 +1,168 @@
+{% load commonfilters %}
+{% load static from staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Subscription is cancelled </title>
+</head>
+<body>
+<table width="800" border="0" cellspacing="0" cellpadding="0" align="center" style="font:13px Verdana, Arial, Helvetica, sans-serif; color:#333333;">
+    <tr>
+        <td align="left" valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font:13px Verdana, Arial, Helvetica, sans-serif; color:#333333;">
+                        <tr>
+                            <td height="80" align="left" valign="middle" style="padding:0px 18px;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="72%" align="left" valign="bottom" style="font-size: 23px; font-weight: 600; border-bottom:1px solid #d0dbd5; padding-bottom:10px;">Subscription is cancelled</td>
+                                        <td width="28%" align="right" valign="top" height="80">
+                                            <a href="#">
+                                                <img src="https://portal.redingtoncloud.com/uploads/order_images/logo.jpg" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="80" align="left" valign="middle" style="padding:0px 18px;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                    <tr>
+                                        <td width="50%" align="left" valign="middle" style="color: #1f9654; font-size: 17px; font-weight: bold;">Subscription Details</td>
+                                        <td width="50%" align="left" valign="top">
+                                            <span style="color: #ffffff; text-align: right; font-size: 16px; font-weight: 500; background: #ff6600; padding: 5px 14px; border-radius: 4px; float: right;">{{ subscription.subscription }}</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="margin-bottom: 12px; float: left; width: 100%;">
+                            <td valign="top" bgcolor="#edfaf1" style="padding: 0px 18px; width: 95.6%; float: left;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                    <tr>
+                                        <td height="30" colspan="2" align="left" valign="middle" style="font-size: 16px; font-weight: 600; border-bottom:1px solid #d0dbd5;">Partner Details</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" height="30" align="left" valign="middle">Company name</td>
+                                        <td width="70%" align="left" valign="middle">{{ partner.company_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">Email</td>
+                                        <td align="left" valign="middle">{{ partner.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">Address</td>
+                                        <td  align="left" valign="middle">{{ partner.address_1 }}, {{ partner.city }}, {{ partner.state }}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="margin-bottom: 12px; float: left; width: 100%;">
+                            <td valign="top" bgcolor="#edfaf1" style="padding: 0px 18px; width: 95.6%; float: left;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                    <tr>
+                                        <td height="30" colspan="2" align="left" valign="middle" style="font-size: 16px; font-weight: 600; border-bottom:1px solid #d0dbd5;">Customer Details</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" height="30" align="left" valign="middle">Company name</td>
+                                        <td width="70%" align="left" valign="middle">{{ customer.company_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">Address</td>
+                                        <td align="left" valign="middle">{{ customer.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">City</td>
+                                        <td  align="left" valign="middle">{{ customer.city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">State</td>
+                                        <td  align="left" valign="middle">{{ customer.state }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">Pincode</td>
+                                        <td  align="left" valign="middle">{{ customer.Pincode }}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                     <tr style="margin-bottom: 12px; float: left; width: 100%;">
+                            <td valign="top" bgcolor="#edfaf1" style="padding: 0px 18px; width: 95.6%; float: left;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                    <tr>
+                                        <td height="30" colspan="2" align="left" valign="middle" style="font-size: 16px; font-weight: 600; border-bottom:1px solid #d0dbd5;">Subscription Details</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" height="30" align="left" valign="middle">Subscription</td>
+                                        <td width="70%" align="left" valign="middle">{{ subscription.subscription }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">Start date</td>
+                                        <td align="left" valign="middle">{{ subscription.effective_start_date|date:"d-F-Y"}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">End date</td>
+                                        <td  align="left" valign="middle">{{ subscription.commitment_end_date|date:"d-F-Y" }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" height="30" valign="middle">Quantity</td>
+                                        <td  align="left" valign="middle">{{ subscription.quantity }}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <tr>
+                    <td align="right" height="36" valign="center" bgcolor="#1f95d2" style="height: inherit; padding:8px 20px; color:#ffffff; font:13px Verdana, Arial, Helvetica, sans-serif; text-align:left;">
+                        For any enquires call +91 81 4411 2222 or write to cloudhelpdesk@redington.co.in
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" height="36" valign="center" style="height: inherit; color:#ffffff;">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                            <tr>
+                                <td width="76%" align="left" valign="middle" bgcolor="1f9654" style="padding:8px 20px; font:13px Verdana, Arial, Helvetica, sans-serif; text-align:left;">www.redingtoncloud.com </td>
+                                <td width="24%" align="left" valign="middle" style="padding:3px 0px 3px 10px;">
+                                    <span style="margin-right:5px;">
+                                        <a style="color: aliceblue;" href="https://www.facebook.com/redingtoncloudsolutions/?utm_source=Footer&amp;utm_medium=website" target="_blank">
+                                            <img src="https://portal.redingtoncloud.com/uploads/order_images/01.png"  alt="Redington" border="0">
+
+                                        </a>
+                                    </span>
+                                    <span style="margin-right:5px;">
+                                        <a style="color: aliceblue;" href="https://twitter.com/RedingtonCloud?utm_source=Footer&amp;utm_medium=website" target="_blank">
+                                        <img src="https://portal.redingtoncloud.com/uploads/order_images/02.png" alt="Redington" border="0">
+                                    </a></span>
+                                    <span style="margin-right:5px;">
+                                        <a style="color: aliceblue;" href="https://plus.google.com/b/101514393255720721546/101514393255720721546" target="_blank">
+                                        <img src="https://portal.redingtoncloud.com/uploads/order_images/03.png" alt="Redington" border="0">
+                                    </a></span>
+                                    <span style="margin-right:5px;">
+                                        <a style="color: aliceblue;" href="https://www.linkedin.com/company/redington-cloud-solutions?utm_source=Footer&amp;utm_medium=website" target="_blank">
+                                        <img src="https://portal.redingtoncloud.com/uploads/order_images/04.png" alt="Redington" border="0">
+                                    </a></span>
+                                    <span>
+                                        <a style="color: aliceblue;" href="https://m.youtube.com/channel/UCYbhGDagFWLBi_uEAqHcSzw" target="_blank">
+                                        <img src="https://portal.redingtoncloud.com/uploads/order_images/05.png" alt="Redington" border="0">
+                                    </a></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="margin:0px 0px 8px 0px; line-height:18px;">Thank you</p>
+                        <p style="margin:0px 0px 15px 0px;">Redington Cloud Team</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

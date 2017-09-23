@@ -1,0 +1,83 @@
+/*
+ * Font Awesome 2x spin
+ */
+
+.#{$fa-css-prefix}-spin-fast {
+  -webkit-animation: fa-spin 1s infinite linear;
+  -moz-animation: fa-spin 1s infinite linear;
+  -o-animation: fa-spin 1s infinite linear;
+  animation: fa-spin 1s infinite linear;
+}
+
+
+.fa-lg {
+  vertical-align: -15%;
+}
+
+/**
+ * Animate.css
+ */
+
+.animated{
+  animation-duration: .5s;
+}
+
+/**
+ * Pace
+ */
+.pace .pace-progress{
+  background: orange;
+  position: absolute;
+  top: $navbar-height;
+  height: 3px;
+}
+
+.pace .pace-activity{
+  position: absolute;
+  top: 65px;
+  border-width: 1px;
+  left: 15px;
+  right: auto;
+  width: 18px;
+  height: 18px;
+  border-top-color: orange;
+  border-left-color: orange;
+}
+
+
+
+.pace .pace-progress-inner{
+  display: none;
+  right: -10px;
+  width: 10px;
+  box-shadow: 0 0 10px orange, 0 0 5px orange;
+}
+
+/***********************/
+/*glyphicons-halflings */
+/***********************/
+
+.glyphicon-comment:before {
+  content:"\E111";
+}
+
+.glyphicon-chevron-up {
+  top: 2px;
+}
+
+
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+  color: #555;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+
+
+/* ng2-select2 */
+
+.select2-container--bootstrap .select2-selection--single {
+  height: 35px !important;
+}

@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="tabbable tabs-left mb-lg">
+            <ul class="nav nav-tabs vdivide">
+                <li class="nav-item"><a class="nav-link" (click)="details()" [ngClass]="{'active': routeParams['tab'] == 'details'}">Details</a></li>
+                <li class="nav-item"><a class="nav-link" (click)="orders()" [ngClass]="{'active': routeParams['tab'] == 'orders'}">Orders</a></li>
+                <li class="nav-item"><a class="nav-link" (click)="invoices()" [ngClass]="{'active': routeParams['tab'] == 'invoices'}">Invoices</a></li>
+                <li class="nav-item"><a class="nav-link" (click)="cloudAccounts()" [ngClass]="{'active': routeParams['tab'] == 'cloud-accounts'}">Cloud accounts</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="widget-controls">
+                    <a (click)="BackToList()" appTooltip data-placement="left" data-title="View customers" data-toggle="tooltip"><i class="fa fa-th-list"></i></a>
+                </div>
+                <!--Organization details tab-->
+                <div class="tab-pane" id="details" [ngClass]="{'active': routeParams['tab'] == 'details'}">
+                    <div *ngIf="!customerDetails">
+                        <p>No Details found.</p>
+                    </div>
+                    <!--Customer Details tab starts here-->
+                    <div *ngIf="customerDetails">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-horizontal form_class no-form">
+                                    <div class="form_class_fieldset_div">
+                                        <div class="title">Customer details</div>
+                                        <div class="row-fluid row">
+                                            <div class="col-lg-6">
+                                                <fieldset>
+                                                    <legend>Details</legend>
+                                                    <!--Compoany name-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Company name</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ customerDetails.company_name }}</label>
+                                                    </div>
+                                                    <!--Address-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Address</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ customerDetails.address }}</label>
+                                                    </div>
+                                                    <!--City-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">City</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ customerDetails.city }}</label>
+                                                    </div>
+                                                    <!--State-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">State</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ customerDetails.state }}</label>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Pincode</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ customerDetails.Pincode }}</label>
+                                                    </div>
+                                                    <!--Country-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Country</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ customerDetails.country }}</label>
+                                                    </div>
+                                                    <!--PAN number-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Segment</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ customerDetails.segment }}</label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <fieldset>
+                                                    <legend>Customer logo</legend>
+                                                    <div class="thumbnail">
+                                                        <img class="img-responsive" [src]="customerDetails.logo? customerDetails.logo: 'assets/img/noimage.jpg'" alt="customer logo">
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form_class_fieldset_div">
+                                        <div class="title">Contact details</div>
+                                        <!--Contact Details section-->
+                                        <div class="row-fluid row">
+                                            <div class="col-lg-6" *ngFor="let contact of customerDetails.contacts; let i = index">
+                                                <fieldset *ngIf="contact.name || contact.email || contact.position || contact.mobile">
+                                                    <legend>Contact {{ i+1 }}</legend>
+                                                    <!-- Contact name-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Name</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ contact.name }}</label>
+                                                    </div>
+                                                    <!--Contact position-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Position</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ contact.position }}</label>
+                                                    </div>
+                                                    <!--Contact email-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Email</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ contact.email }}</label>
+                                                    </div>
+                                                    <!--Contact mobile-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-4 col-form-label text-md-right">Mobile</label>
+                                                        <label class="col-md-7 col-form-label text-md-left">{{ contact.mobile }}</label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Customer Details tab ends here-->
+                </div>
+                <!--Order details tab-->
+                <div class="tab-pane" id="orders" [ngClass]="{'active': routeParams['tab'] == 'orders'}">
+                    <app-red-table *ngIf="routeParams['tab'] == 'orders'" [screenName]="'Orders list'" [columns]="columns" [fetchUrl]="fetchUrl" [addButtonInfo]="addButtonInfo" [commonFilter]="commonFilter"
+                        [limit]="5" (event)="eventListener($event)">
+                    </app-red-table>
+                </div>
+                
+
+                <!--Customer Cloud Accounts Tab-->
+                <div class="tab-pane" id="cloud-accounts" [ngClass]="{'active': routeParams['tab'] == 'cloud-accounts'}">
+                    <app-customer-cloud-accounts-details *ngIf="routeParams['tab'] == 'cloud-accounts'"></app-customer-cloud-accounts-details>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

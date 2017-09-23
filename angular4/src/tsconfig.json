@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "baseUrl": "",
+    "noEmitHelpers": true,
+    "paths": {
+        "app": [ "app/*" ],
+        "@angular/*": ["../node_modules/@angular/*"] 
+    },
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es6", "dom"],
+    "mapRoot": "./",
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "../dist/out-tsc",
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "noStrictGenericChecks":true,
+    "skipLibCheck": true,
+    "noImplicitAny": false
+  },
+  "exclude": [
+    "node_modules/*"
+]
+}

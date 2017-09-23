@@ -1,0 +1,54 @@
+<div>
+    <app-red-table [screenName]="'List of Rejected Partners'"
+                   [columns]="cols"
+                   [fetchUrl]="fetchUrl"
+                   [commonFilter]="commonFilter"
+                   [limit]= "5"
+               	   [refreshRedTable]= "refreshRedTable"
+                   (event)="eventListener($event)"
+                   [backend_excereport_fetchUrl]="backend_report_fetchUrl"
+                   [backend_excereport_Filters]="reportFilters">
+    </app-red-table>
+</div>
+
+<div class="modal fade" role="dialog" id="rejectViewModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Reject reason</h4>
+			</div>
+			<div class="modal-body">
+				<p>{{rejectReason}}</p>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" data-dismiss="modal" class="btn btn-primary">
+                    Close
+                </button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" role="dialog" id="delete_partner">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Partner</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to Delete this partner?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                <button type="button" class="actions-button btn btn-danger" (click)="deletePartner()" [disabled]="saving">
+                    <span *ngIf="!saving">Delete</span>
+                    <span *ngIf="saving">
+                        Deleting <i class="fa fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+				<!--<button type="button" data-dismiss="modal" (click)="deletePartner()" class="actions-button btn btn-danger">Yes</button>-->
+            </div>
+        </div>
+    </div>
+</div>

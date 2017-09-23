@@ -1,0 +1,14 @@
+<div>
+    <app-red-table [screenName]="'List of Partners'"
+                   [columns]="columns"
+                   [fetchUrl]="fetchUrl"
+                   [addButtonInfo]="addButtonInfo"
+                   [commonFilter]="commonFilter"
+                   [limit]= "5"
+                   [backend_excereport_fetchUrl]="backend_report_fetchUrl"
+                   [backend_excereport_Filters]="reportFilters"
+                   (export)="exportExcel_AWS_Partners($event, true)"
+                   [config]="config"
+                   (event)="eventListener($event)">
+    </app-red-table>
+</div>

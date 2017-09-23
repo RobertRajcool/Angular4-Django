@@ -1,0 +1,88 @@
+CONFIGURING ROLES & PERMISSIONS
+-------------------------------
+
+1. While we are going to do a new model and its implementations we have to restrict their permissions with roles ,
+    otherwise it will be open for all users.
+2. In order to do that we have to restrict the permissions on both django & angular
+3. IN DJANGO
+    -> In django we are perventing the access by access decorators as like below
+     # views.py
+
+        from rest_framework import permissions
+
+        @method_decorator(permission_required('users.list_reduser', raise_exception=True), name='list')
+        @method_decorator(permission_required('users.view_reduser', raise_exception=True), name='retrieve')
+        @method_decorator(permission_required('users.add_reduser', raise_exception=True), name='create')
+        @method_decorator(permission_required('users.change_reduser', raise_exception=True), name='update')
+        @method_decorator(permission_required('users.change_reduser', raise_exception=True), name='partial_update')
+        @method_decorator(permission_required('users.delete_reduser', raise_exception=True), name='destroy')
+        class UsersViewSet(viewsets.ModelViewSet):
+            permission_classes = (permissions.IsAuthenticated,)
+            queryset = RedUser.objects.all()
+            serializer_class = UsersSerializer
+
+    -> On custom view requirements cases, add permission for that on viewset and
+        also in model class
+    -> Create new permission only if needed or else use one of existing permissions,
+        If you are using one of the existing you don't have to mention it in model class
+
+        # models.py
+
+            class Roles(models.Model):
+                group = models.OneToOneField(Group, related_name='details', on_delete=models.CASCADE)
+                alias = models.CharField(max_length=50)
+                created_by = models.ForeignKey(RedUser, to_field='id')
+                accesses = models.CharField(max_length=200, null=True)
+                description = models.CharField(max_length=80, null=True)
+                created_at = models.DateTimeField(auto_now_add=True)
+                modified_at = models.DateTimeField(auto_now=True)
+
+                class Meta:
+                    permissions = (
+                        ('codename_roles', 'Can codename roles'),
+                    )
+
+        # views.py
+
+            class RolesViewSet(viewsets.ModelViewSet):
+                permission_classes = (permissions.IsAuthenticated,)
+                queryset = Roles.objects.all()
+                serializer_class = RolesSerializer
+
+            @method_decorator(permission_required('roles.codename_roles', raise_exception=True), name='retrieve')
+            @list_route(methods=['get'], url_path='get-user')
+            def get_user(self, request):
+                user = request.user
+                return Response(user)
+
+4. IN ANGULAR2
+    -> In angular2 we may restrict in two ways
+        1. In routing
+            // roles in routing
+            import { AuthGuardService } from 'app/services';
+
+            routes = [
+                {
+	                path: 'dashboard', component: DashboardComponent,
+                    canActivate: [AuthGuardService],
+                    data: { roles: ['auth.view_permission'] }
+                },
+            ]
+
+        2. In HTML
+            // roles in template
+            <li *access="['users.list_userprofile']">
+                <a> Users <i class="toggle fa fa-angle-down"></i></a>
+            </li>
+
+            // To add additional conditions to *access directive, provide as follows
+            <li *access="['users.list_userprofile']; anyOne: true; types: ['R', 'P']">
+                <a> Users <i class="toggle fa fa-angle-down"></i></a>
+            </li>
+
+            anyOne :
+                -> if true, allows when user has any one of the provided permissions
+                -> if false, allows when user has every permissions of the provided permissions
+            types :
+                -> If this provided, then only allows if user_type is in provided types.
+                -> If not provided, then will not consider user_type

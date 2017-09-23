@@ -1,0 +1,18 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    User Created
+{% endblock %}
+
+{% block content %}
+    Hello <strong>{{ firstname }} {{ lastname }}</strong>
+
+    Your user account with Redington Cloud Portal has been created.<br><br>
+
+    Your login details:<br><br>
+    <strong>UserName</strong> : {{ username }}<br>
+    <strong>Password</strong> : {{ password }}
+
+    <p>Portal login URL: {{ domain_name }}</p>
+
+{% endblock %}

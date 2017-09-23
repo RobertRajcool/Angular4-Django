@@ -1,0 +1,149 @@
+<div class="js-sidebar-content" *ngIf="userData">
+	<header class="logo hidden-sm-down" style="margin: 0px; height: initial;">
+		<a [routerLink]="['/app']" href="javascript:void(0);"><img src="assets/img/logo-main.png" alt="Logo"></a>
+	</header>
+	<div class="sidebar-status hidden-md-up">
+		<a [routerLink]="['/app']" href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+			<img src="assets/img/logo-main.png" alt="Logo">
+		</a>
+		<!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
+	</div>
+	<!-- main notification links are placed inside of .sidebar-nav -->
+	<ul class="sidebar-nav">
+		<li>
+			<a [routerLink]=" ['dashboard'] ">
+				<span class="icon">
+            <i class="fa fa-desktop"></i>
+          </span> Dashboard
+				<i class="toggle fa "></i>
+			</a>
+		</li>
+		<li *access="['notifications.list_notifications','notifications.view_notifications']">
+			<a [routerLink]=" ['/app/notifications'] ">
+				<span class="icon">
+            <i class="fa fa-envelope"></i>
+          </span> Notifications
+				<span class="tag tag-danger">
+            {{ unread_notifications }}
+          </span>
+			</a>
+		</li>
+		<!--Partners-->
+		<li *access="['partner.list_partner']">
+			<a class="collapsed" data-target="#sidebar-partner" data-toggle="collapse" data-parent="#sidebar">
+				<span class="icon">
+                  <i class="fa fa-users"></i>
+                </span> Partner
+				<i class="toggle fa fa-angle-down"></i>
+			</a>
+			<ul id="sidebar-partner" class="collapse">
+				<li *access="['partner.view_partner','partner.list_partner']">
+					<a [routerLink]=" ['partner/list'] ">Active Partners</a>
+				</li>
+				<li *access="['partner.view_initialpartner','partner.list_initialpartner']">
+					<a [routerLink]=" ['inactive-partner/list'] ">Inactive Partners</a>
+				</li>
+				<li *access="['partner.view_initialpartner','partner.list_initialpartner']">
+					<a [routerLink]=" ['rejected-partner/list'] ">Rejected Partners</a>
+				</li>
+				<li *access="['partner.view_partner','partner.list_partner']">
+					<a [routerLink]=" ['partner-customers/active'] ">Active Customers</a>
+				</li>
+				<li *access="['partner.view_initialpartner','partner.list_initialpartner']">
+					<a [routerLink]=" ['partner-customers/inactive'] ">Inactive Customers</a>
+				</li>
+			</ul>
+		</li>
+
+		<li *access="['customers.list_customers','customers.add_customers']">
+			<a class="collapsed" data-target="#sidebar-ui" data-toggle="collapse" data-parent="#sidebar">
+				<span class="icon">
+            <i class="fa fa-users"></i>
+          </span> Customers
+				<i class="toggle fa fa-angle-down"></i>
+			</a>
+			<ul id="sidebar-ui" class="collapse">
+				<li *access="['customers.list_customers']">
+					<a [routerLink]=" ['customers/list'] ">View Customers</a>
+				</li>
+				<li *access="['customers.add_customers']" [hidden]="userData.user_type!='P'">
+					<a [routerLink]=" ['customers/add'] ">Add Customer</a>
+				</li>
+			</ul>
+		</li>
+		<li *access="['users.list_reduser','users.add_reduser']">
+			<a class="collapsed" data-target="#sidebar-users" data-toggle="collapse" data-parent="#sidebar">
+				<span class="icon">
+            <i class="fa fa-user"></i>
+          </span> Users
+				<i class="toggle fa fa-angle-down"></i>
+			</a>
+			<ul id="sidebar-users" class="collapse">
+				<li *access="['users.list_reduser']">
+					<a [routerLink]=" ['users/list'] ">Manage Users</a>
+				</li>
+				<li *access="['users.add_reduser']">
+					<a [routerLink]=" ['users/addUser'] ">Add User</a>
+				</li>
+				<li *access="['auth.list_group', 'auth.add_group','auth.view_group', 'auth.change_group','auth.delete_group', 'users.list_roles', 'users.add_roles','users.view_roles','users.change_roles','users.delete_roles']">
+					<a [routerLink]=" ['users/roles'] ">Roles</a>
+				</li>
+
+			</ul>
+		</li>
+		<li *access="['partner.view_partner', 'partner.change_partner']" [hidden]="userData.user_type!='P'">
+			<a [routerLink]="url">
+				<span class="icon">
+            <i class="glyphicon glyphicon-user"></i>
+          </span> Partner Profile
+			</a>
+		</li>
+		<!--Administration-->
+		<li *access=" [
+        'notifications.view_notificationgroups','notifications.change_notificationgroups','notifications.delete_notifications','notifications.list_notificationgroups','notifications.add_notificationgroups',
+        'notifications.add_notificationactions','notifications.delete_notificationactions','notifications.view_notificationactions','notifications.list_notificationactions','notifications.change_notificationactions'
+        ]">
+			<a class="collapsed" data-target="#sidebar-administration" data-toggle="collapse" data-parent="#sidebar">
+				<span class="icon">
+            <i class="fa fa-user-secret"></i>
+          </span> Administration
+				<i class="toggle fa fa-angle-down"></i>
+			</a>
+			<ul id="sidebar-administration" class="collapse">
+				<li *access="['notifications.view_notificationgroups','notifications.change_notificationgroups','notifications.delete_notifications','notifications.list_notificationgroups','notifications.add_notificationgroups']">
+					<a [routerLink]=" ['notification-groups'] ">Notification Groups</a>
+				</li>
+				<li *access="['notifications.add_notificationactions','notifications.delete_notificationactions','notifications.view_notificationactions','notifications.list_notificationactions','notifications.change_notificationactions']">
+					<a [routerLink]=" ['notification-actions']">Notification Actions</a>
+				</li>
+				<!--TODO: Add the access control-->
+				<li>
+					<a [routerLink]=" ['customer-registration-link']">Send Registration Link</a>
+				</li>
+				<li>
+					<a [routerLink]=" ['orc-linking'] ">ORC Linking</a>
+				</li>
+			</ul>
+		</li>
+		<li [hidden]="userData.user_type!='P'">
+			<a [routerLink]=" ['feedback'] ">
+				<span class="icon">
+					<i class="fa fa-headphones" aria-hidden="true"></i>
+          </span> Help desk
+				<i class="toggle fa "></i>
+			</a>
+		</li>
+
+		<li [hidden]="userData.is_superuser != true">
+			<a [routerLink]=" ['partner-ratings'] ">
+				<span class="icon">
+					<i class="fa fa-star-o" aria-hidden="true"></i>
+          </span> Partner Ratings
+				<i class="toggle fa "></i>
+			</a>
+		</li>
+
+	</ul>
+
+</div>
+

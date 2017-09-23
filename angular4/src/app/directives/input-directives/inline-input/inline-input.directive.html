@@ -1,0 +1,9 @@
+<span [hidden]="mode == 'display'">
+    <input type="text" appCurrencyFormatter [currency]="currencyFormat" [ngModel]="innerValue" (ngModelChange)="innerValue = $event" class="form-control">
+    <button type="button" (click)="save()" class="btn btn-success">Save</button>
+    <button type="button" (click)="cancel()" class="btn btn-primary">Cancel</button>
+</span>
+<span [hidden]="mode == 'input'">
+    <span>{{ (innerValue || 0) | Currency:2:currencyFormat:true }}</span>
+    <button type="button" (click)="mode = 'input'" class="btn btn-primary">Change</button>
+</span>

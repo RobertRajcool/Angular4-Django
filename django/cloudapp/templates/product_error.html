@@ -1,0 +1,11 @@
+
+{% extends "base_email.html" %}
+{% load commonfilters %}
+{% block title %}
+    Title
+{% endblock %}
+
+{% block content %}
+    <h1>{% constant_value "DOMAIN_NAME" %}</h1>
+    <p>{{ details | safe }}</p>
+{% endblock %}

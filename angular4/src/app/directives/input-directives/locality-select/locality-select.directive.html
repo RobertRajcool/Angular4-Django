@@ -1,0 +1,26 @@
+<div *ngIf="!select" class="display" [ngClass]="{'disabled': disabled}">
+	<div (click)="enableSearch" class="input-group input-group-transparent">
+		<input id="display-input" [value]="innerValue" class="form-control" type="text" [placeholder]="'Type to search ' + locality_property + 's'" readonly>
+		<span class="input-group-addon">
+            <i *ngIf="innerValue && !disabled" (click)="resetInnerValue()" class="fa fa-times"></i>
+            <i class="caret"></i>
+        </span>
+	</div>
+</div>
+<div *ngIf="select" class="search">
+	<div class="input-group input-group-transparent">
+		<input id="search-input" [formControl]="typo" class="form-control" type="text" (focusin)="clearOptionFocus()" (blur)="onBlur()">
+		<span class="input-group-addon">
+            <i *ngIf="search" class="fa fa-circle-o-notch fa-spin"></i>
+        </span>
+	</div>
+	<ul id="dropdown-menu" class="ui-select-choices dropdown-menu" role="menu">
+		<li *ngFor="let item of list; let i=index" tabindex="{{i+1}}" (click)="selectOpt(i, true)" role="menuitem">
+			<div class="ui-select-choices-row active">
+				<a [ngClass]="{active: innerValue === item[locality_property]}" class="dropdown-item" href="javascript:void(0)">
+					<div class="dropdown-item-label">{{ item[locality_property] }}</div>
+				</a>
+			</div>
+		</li>
+	</ul>
+</div>

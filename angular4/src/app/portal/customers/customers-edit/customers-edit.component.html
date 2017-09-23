@@ -1,0 +1,275 @@
+<div class="row">
+  <div class="col-lg-12">
+    <form *ngIf="showcustomerstatus==true" class="form-horizontal form_class" role="form" [formGroup]="editCustomerForm"
+          (ngSubmit)="editCustomerDetails(editCustomerForm.value)">
+      <div class="form_class_fieldset_div">
+        <div class="title">Customer details</div>
+        <div class="row-fluid row">
+          <div class="col-lg-6">
+            <fieldset>
+              <legend>details</legend>
+              <!--Partner Input-->
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required">Company name</label>
+                <div class="col-md-7">
+                  <input type="text" formControlName="company_name" class="form-control"
+                         placeholder="Please enter company name"/>
+                  <span
+                    *ngIf="editCustomerForm.controls.company_name.errors && (editCustomerForm.controls.company_name.dirty || editCustomerForm.controls.company_name.touched)"
+                    class="help-block">
+                                        <small [hidden]="!editCustomerForm.controls.company_name.errors.required"
+                                               class="text-danger">
+                                                        Company name is required
+                                        </small>
+                                        </span>
+                </div>
+              </div>
+              <!--Address-->
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right required">Address</label>
+                <div class="col-md-7 ">
+                  <input type="textarea" formControlName="address" class="form-control"
+                         placeholder="Please enter address">
+                </div>
+              </div>
+              <!--Pincode-->
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right required">Pincode</label>
+                <div class="col-md-7 ">
+                  <app-locality-select property="pincode" [relDisCtrl]="editCustomerForm.controls.city"
+                                       [relStateCtrl]="editCustomerForm.controls.state"
+                                       formControlName="postcode"></app-locality-select>
+                  <span *ngIf="editCustomerForm.controls.postcode.errors && (editCustomerForm.controls.postcode.dirty
+                                            || editCustomerForm.controls.postcode.touched)" class="help-block">
+                                            <span [hidden]="!editCustomerForm.controls.postcode.errors.required"
+                                                  class="text-danger">
+                                                Please enter postcode
+                                            </span>
+                                            </span>
+                </div>
+              </div>
+              <!--City-->
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right">
+                  City
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="city" class="form-control" placeholder="Please enter city"
+                         [readonly]="true">
+                </div>
+              </div>
+              <!--State-->
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right required">
+                  State
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="state" class="form-control" placeholder="Please enter state"
+                         [readonly]="true">
+                </div>
+              </div>
+              <!--PAN number-->
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right">
+                  PAN number
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="pan_number" class="form-control"
+                         placeholder="Please enter PAN number">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required">
+                  Customer vertical
+                </label>
+                <div class="col-md-7">
+                  <ng-select [allowClear]="true" [items]="customerItems" (data)="customerRefreshValue($event)"
+                             (selected)="customerSelected($event)" (removed)="customerRemoved($event)"
+                             (typed)="customerTyped($event)" placeholder="Please enter customer vertical"
+                             formControlName="customer_vertical">
+                  </ng-select>
+                  <span *ngIf="editCustomerForm.controls.customer_vertical.errors && (editCustomerForm.controls.customer_vertical.dirty
+                                    || editCustomerForm.controls.customer_vertical.touched)" class="help-block">
+                                    <span [hidden]="!editCustomerForm.controls.customer_vertical.errors.required"
+                                          class="text-danger">
+                                    Please Select Customer vertical
+                                    </span>
+                                    </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-4 col-form-label text-md-right required">
+                  Segment
+                </label>
+                <div class="col-md-7">
+                  <ng-select [allowClear]="true" [items]="segmentItems" (data)="customerRefreshValue($event)"
+                             (selected)="customerSelected($event)" (removed)="customerRemoved($event)"
+                             (typed)="customerTyped($event)" placeholder="choose segment" formControlName="segment">
+                  </ng-select>
+                </div>
+              </div>
+              <div class="form-group row">
+                   <label class="col-md-4 col-form-label text-md-right required">
+                      Delivery Address
+                   </label>
+               <div class="col-md-7" *ngIf="deliverySequenceItems">
+                   <select formControlName="delivery" class="form-control">
+                       <option value="">select</option>
+                       <option *ngFor=" let detail of deliverySequenceItems" class="form-control"  value="{{detail.dDSEQ}}" >
+                           {{detail.dDSEQ}}
+                       </option>
+                   </select>
+                       <span *ngIf="editCustomerForm.controls.delivery.errors && (editCustomerForm.controls.delivery.dirty
+                       || editCustomerForm.controls.delivery.touched)" class="help-block">
+                       <span [hidden]="!editCustomerForm.controls.delivery.errors.required" class="text-danger">
+                       Please select delivery Address
+                       </span>
+                       </span>
+                   </div>
+               </div>
+              <div *ngIf="deliverySeqzuenceItems">
+                <div *ngFor="let detail of deliverySequenceItems">
+                  <div *ngIf="editCustomerForm.controls.delivery.value == detail['dDSEQ']" class="form-group row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-6 inline-address">
+                      <span>{{ detail.cCustomerName }}</span>
+                      <span>{{ detail.cAddress1 }}, {{ detail.cAddress2 }}</span>
+                      <span>{{ detail.cAddress3 }}, {{ detail.cCity }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </fieldset>
+          </div>
+          <div class="col-lg-6">
+            <fieldset>
+              <legend>Customer logo</legend>
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right required">Logo</label>
+                <div class="col-md-7 ">
+                  <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" data-trigger="fileinput">
+                      <img style="width: 200px; height: 150px;" id="vendorlogoid" alt="..." src="{{logo}}">
+                    </div>
+                    <div>
+                      <input hidden name="filename" id="imageFile" type="file" (change)="uploadImageFile($event)">
+                      <button type="button" style="background-color: #f8f8f8;width: 122px"
+                              (click)="openImageFile($event)" class="btn btn-default">
+                        Select logo
+                      </button>
+                    </div>
+                  </div>
+                  <span *ngIf="logoError" class="text-danger help-block">
+                                            {{logoError}}
+                                    </span>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="form_class_fieldset_div">
+        <div class="title">Contact details</div>
+        <div class="row-fluid row">
+          <div class="col-lg-6">
+            <fieldset>
+              <legend>Primary contact</legend>
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right required">
+                  Name
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="contact_name" class="form-control"
+                         placeholder="Please enter name">
+                  <span *ngIf="editCustomerForm.controls.contact_name.errors && (editCustomerForm.controls.contact_name.dirty
+                                        || editCustomerForm.controls.contact_name.touched)" class="help-block">
+                                        <span [hidden]="!editCustomerForm.controls.contact_name.errors.required"
+                                              class="text-danger">
+                                            Please enter contact name
+                                        </span>
+                                        </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right">
+                  Position
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="position" class="form-control"
+                         placeholder="Please enter position">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right required">
+                  Email
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="email" class="form-control" placeholder="Please enter email">
+                  <control-messages [control]="editCustomerForm.controls.email"></control-messages>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right required">
+                  Mobile
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="mobile" class="form-control" placeholder="Please enter mobile">
+                  <control-messages [control]="editCustomerForm.controls.mobile"></control-messages>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-lg-6">
+            <fieldset>
+              <legend>Secondary contact (Optional)</legend>
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right ">
+                  Name
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="optional_contact_name" class="form-control"
+                         placeholder="Please enter name">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right">
+                  Position
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="optional_contact_position" class="form-control"
+                         placeholder="Please enter position">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right">
+                  Email
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="optional_contact_email" class="form-control"
+                         placeholder="Please enter Email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-md-4 text-md-right">
+                  Mobile
+                </label>
+                <div class="col-md-7 ">
+                  <input type="text" formControlName="optional_contact_mobile" class="form-control"
+                         placeholder="Please enter mobile">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions new-actions1">
+        <button type="submit" class="btn btn-primary"
+                [disabled]="!editCustomerForm.valid">Save
+        </button>
+        <button type="button" class="btn btn-inverse" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

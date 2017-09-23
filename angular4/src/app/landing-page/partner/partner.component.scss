@@ -1,0 +1,175 @@
+@import "../../scss/_variables";
+@import "../../../../node_modules/bootstrap/scss/_variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+// Below three are used for select2 dropdown in add user screen.
+@import "../../scss/select2-variables";
+@import "../../../../node_modules/select2/src/scss/core";
+@import "../../../../node_modules/select2-bootstrap-theme/src/select2-bootstrap";
+@import "../../../../node_modules/jasny-bootstrap/dist/css/jasny-bootstrap";
+@import "../../../../node_modules/bootstrap-application-wizard/src/bootstrap-wizard";
+
+.abc-checkbox{
+  padding-left: 5px;
+}
+.permissions-section {
+  padding-top: 2%;
+}
+
+/***********************************/
+/**            PARSLEY            **/
+/***********************************/
+
+
+input.parsley-error{
+  border-color: $brand-danger;
+  @include box-shadow(inset 0 1px 1px rgba($brand-danger,.075));
+}
+
+.parsley-errors-list{
+  font-size: $font-size-smaller;
+  padding-left: 0;
+  margin-bottom: 5px;
+
+  li{
+    list-style: none;
+    color: $brand-danger;
+  }
+}
+
+/***********************************/
+/**          FORM WIZARD          **/
+/***********************************/
+
+.form-wizard{
+  .nav-pills{
+    > li > a{
+      padding-top: 15px;
+      padding-bottom: 15px;
+      background-color: $gray-lighter;
+      color: $gray-light;
+      @include border-radius(3px);
+      cursor: default;
+    }
+
+    > li.active > a{
+      background-color: $brand-primary;
+      color: $white;
+    }
+    > li.done > a {
+      background-color: lighten($brand-primary, 28%);
+      color: $white;
+      cursor: pointer;
+    }
+    @include media-breakpoint-up(md){
+      &.nav-justified{
+        > li {
+          padding: 0 5px;
+          &:first-child{
+            padding-left: 0;
+          }
+          &:last-child{
+            padding-right: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .tab-pane{
+    padding: $line-height-computed 20px;
+    @include border-radius(5px);
+  }
+
+  .pager > li.disabled > .btn{
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    opacity: .65;
+    @include box-shadow(none);
+  }
+
+  .pager {
+    padding-left: 0;
+    margin-top: 1rem;
+
+    li {
+      display: inline;
+    }
+  }
+
+  //fix conflict with MODAL WIZARD
+  .pager.wizard{
+    display: block;
+  }
+}
+
+/**
+ * Jasny Bootstrap
+ * Fileinput.less
+ */
+
+.fileinput.fileinput-new {
+  .thumbnail {
+    padding: $thumbnail-padding;
+    line-height: $line-height-base;
+    background-color: $thumbnail-bg;
+    border: $thumbnail-border-width solid $thumbnail-border-color;
+    border-radius: $thumbnail-border-radius;
+    transition: all .2s ease-in-out;
+    @include box-shadow(0 1px 2px rgba(0,0,0,.075));
+  }
+}
+
+.fileinput-preview.fileinput-exists {
+  border: 1px solid $input-border-color;
+  border-radius: $border-radius;
+  padding: 5px;
+}
+
+.fileinput.input-group {
+  display: flex;
+}
+
+.fileinput-new.input-group .btn-file,
+.fileinput-new .input-group .btn-file {
+  border-radius: 0 $border-radius $border-radius 0;
+
+  &.btn-xs,
+  &.btn-sm {
+    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+  }
+  &.btn-lg {
+    border-radius: 0 $border-radius-lg $border-radius-lg 0;
+  }
+}
+
+.form-group.has-warning .fileinput {
+  .fileinput-preview {
+    color: $state-warning-text;
+  }
+  .thumbnail {
+    border-color: $state-warning-border;
+  }
+}
+.form-group.has-error .fileinput {
+  .fileinput-preview {
+    color: $state-danger-text;
+  }
+  .thumbnail {
+    border-color: $state-danger-border;
+  }
+}
+.form-group.has-success .fileinput {
+  .fileinput-preview {
+    color: $state-success-text;
+  }
+  .thumbnail {
+    border-color: $state-success-border;
+  }
+}
+
+.btn-label {
+  background: transparent;
+  left: 2px;
+  padding: 1px 6px;
+}
+

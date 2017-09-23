@@ -1,0 +1,110 @@
+<div *ngIf="!_cloudAccounts.length">No details saved</div>
+<div class="form_class_fieldset_div" *ngIf="_cloudAccounts.length">
+	<div class="title">{{ pageTitle }}</div>
+	<div *ngFor="let cloudAccount of _cloudAccounts; let i = index">
+		<div [ngSwitch]="cloudAccount['type']">
+			<!--For AWS account -->
+			<section *ngSwitchCase="'AWS'" class="widget no-border">
+				<div class="row-fluid row">
+					<div class="col-lg-12">
+						<fieldset>
+							<legend><strong>AWS Account Details</strong></legend>
+							<div class="row">
+								<div class="col-lg-6 col-xs-12">
+									<!--Payer Account Id-->
+									<div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Payer account Id </label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['payer_account_id']}} </label>
+									</div>
+									<!--Linked Account Id-->
+									<div class="form-group row">
+										<label class="col-md-5 ol-form-label text-md-right">Linked account Id </label>
+										<label class="col-md-7 ol-form-label text-md-left">{{ cloudAccount['details']['account_id']}} </label>
+									</div>
+									<!--Friendly Name-->
+									<div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Friendly name </label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['friendly_name']}} </label>
+									</div>
+                                    <!--Monthly Requiring Rate-->
+									<div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">MRR </label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['mrr']}} </label>
+									</div>
+                                     <div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Reference Number</label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['reference_number']}} </label>
+									</div>
+								</div>
+
+                                <div class="col-lg-6">
+                                    <!--Workload-->
+									<div class="form-group row">
+										<label class="col-md-5 ol-form-label text-md-right">Workload </label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['workload']}} </label>
+									</div>
+                                    <!--Delivery Sequence-->
+									<div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Delivery Address </label>
+										<label class="col-md-7 col-form-label text-md-left">
+                                            <div>{{ cloudAccount['details']['delivery_sequence']}}</div>
+
+                                            <div *ngFor="let sequence of cloudAccount['delivery_sequences']">
+                                                <div *ngIf="cloudAccount['details']['delivery_sequence'] == sequence['dDSEQ']">
+											        <div>{{ sequence['cCustomerName'] }},</div>
+											        <div>{{ sequence['cAddress1'] }}, {{ sequence['cAddress2'] }}</div>
+											        <div>{{ sequence['cAddress3'] }}, {{ sequence['cCity'] }}.</div>
+										        </div>
+                                            </div>
+                                        </label>
+									</div>
+                                </div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</section>
+
+			<!--For Microsoft Account-->
+			<div *ngSwitchCase="'MS'" class="col-lg-12">
+				<div class="row-fluid row">
+					<div class="col-lg-12">
+						<fieldset>
+							<legend><strong>Microsoft Account Details</strong></legend>
+							<div class="row">
+								<div class="col-lg-6 col-xs-12">
+									<!--Domain Name-->
+									<div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Domain name </label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['domain_name']}} </label>
+									</div>
+									<!--Tenant Id-->
+									<div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Tenant Id </label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['tenant_id']}} </label>
+									</div>
+                                    <!--Discount-->
+									<div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Discount </label>
+										<label class="col-md-7 col-form-label text-md-left">
+                                            {{ cloudAccount['details']['standard_discount']}}<span [hidden]="!cloudAccount['details']['standard_discount'] || cloudAccount['details']['standard_discount']==''">%</span>
+                                        </label>
+									</div>
+                                    <!--Discount Status-->
+									<div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Discount status</label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['discount_status']}} </label>
+									</div>
+                                    <div class="form-group row">
+										<label class="col-md-5 col-form-label text-md-right">Reference Number</label>
+										<label class="col-md-7 col-form-label text-md-left">{{ cloudAccount['details']['reference_number']}} </label>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

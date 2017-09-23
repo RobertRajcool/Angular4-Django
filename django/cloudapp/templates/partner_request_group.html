@@ -1,0 +1,129 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {% if type == 'Customer' %}
+       Customer Registration Completed
+    {% else %}
+       Partner Registration Completed
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if type == 'Customer' %}
+       <p>Customer <strong>{{ username }}</strong> has completed registration with following details!.<br></p>
+    {% else %}
+       <p>Partner <strong>{{ username }}</strong> has completed registration with following details!.<br></p>
+    {% endif %}
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-bottom:none; border-top:none;">
+        <tr>
+            <td align="left" valign="top" style="padding:0px 20px; font:13px Verdana, Arial, Helvetica, sans-serif; color:#333333;">
+                <fieldset style="border:1px solid #e0e0e0; padding: 6px; margin-bottom:12px;">
+                    <legend><strong>Company Details</strong></legend>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                        <tr>
+                            <td width="105" align="left" valign="top">Company Name</td>
+                            <td colspan="3" align="left" valign="top">: {{ partner_details.company_name }}.</td>
+                        </tr>
+                        <tr>
+                            <td align="left" valign="top">Address Line 1</td>
+                            <td width="221" align="left" valign="top">: {{ partner_details.address_1 }}</td>
+                            <td width="68" align="left" valign="top">City</td>
+                            <td width="190" align="left" valign="top">: {{ partner_details.city }}</td>
+                        </tr>
+                        <tr>
+                            <td align="left" valign="top">Address Line 2</td>
+                            <td align="left" valign="top">: {{ partner_details.address_2 }}</td>
+                            <td align="left" valign="top">State</td>
+                            <td align="left" valign="top">: {{ partner_details.state }}</td>
+                        </tr>
+                        <tr>
+                            <td align="left" valign="top"> Pincode </td>
+                            <td align="left" valign="top">:  {{ partner_details.pin_code }}</td>
+                        </tr>
+                    </table>
+                </fieldset>
+                {% for item in contact_details %}
+                    {% if item.type == 'P' %}
+                        <fieldset style="border:1px solid #e0e0e0; padding: 6px; margin-bottom:12px;">
+                            <legend><strong>Contact Information: Person 1</strong></legend>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                <tr>
+                                    <td align="left" valign="top">First Name</td>
+                                    <td width="238" align="left" valign="top">: {{ item.name }}</td>
+                                    <td width="85" align="left" valign="top">Contact No</td>
+                                    <td width="185" align="left" valign="top">: {{ item.mobile }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top">Email Id</td>
+                                    <td align="left" valign="top">: {{ item.email }}</td>
+                                    <td align="left" valign="top">Designation</td>
+                                    <td align="left" valign="top">:
+                                        Primary
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    {% elif item.type == 'D/O'%}
+                        <fieldset style="border:1px solid #e0e0e0; padding: 6px; margin-bottom:12px;">
+                            <legend><strong>Contact Information: Person 2</strong></legend>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                <tr>
+                                    <td align="left" valign="top">First Name</td>
+                                    <td width="238" align="left" valign="top">: {{ item.name }}</td>
+                                    <td width="85" align="left" valign="top">Contact No</td>
+                                    <td width="185" align="left" valign="top">: {{ item.mobile }}</td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top">Email Id</td>
+                                    <td align="left" valign="top">: {{ item.email }}</td>
+                                    <td align="left" valign="top">Designation</td>
+                                    <td align="left" valign="top">:
+                                        Director/Owner
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    {% endif %}
+                    {% comment %}<fieldset style="border:1px solid #e0e0e0; padding: 6px; margin-bottom:12px;">
+                        <legend><strong>Contact Information: Person {{ forloop.counter }}</strong></legend>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                            <tr>
+                                <td align="left" valign="top">First Name</td>
+                                <td width="238" align="left" valign="top">: {{ item.name }}</td>
+                                <td width="85" align="left" valign="top">Contact No</td>
+                                <td width="185" align="left" valign="top">: {{ item.mobile }}</td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="top">Email Id</td>
+                                <td align="left" valign="top">: {{ item.email }}</td>
+                                <td align="left" valign="top">Designation</td>
+                                <td align="left" valign="top">:
+                                    {{ item.type }}
+                                    {% if  item.type == 'D/O'%}
+                                        Director/Owner
+                                    {% elif item.type == 'A&O' %}
+                                        A/c Person & Operation Executive
+                                    {% elif item.type == 'S' %}
+                                        Sales Person
+                                        {% else %}
+                                        Primary
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>{% endcomment %}
+                {% endfor %}
+                <fieldset style="border:1px solid #e0e0e0; padding: 6px; margin-bottom:0px;">
+                    <legend><strong>Other Details</strong></legend>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                        <tr>
+                            <td width="76" align="left" valign="top">User Name</td>
+                            <td width="238" align="left" valign="top">: {{ partner_details.preferred_user_name }}</td>{% comment %}
+                            <td width="85" align="left" valign="top">Vendor</td>
+                            <td width="185" align="left" valign="top">: All</td>{% endcomment %}
+                        </tr>
+                    </table>
+                </fieldset>
+        </tr>
+    </table>
+{% endblock %}

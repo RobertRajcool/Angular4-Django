@@ -1,0 +1,17 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Register Microsoft Account
+{% endblock %}
+
+{% block content %}
+
+    <p>Dear {{ customername }},</p>
+
+    <p>Please click the link to register your domain name in Microsoft</p><br><br>
+    <a href={{ url }}>
+        <strong>Create Microsoft Account</strong>
+    </a>
+    <p> This link will expire in 7 days. </p>
+
+{% endblock %}

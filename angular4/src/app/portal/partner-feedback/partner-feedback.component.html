@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-lg-12">
+    <form [formGroup]="feedbackForm" class="form-horizontal form_class" (ngSubmit)="addFeedBack(feedbackForm.value)" role="form">
+      <div class="form_class_fieldset_div">
+        <div class="title">Help desk</div>
+        <div class="row-fluid row">
+
+        <div class="col-lg-12 toll_free_section">
+            <div class="alert alert_2 ng-isolate-scope alert-info alert-sm">
+                <fieldset class="toll_free_fieldset">
+                    <legend>Toll free</legend>
+                        <label class="phone_icon_main"><i class="fa fa-phone phone_icon"></i></label>
+                        <div class="phone_number">+91 81 4411 2222 </div>
+                </fieldset>
+            </div>
+        </div>
+
+          <div class="col-lg-12">
+            <fieldset>
+              <legend>Details</legend>
+              <div class="form-group row">
+                <label  class="col-md-3  col-form-label text-md-right required">Contact Name</label>
+                <div class="col-md-5 col-xs-12">
+                  <input type="text"  class="form-control" formControlName="name" placeholder="Please enter contact name">
+                  <span *ngIf="feedbackForm.controls.name.errors && (feedbackForm.controls.name.dirty || feedbackForm.controls.name.touched)" class="help-block">
+                      <small [hidden]="!feedbackForm.controls.name.errors.required" class="text-danger">
+                     Contact name is required
+                      </small>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label  class="col-md-3  col-form-label text-md-right required">Contact Email</label>
+                <div class="col-md-5 col-xs-12">
+                  <input type="text"  class="form-control" formControlName="email" placeholder="Please enter contact email id">
+                  <span *ngIf="feedbackForm.controls.email.errors && (feedbackForm.controls.email.dirty || feedbackForm.controls.email.touched)" class="help-block">
+                      <small [hidden]="!feedbackForm.controls.email.errors.required" class="text-danger">
+                      Email address is required
+                      </small>
+                      <small [hidden]="!feedbackForm.controls.email.errors.pattern" class="text-danger">
+                      Please enter valid email address
+                      </small>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label  class="col-md-3  col-form-label text-md-right required">Contact No</label>
+                <div class="col-md-3 col-xs-12">
+                  <input type="text"  class="form-control" formControlName="mobile" placeholder="Please enter contact number">
+                  <span *ngIf="feedbackForm.controls.mobile.errors && (feedbackForm.controls.mobile.dirty || feedbackForm.controls.mobile.touched)" class="help-block">
+                      <small [hidden]="!feedbackForm.controls.mobile.errors.required" class="text-danger">
+                      Contact number is required
+                      </small>
+                      <small [hidden]="!feedbackForm.controls.mobile.errors.pattern" class="text-danger">
+                      Please enter a valid phone number
+                      </small>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label  class="col-md-3  col-form-label text-md-right required">Help related to</label>
+                <div class="col-md-5 col-xs-12">
+                  <select formControlName="reason"  class="form-control" >
+                    <option value="">Help related to operation</option>
+                    <option *ngFor=" let object of feedbackOption" class="form-control"  value="{{object}}" >
+                      {{object}}
+                    </option>
+                  </select>
+                  <span *ngIf="feedbackForm.controls.reason.errors && (feedbackForm.controls.reason.dirty || feedbackForm.controls.reason.touched)" class="help-block">
+                      <small [hidden]="!feedbackForm.controls.reason.errors.required" class="text-danger">
+                      Please select feedback related to operation
+                      </small>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 text-md-right required">
+                  Description
+                </label>
+                <div class="col-md-8">
+                  <textarea type="text" formControlName="description"  class="form-control" rows="7"
+                            placeholder="Please enter description">
+                  </textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label col-md-3 text-md-right" >
+                  Attachments (if any)
+                </label>
+                <div class="col-md-5">
+                  <input name="filename" id="fileId" type="file" (change)="uploadAttchementFile($event)" hidden>
+                  <button type="button" style="background-color: #f8f8f8;width: 122px" (click)="openAttachment($event)" class="btn btn-default">
+                    Select file</button><span style="margin-left: 5px">{{ attachementFilename }}</span>
+                  <span *ngIf="attachementErrorMsg" class="text-danger help-block">
+                                {{attachementErrorMsg}}
+                                </span>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions new-actions1">
+        <button type="submit" [disabled]="!feedbackForm.valid || attachementErrorMsg" class="btn btn-primary">Send feedback</button>
+        <button type="button" class="btn btn-inverse" [routerLink]="['/app/dashboard']">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

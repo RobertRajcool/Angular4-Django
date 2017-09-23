@@ -1,0 +1,10 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Title
+{% endblock %}
+
+{% block content %}
+    <p><strong>Partner:</strong>{{ partner_name }} Account request rejected for this <strong>Customer:</strong> {{ customer_name }}</p>
+    <p><strong>Rejection Details:</strong> {{ reject_msg }} </p>
+{% endblock %}

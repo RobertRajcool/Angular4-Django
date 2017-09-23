@@ -1,0 +1,17 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {% if type == 'Customer' %}
+       Customer Registration Rejected
+    {% else %}
+       Partner Registration Rejected
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if type == 'Customer' %}
+       <p>Customer activation for customer : <strong>{{ username }}</strong> has been rejected.</p>
+    {% else %}
+       <p>Partner activation for partner : <strong>{{ username }}</strong> has been rejected.</p>
+    {% endif %}
+{% endblock %}

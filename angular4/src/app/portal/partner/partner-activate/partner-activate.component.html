@@ -1,0 +1,246 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-horizontal form_class">
+            <div class="form_class_fieldset_div">
+                <div *ngIf="isCustomer" class="title">Customer details</div>
+                <div *ngIf="!isCustomer" class="title">Partner details</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-12">
+                        <fieldset>
+                            <legend *ngIf="isCustomer">Customer Details</legend>
+                            <legend *ngIf="!isCustomer">Partner Details</legend>
+                            <div class="col-lg-6 style-float-left">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Name</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.name }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Email</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.email }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Contact number</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.mobile }}</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 style-float-left">
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Company Name</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.company_name }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">City, State</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.city }}, {{ partner.state }}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Address</label>
+                                    <label class="col-md-7 col-form-label text-md-left">
+                                        <ul>
+                                            <li>{{ partner.address_1 }}</li>
+                                            <li *ngIf="partner.address_2">{{ partner.address_2 }}</li>
+                                            <li *ngIf="partner.address_3">{{ partner.address_3 }}</li>
+                                        </ul>
+                                    </label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label text-md-right">Pincode</label>
+                                    <label class="col-md-7 col-form-label text-md-left">{{ partner.pin_code }}</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="form_class_fieldset_div">
+                <div class="title">Contact Details</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-12">
+                        <div class="col-lg-4 style-float-left partner-contact-details-box" *ngFor="let contact of partner.contacts; let i=index">
+                            <div class="partner-registration-contact-box-2">
+                                <div *ngIf="contact.type == 'D/O'" class="title">Director/Owner</div>
+                                <div *ngIf="contact.type == 'A&amp;O'" class="title">Accounts Person &amp; Operation Executive</div>
+                                <div *ngIf="contact.type == 'S'" class="title">Sales Person</div>
+                                <div *ngIf="contact.type == 'O'" class="title">Others</div>
+                                <div class="field">
+                                    <label class="field-label">Name</label>
+                                    <label>{{ contact.name }}</label>
+                                </div>
+                                <div class="field">
+                                    <label class="field-label">Email</label>
+                                    <label>{{ contact.email }}</label>
+                                </div>
+                                <div class="field">
+                                    <label class="field-label">Contact number</label>
+                                    <label>{{ contact.mobile }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form_class_fieldset_div">
+                <div class="title">Other Details</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-12">
+                        <div class="field margin-top-2">
+                            <label class="field-label">GST registration number</label>
+                            <label>{{ partner.gst_number }}</label>
+                        </div>
+                        <div class="field">
+                            <label class="field-label">What type of partner are you ?</label>
+                            <label>
+                                <ul *ngFor="let type of partner.partner_type; let i=index">
+                                    <li>{{type}}</li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="field margin-top-2">
+                            <label class="field-label">Core business</label>
+                            <label>{{ partner.business_type }}</label>
+                        </div>
+                        <div class="field">
+                            <label class="field-label">Focused customer vertical</label>
+                            <label>
+                                <ul *ngFor="let customer of partner.focused_customer; let i=index">
+                                    <li>{{customer}}</li>
+                                </ul>
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label class="field-label">Interested workloads to work with Redington</label>
+                            <label>
+                                <ul *ngFor="let workload of partner.interested_workload; let i=index">
+                                    <li>{{workload}}</li>
+                                </ul>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form_class_fieldset_div">
+                <div class="title">Business details</div>
+                <div class="row-fluid row">
+                    <div class="col-lg-6">
+                        <div class="widget-body">
+                            <table class="table partner-contact-details-list actions-list">
+                                <thead>
+                                    <tr>
+                                        <th class="no">No</th>
+                                        <th>File Name</th>
+                                        <th class="actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let document of partner.documents; let i=index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{document.type}}</td>
+                                        <td>
+                                            <div class="input-group-btn">
+                                                <a class="actions-button btn btn-info" target="_blank" href="{{document.file_data}}"><i class="fa fa-eye"></i></a>
+                                                <a class="actions-button btn btn-success" href="{{document.file_data}}"><i class="fa fa-download"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="title">{{ isCustomer ? 'Customer activation':'Partner activation'}}</div>
+                        <form [formGroup]="partnerActivationForm" class="form-horizontal" #f="ngForm" (ngSubmit)="activatePartnerFunc(f)">
+                            <div *ngIf="!isCustomer" class="form-group row">
+                                <label for="normal-field" class="col-md-4  col-form-label text-md-right">Existing partner</label>
+                                <div class="col-md-7">
+                                    <div class="abc-radio">
+                                        <input type="radio" id="radio1" name="existing_status" value="1" formControlName="existing_status">
+                                        <label for="radio1">Existing</label>
+                                    </div>
+                                    <div class="abc-radio">
+                                        <input type="radio" id="radio2" name="existing_status" value="0" formControlName="existing_status">
+                                        <label for="radio2">Not Existing</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="normal-field" class="col-md-4  col-form-label text-md-right">Dealer Code</label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" formControlName="jba_code">
+                                    <span *ngIf="isValidCode!=undefined" style="color: red">{{ isValidCode }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="normal-field" class="col-md-4  col-form-label text-md-right">Credit limit</label>
+                                <div class="col-md-7">
+                                    <input type="number" class="form-control" formControlName="credits">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="normal-field" class="col-md-4  col-form-label text-md-right">Preferred username</label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" formControlName="preferred_user_name">
+                                    <span *ngIf="isValidUser!=undefined" style="color: red">{{ isValidUser }}</span>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button *ngIf="process_status=='progress'" [disabled]="!partnerActivationForm.valid || isCodeExist" type="submit" class="btn btn-danger btn-rounded float-xs-right">Activate &ensp;</button>
+                                <button *ngIf="process_status=='rejecting'" [disabled]="true" type="submit" class="btn btn-danger btn-rounded float-xs-right">Activate &ensp;</button>
+                                <button *ngIf="process_status=='activating'" [disabled]="true" type="submit" class="btn btn-danger btn-rounded float-xs-right">
+                                            Activating &ensp;
+                                            <i class="fa fa-spinner fa-spin"></i>
+                                        </button>
+                                <button *ngIf="process_status=='progress'" type="button" class="btn btn-default btn-rounded" data-toggle="modal" data-target="#modal">Reject &ensp;</button>
+                                <button *ngIf="process_status=='rejecting'" [disabled]="true" type="button" class="btn btn-default btn-rounded" data-toggle="modal"
+                                    data-target="#modal">
+                                    Rejecting &ensp;
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                    </button>
+                                    <button *ngIf="process_status=='activating'" [disabled]="true" type="button" class="btn btn-default btn-rounded" data-toggle="modal"
+                                        data-target="#modal">Reject &ensp;</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Partner reject modal-->
+<div id="modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!--Modal content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 *ngIf="isCustomer" class="modal-title">Customer rejection</h4>
+                <h4 *ngIf="!isCustomer" class="modal-title">Partner rejection</h4>
+            </div>
+            <!--/. Header Body-->
+            <div class="modal-body">
+                <form [formGroup]="partnerRejectionForm" class="form-horizontal">
+                    <div class="row">
+                        <label class="col-md-2  col-form-label text-md-right">Rejection reason</label>
+                        <div class="col-lg-9 col-xs-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Please enter rejection reason" formControlName="rejection_reason">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button (click)="rejectPartnerFunc()" type="submit" [disabled]="!partnerRejectionForm.valid" class="btn btn-primary" data-dismiss="modal">Done</button>
+                    </div>
+                    <!--/. Footer-->
+
+                </form>
+            </div>
+            <!--/. Body-->
+
+        </div>
+        <!--/. Modal content-->
+    </div>
+</div>
+<!--Partner reject modal-->

@@ -1,0 +1,12 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Update Orders
+{% endblock %}
+
+{% block content %}
+    <p>Dear partner, </p><br><br>
+
+    <p>Congratulations! Your order has been approved. </p><br><br>
+    <p>Order Number: {{ order_details.order_number }}</p>
+{% endblock %}

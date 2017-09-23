@@ -1,0 +1,19 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    {% if type == 'Customer' %}
+       Customer Registration
+    {% else %}
+       Partner Registration
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if type == 'Customer' %}
+       <p>Customer <strong>{{ username }}</strong> has started registering!.<br></p>
+    {% else %}
+       <p>Partner <strong>{{ username }}</strong> has started registering!.<br></p>
+    {% endif %}
+{% endblock %}
+
+

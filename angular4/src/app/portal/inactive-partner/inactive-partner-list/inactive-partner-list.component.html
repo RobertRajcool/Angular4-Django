@@ -1,0 +1,13 @@
+<div>
+    <app-red-table [screenName]="'List of partners to activate'"
+                   [columns]="cols"
+                   [fetchUrl]="fetchUrl"
+                   [addButtonInfo]="addButtonInfo"
+                   [commonFilter]="commonFilter"
+                   [limit]= "5"
+                   (event)="eventListener($event)"
+                   [backend_excereport_fetchUrl]="backend_report_fetchUrl"
+                   [backend_excereport_Filters]="reportFilters"
+    >
+    </app-red-table>
+</div>

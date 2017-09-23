@@ -1,0 +1,61 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  background:#433e8e;
+}
+.wrapper {
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: 0px;
+  background:url('/assets/Login-001/images/login_bg_new.jpg') center top repeat-y;
+  background-size: cover;
+
+}
+.login-screen-main {
+  width: 100%;
+  height: auto;
+  margin-top: 90px;
+}
+.login-main-box {
+  top: 20px;
+  width: 330px;
+  height: auto;
+}
+.re-logo {
+  margin:0px;
+  padding: 20px 10px;
+  text-align:center;
+  background: #309c5f;
+  border-radius: 28px 28px 0 0;
+}
+.left-image-list {
+  margin:0px;
+  padding:0px;
+  width: 100%;
+  height: 100%;
+}
+.left-img-panel-main {
+  	width: 540px;
+    height: 100%;
+    float: right;
+    text-align: center;
+}
+.left-img-panel-main .text {
+    font-size: 26px;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+

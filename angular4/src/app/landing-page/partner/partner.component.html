@@ -1,0 +1,700 @@
+<div class="partner_registration_screen">
+  <header id="site-header" class="site-header animated-header shrink fixed" role="banner">
+    <div class="transparent-header-background" style="background-color: rgba(255, 255, 255, 0);">
+      <div class="container">
+        <div class="header-main logo-position-menu_center header-colors-light header-layout-default header-style-3">
+          <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation" style="text-align: left;">
+            <ul id="primary-menu" class="nav-menu dl-menu styled no-responsive" style="left: 25.5px; position: relative;">
+              <li><a href="https://redingtoncloud.com#services" target="_blank">Cloud Services</a></li>
+              <li><a href="http://https://redingtoncloud.com#portfolio" target="_blank">Cloud Portfolio</a></li>
+              <li class="menu-item-active"><a href="">Become a Partner</a></li>
+              <li class="menu-item-logo">
+                <div class="site-logo"> <a href="https://redingtoncloud.com/" rel="home"> <span class="logo" style="min-width: 148px;"> <img src="https://redingtoncloud.com/wp-content/uploads/thegem-logos/logo_97d20fda6955dfe9b0887277836b9616_1x.png" srcset="" alt="" style="width: 132px; margin-right: 16px; margin-left: -148px; display: inline;" class="small"> </span> </a> </div>
+              </li>
+              <li><a href="https://redingtoncloud.com/about-us/" target="_blank">About Us</a></li>
+              <li><a href="https://redingtoncloud.com/contact-us/" target="_blank">Contact Us</a></li>
+              <li *ngIf="!is_customer"><a href="https://redingtoncloud.com/partner-login/" target="_blank">Partner Login</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="col-lg-12 theme-select partner_registration_tab_main" style="background: #fff;">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-horizontal form_class">
+          <div class="form_class_fieldset_div">
+            <div class="title">{{ !is_customer? "Partner registration": "Customer registration" }}</div>
+            <div class="row-fluid row">
+              <section class="widget col-lg-12" widget>
+                <div class="widget-body partner-registration-screen field-font-size-main">
+                  <div class="row">
+                    <div class="col-lg-12 col-xs-12">
+                      <div bootstrap-wizard data-height="444" class="form-wizard">
+                        <!--Header section-->
+                        <ul class="nav-justified mb-sm nav nav-pills">
+                          <li class="nav-item"> <a class="nav-link" href="#tab1" data-toggle="tab"> <small>1.</small> Your details </a> </li>
+                          <li class="nav-item"> <a class="nav-link" href="#tab2" data-toggle="tab"> <small>2.</small> Company details </a> </li>
+                          <li class="nav-item"> <a class="nav-link" href="#tab3" data-toggle="tab"> <small>3.</small> Business details </a> </li>
+                        </ul>
+                        <!--/. Header section-->
+                        <!--Progress bar-->
+                        <div class="bg-gray-lighter progress-bar mt-xs">
+                          <progress id="bar" class="progress progress-xs progress-bar-gray-light" value="100" max="100" style="width: 25%;"></progress>
+                        </div>
+                        <!--/.Progress bar-->
+                        <!--Tabs section-->
+                        <div class="tab-content">
+                          <!--First step-->
+                          <div class="tab-pane bg-gray-lighter" id="tab1" style="">
+                            <form [formGroup]="partnerRegistrationForm_1" data-parsley-priority-enabled="false" novalidate="novalidate" (ngSubmit)="submitFunc('first_step')">
+                              <div class="row">
+                                <div class="col-lg-6 registration-content-bg">
+                                  <fieldset *ngIf="!is_customer" >
+                                  <div class="col-lg-11">
+                                    <div class="partnership-benefits-list">
+                                      <p>Partner with Redington, grow your cloud business. Leverage Redington Cloud's capabilities such as consulting, Migration and Managed services. Access best in class cloud services through single platform and also earn your reseller margin.</p>
+                                      <h4>Partnership benefits:</h4>
+                                      <ul>
+                                        <li>Cloud simplified through Redington</li>
+                                        <li>Trusted advisor for cloud</li>
+                                        <li>Build your cloud offering by packaging Redington services</li>
+                                        <li>Sales and presales enablement</li>
+                                        <li>Training and certification roadmap</li>
+                                        <li>One stop shop for multi cloud services</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                  </fieldset>
+                                </div>
+                                <div class="col-lg-6">
+                                  <fieldset>
+                                  <div class="row">
+                                    <div class="form-group col-lg-5" *ngIf="!is_customer">
+                                      <label for="username"><strong>Existing partner</strong></label>
+                                      <div class="abc-radio">
+                                        <input type="radio" formControlName="existing_partner" value="1" (change)="changFunc()" name="existing_partner" id="radio1">
+                                        <label for="radio1">Yes</label>
+                                      </div>
+                                      <div class="abc-radio">
+                                        <input type="radio" formControlName="existing_partner" value="0" (change)="changFunc()" name="existing_partner" id="radio2">
+                                        <label for="radio2">No</label>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-lg-7 margin-top-2" *ngIf="existing_partner_status=='true'">
+                                      <label class="required" for="jba_code">Dealer Code</label>
+                                      <input type="text" formControlName="jba_code" class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="username">Company name</label>
+                                    <input type="text" id="company" name="company" class="form-control" required="required" formControlName="company_name">
+                                  </div>
+                                  <div class="margin-bottom-10 margin-top-10">
+                                    <control-messages [control]="partnerRegistrationForm_1.controls.company_name"></control-messages>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="username">Name</label>
+                                    <input type="text" id="username" name="username" class="form-control" required="required" formControlName="name">
+                                  </div>
+                                  <div class="margin-bottom-10 margin-top-10">
+                                    <control-messages [control]="partnerRegistrationForm_1.controls.name"></control-messages>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" required="required" formControlName="email">
+                                  </div>
+                                  <div class="margin-bottom-10 margin-top-10">
+                                    <control-messages [control]="partnerRegistrationForm_1.controls.email"></control-messages>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="contact">Contact number</label>
+                                    <input type="text" id="contact" name="contact" class="form-control" required="required" formControlName="mobile">
+                                  </div>
+                                  <div class="margin-bottom-10 margin-top-10">
+                                    <control-messages [control]="partnerRegistrationForm_1.controls.mobile"></control-messages>
+                                  </div>
+                                  </fieldset>
+                                </div>
+                              </div>
+                              <!--Footer section-->
+                              <ul class="pager wizard page-prenext" style="margin: 48px -20px -80px 0; float: right;">
+                                <li class="next">
+                                  <button type="submit" [disabled]="!partnerRegistrationForm_1.valid" class="btn btn-primary btn-rounded pull-right">
+                                    Next &nbsp;
+                                    <!--<i class="fa fa-arrow-right"></i> -->
+                                  </button>
+                                </li>
+                              </ul>
+                              <!--/. Footer section-->
+                            </form>
+                          </div>
+                          <!--/. First step-->
+                          <!--Second step-->
+                          <div class="tab-pane bg-gray-lighter" id="tab2" style="padding-bottom: 0px;">
+                            <form [formGroup]="partnerRegistrationForm_2" data-parsley-priority-enabled="false" novalidate="novalidate" (ngSubmit)="submitFunc('second_step')" style=" ">
+                              <div class="row">
+                                <div class="col-lg-6">
+                                  <fieldset>
+                                  <div class="form-group">
+                                    <label class="required" for="company_name">Company name</label>
+                                    <input type="text" name="company_name" formControlName="company_name" class="form-control" required="required">
+                                  </div>
+                                  <div class="margin-bottom-10 margin-top-10">
+                                    <control-messages [control]="partnerRegistrationForm_2.controls.company_name"></control-messages>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="address1">Address 1</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-book field-font-size2"></i></span>
+                                      <input formControlName="addrs_line_1" class="form-control" type="text" required="required">
+                                    </div>
+                                  </div>
+                                  <div class="margin-bottom-10 margin-top-10">
+                                    <control-messages [control]="partnerRegistrationForm_2.controls.addrs_line_1"></control-messages>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="address2">Address 2</label>
+                                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-book field-font-size2"></i></span>
+                                      <input formControlName="addrs_line_2" class="form-control" type="text">
+                                    </div>
+                                  </div>
+                                  </fieldset>
+                                </div>
+                                <div class="col-lg-6">
+                                  <fieldset>
+                                  <div class="form-group">
+                                    <label class="required" for="pincode">PIN Code</label>
+                                    <app-locality-select property="pincode" formControlName="pin_code" [relDisCtrl]="partnerRegistrationForm_2.controls.city" [relStateCtrl]="partnerRegistrationForm_2.controls.state"></app-locality-select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="city">City</label>
+                                    <app-locality-select property="district" formControlName="city"></app-locality-select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="state">State</label>
+                                    <app-locality-select property="state" formControlName="state"></app-locality-select>
+                                  </div>
+                                  </fieldset>
+                                </div>
+                              </div>
+                              <!--Contact details-->
+                              <div class="row margin-top-1">
+                                <div class="col-lg-12">
+                                  <fieldset class="padding-top-1">
+                                  <legend>Contact details</legend>
+                                  <div class="col-lg-4 style-float-left">
+                                    <div class="partner-registration-contact-box">
+                                      <div class="abc-checkbox required abc-checkbox-info">
+                                        <input [checked]="saveUsername" type="checkbox" (change)="saveUsername = !saveUsername" id="director" name="director-owner" value="true" formControlName="director_cntct_status">
+                                        <label for="director">Director/Owner</label>
+                                      </div>
+                                      <div *ngIf="saveUsername">
+                                        <div class="form-group">
+                                          <label class="required" for="con-name1">Name</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="director_name" class="form-control" type="text" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.director_name"></control-messages>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="required" for="con-email1">Email</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="director_email" class="form-control" type="email" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.director_email"></control-messages>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="required" for="con-contact1">Contact number</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="director_mobile" class="form-control" type="text" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.director_mobile"></control-messages>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-4 style-float-left">
+                                    <div class="partner-registration-contact-box">
+                                      <div class="abc-checkbox required abc-checkbox-info">
+                                        <input type="checkbox" id="accountPerson" name="accountPerson" [checked]="accountPerson" value="true" (change)="accountPerson = !accountPerson" formControlName="accts_cntct_status">
+                                        <label for="accountPerson">Accounts Person &amp; Operation Executive</label>
+                                      </div>
+                                      <div *ngIf="accountPerson">
+                                        <div class="form-group">
+                                          <label class="required" for="con-name1">Name</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="accts_name" class="form-control" type="text" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.accts_name"></control-messages>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="required" for="con-email1">Email</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="accts_email" class="form-control" type="email" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.accts_email"></control-messages>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="required" for="con-contact1">Contact number</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="accts_mobile" class="form-control" type="text" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.accts_mobile"></control-messages>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-4 style-float-left">
+                                    <div class="partner-registration-contact-box">
+                                      <div class="abc-checkbox required abc-checkbox-info">
+                                        <input type="checkbox" id="salesPerson" name="salesPerson" [checked]="salesPerson" value="true" (change)="salesPerson = !salesPerson" formControlName="sales_cntct_status">
+                                        <label for="salesPerson">Sales person</label>
+                                      </div>
+                                      <div *ngIf="salesPerson">
+                                        <div class="form-group">
+                                          <label class="required" for="con-name1">Name</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="sales_name" class="form-control" type="text" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.sales_name"></control-messages>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="required" for="con-email1">Email</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="sales_email" class="form-control" type="email" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.sales_email"></control-messages>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="required" for="con-contact1">Contact number</label>
+                                          <div class="input-group"> <span class="input-group-addon"> <i class="fa fa fa-user field-font-size2"></i> </span>
+                                            <input formControlName="sales_mobile" class="form-control" type="text" required="required">
+                                          </div>
+                                        </div>
+                                        <div class="margin-bottom-10 margin-top-10">
+                                          <control-messages [control]="partnerRegistrationForm_2.controls.sales_mobile"></control-messages>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  </fieldset>
+                                </div>
+                              </div>
+                              <!--/. Contact details-->
+                              <!--Document details-->
+                              <div class="row margin-top-1" *ngIf="existing_partner_status!='true'">
+                                <div class="col-lg-12">
+                                  <fieldset class="padding-top-1">
+                                  <legend>Upload documents</legend>
+                                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+                                  <div class="col-lg-6 style-float-left">
+                                    <div class="abc-checkbox abc-checkbox-info">
+                                      <input [checked]="bank_statement" id="bank_statement"  type="checkbox" (change)="bank_statement = !bank_statement; removeDocumentFunc(0, 'Bank statement')" value="bank_statement">
+                                      <label for="bank_statement">Last 3 months bank statement</label>
+                                    </div>
+                                    <div class="form-group" *ngIf="bank_statement">
+                                      <div>
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                          <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename bank_statement"></span> </div>
+                                          <span class="input-group-addon btn btn-secondary btn-file select-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                          <input name="statement" type="file" (change)="selectDocumentFunc($event, 0, 'Bank statement')">
+                                          </span> <a href="#" (click)="removeDocumentFunc(0, 'Bank statement')" class="input-group-addon btn btn-secondary fileinput-exists remove" data-dismiss="fileinput">Remove</a> </div>
+                                          <span style="color: red" *ngIf="isBsValid!=undefined">{{ isBsValid }}</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="bank_statement && bank_statement_file!='empty'"> <a target="blank" href="{{ bank_statement_url }}">{{ bank_statement_file }}</a> </div>
+                                  </div>
+                                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+                                  <div class="col-lg-6 style-float-left">
+                                    <div class="abc-checkbox abc-checkbox-info">
+                                      <input [checked]="income_tax" id="income_tax" type="checkbox" (change)="income_tax = !income_tax; removeDocumentFunc(1, 'Audits')" value="income_tax">
+                                      <label for="income_tax">Latest Audit Accounts with Income Tax return acknowledgement copy</label>
+                                    </div>
+                                    <div class="form-group" *ngIf="income_tax">
+                                      <div>
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                          <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span> </div>
+                                          <span class="input-group-addon btn btn-secondary btn-file select-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                          <input name="audits" type="file" (change)="selectDocumentFunc($event, 1, 'Audits')">
+                                          </span> <a href="#" (click)="removeDocumentFunc(1, 'Audits')" class="input-group-addon btn btn-secondary fileinput-exists remove" data-dismiss="fileinput">Remove</a> </div>
+                                          <span style="color: red" *ngIf="isItValid!=undefined">{{ isItValid }}</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="income_tax && income_tax_file!='empty'"> <a target="blank" href="{{ income_tax_url }}">{{ income_tax_file }}</a> </div>
+                                  </div>
+                                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+                                  <div class="col-lg-6 style-float-left">
+                                    <div class="abc-checkbox abc-checkbox-info">
+                                      <input [checked]="cst_lst" id="cst_lst" type="checkbox" (change)="cst_lst = !cst_lst; removeDocumentFunc(2, 'CST & LST')" value="cst_lst">
+                                      <label for="cst_lst">CST &amp; LST Registration proof</label>
+                                    </div>
+                                    <div class="form-group" *ngIf="cst_lst">
+                                      <div>
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                          <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span> </div>
+                                          <span class="input-group-addon btn btn-secondary btn-file select-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                          <input name="..." type="file" (change)="selectDocumentFunc($event, 2, 'CST & LST')">
+                                          </span> <a href="#" (click)="removeDocumentFunc(2, 'CST & LST')" class="input-group-addon btn btn-secondary fileinput-exists remove" data-dismiss="fileinput">Remove</a> </div>
+                                          <span style="color: red" *ngIf="isClValid!=undefined">{{ isClValid }}</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="cst_lst && cst_lst_file!='empty'"> <a target="blank" href="{{ cst_lst_url }}">{{ cst_lst_file }}</a> </div>
+                                  </div>
+                                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+                                  <div class="col-lg-6 style-float-left">
+                                    <div class="abc-checkbox abc-checkbox-info">
+                                      <input [checked]="memorandum_proof" id="memorandum_proof" type="checkbox" (change)="memorandum_proof = !memorandum_proof; removeDocumentFunc(3, 'Memorandum & Articles')" value="memorandum_proof">
+                                      <label for="memorandum_proof">Memorandum &amp; Articles of Association/Partnership Agreements</label>
+                                    </div>
+                                    <div class="form-group" *ngIf="memorandum_proof">
+                                      <div>
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                          <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span> </div>
+                                          <span class="input-group-addon btn btn-secondary btn-file select-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                          <input name="...." type="file" (change)="selectDocumentFunc($event, 3, 'Memorandum & Articles')">
+                                          </span> <a href="#" (click)="removeDocumentFunc(3, 'Memorandum & Articles')" class="input-group-addon btn btn-secondary fileinput-exists remove" data-dismiss="fileinput">Remove</a> </div>
+                                          <span style="color: red" *ngIf="isMpValid!=undefined">{{ isMpValid }}</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="memorandum_proof && memorandum_proof_file!='empty'"> <a target="blank" href="{{ memorandum_proof_url }}">{{ memorandum_proof_file }}</a> </div>
+                                  </div>
+                                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+                                  <div class="col-lg-6 style-float-left">
+                                    <div class="abc-checkbox abc-checkbox-info">
+                                      <input [checked]="passport? 'checked': null" id="passport" type="checkbox" (change)="passport = !passport; removeDocumentFunc(4, 'Passport')" value="passport">
+                                      <label for="passport">Copy of Passport of Proprietor/Partner/Directors <strong style="color:#dd5826;">(Mandatory)</strong></label>
+                                    </div>
+                                    <div class="form-group" *ngIf="passport">
+                                      <div>
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                          <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span> </div>
+                                          <span class="input-group-addon btn btn-secondary btn-file select-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                          <input name="..." type="file" (change)="selectDocumentFunc($event, 4, 'Passport')">
+                                          </span> <a href="#" (click)="removeDocumentFunc(4, 'Passport')" class="input-group-addon btn btn-secondary fileinput-exists remove" data-dismiss="fileinput">Remove</a> </div>
+                                          <span style="color: red" *ngIf="isPtValid!=undefined">{{ isPtValid }}</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="passport && passport_file!='empty'"> <a target="blank" href="{{ passport_url }}">{{ passport_file }}</a> </div>
+                                  </div>
+                                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+                                  <div class="col-lg-6 style-float-left">
+                                    <div class="abc-checkbox abc-checkbox-info">
+                                      <input [checked]="pan_card? 'checked': null" id="pan_card" type="checkbox" (change)="pan_card = !pan_card; removeDocumentFunc(5, 'Pan card')" value="pan_card">
+                                      <label for="pan_card">Company PAN Card <strong style="color:#dd5826;">(Mandatory)</strong></label>
+                                    </div>
+                                    <div class="form-group" *ngIf="pan_card">
+                                      <div>
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                          <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span> </div>
+                                          <span class="input-group-addon btn btn-secondary btn-file select-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                          <input name="..." type="file" (change)="selectDocumentFunc($event, 5, 'Pan card')">
+                                          </span> <a href="#" (click)="removeDocumentFunc(5, 'Pan card')" class="input-group-addon btn btn-secondary fileinput-exists remove" data-dismiss="fileinput">Remove</a> </div>
+                                          <span style="color: red" *ngIf="isPaValid!=undefined">{{ isPaValid }}</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="pan_card && pan_card_file!='empty'"> <a target="blank" href="{{ pan_card_url }}">{{ pan_card_file }}</a> </div>
+                                  </div>
+                                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+                                  <div class="col-lg-6 style-float-left">
+                                    <div class="abc-checkbox abc-checkbox-info">
+                                      <input [checked]="service_tax? 'checked': null" id="service_tax" type="checkbox" (change)="service_tax = !service_tax; removeDocumentFunc(6, 'GST certificate')" value="service_tax">
+                                      <label for="service_tax">GST Registration Certificate <strong style="color:#dd5826;">(Mandatory)</strong></label>
+                                    </div>
+                                    <div class="form-group" *ngIf="service_tax">
+                                      <div>
+                                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                          <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span> </div>
+                                          <span class="input-group-addon btn btn-secondary btn-file select-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                          <input name="..." type="file" (change)="selectDocumentFunc($event, 6, 'GST certificate')">
+                                          </span> <a href="#" (click)="removeDocumentFunc(6, 'GST certificate')" class="input-group-addon btn btn-secondary fileinput-exists remove" data-dismiss="fileinput">Remove</a> </div>
+                                          <span style="color: red" *ngIf="isStValid!=undefined">{{ isStValid }}</span>
+                                      </div>
+                                    </div>
+                                    <div class="form-group" *ngIf="service_tax && service_tax_file!='empty'"> <a target="blank" href="{{ service_tax_url }}">{{ service_tax_file }}</a> </div>
+                                  </div>
+                                  <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
+                                  </fieldset>
+                                </div>
+                              </div>
+                              <!--/. Document details-->
+                              <!--Other details-->
+                              <div class="row margin-top-1">
+                                <div class="col-lg-12">
+                                <fieldset>
+                            	<legend>Other details</legend>
+                                <div class="col-lg-6 style-float-left">
+                                  <div class="form-group">
+                                    <label for="hint-field" class="col-form-label text-md-left required">Preferred username for login</label>
+                                    <div>
+                                      <input type="text" class="form-control" formControlName="preferred_user_name">
+                                      <control-messages [control]="partnerRegistrationForm_2.controls.preferred_user_name"></control-messages>
+                                    </div>
+                                  </div>
+                                  <div class="margin-bottom-10 margin-top-10">
+                                    <!--<control-messages [control]="partnerRegistrationForm_2.controls.preferred_user_name"></control-messages>-->
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 style-float-left">
+                                  <div class="form-group">
+                                    <label for="hint-field" class="col-form-label text-md-left">GST registration number</label>
+                                    <div>
+                                      <input type="text" class="form-control" formControlName="gst_number">
+                                      <control-messages [control]="partnerRegistrationForm_2.controls.gst_number"></control-messages>
+                                    </div>
+                                  </div>
+                                </div>
+                                </fieldset>
+                                </div>
+                              </div>
+                              <!--/. Other details-->
+                              <!--Terms and conditions-->
+                              <div class="form-group row">
+                                <div class="col-lg-8 permissions-section">
+                                  <div class="abc-checkbox">
+                                    <input type="checkbox" id="director" name="director-owner" [checked]="agreePolicies? 'checked': null" (click)="handleSelect($event, termsAndConditions)" />
+                                    <label for="terms_and_condition" data-toggle="modal" data-target="#terms-conditions-modal">I have read and agreed to Terms &amp; Conditions </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--/. Terms and conditions-->
+                              <!--Footer section-->
+                              <ul class="pager wizard page-prenext" style="margin: 34px -20px -80px 0; float: right;">
+                                <li class="next">
+                                  <button *ngIf="existing_partner_status!='true'" type="submit" [disabled]="!partnerRegistrationForm_2.valid || !agreePolicies || !passport || !pan_card || !service_tax || isBsValid!=undefined || isItValid!=undefined || isClValid!=undefined || isMpValid!=undefined || isPtValid!=undefined || isPaValid!=undefined || isStValid!=undefined" class="btn btn-primary btn-rounded pull-right">
+                                    Next &nbsp;
+                                    <!--<i class="fa fa-caret-right"></i> -->
+                                  </button>
+                                  <button *ngIf="existing_partner_status=='true'" type="submit" [disabled]="!partnerRegistrationForm_2.valid" class="btn btn-primary btn-rounded pull-right">
+                                    Next &nbsp;
+                                    <!--<i class="fa fa-caret-right"></i> -->
+                                  </button>
+                                </li>
+                                <li class="finish" style="display: none">
+                                  <button type="button" class="btn btn-success btn-rounded pull-right">
+                                    Finish &nbsp;
+                                    <!--<i class="glyphicon glyphicon-ok"></i> -->
+                                  </button>
+                                </li>
+                                <li class="previous">
+                                  <button type="button" class="btn btn-warning btn-rounded pull-left">
+                                    <!--<i class="fa fa-caret-left"></i> -->
+                                    &nbsp; Previous
+                                  </button>
+                                </li>
+                              </ul>
+                              <!--/. Footer section-->
+                            </form>
+                          </div>
+                          <!--/. Second step-->
+                          <!--Third step-->
+                          <div class="tab-pane bg-gray-lighter" id="tab3" style="padding-bottom: 0px;">
+                            <form [formGroup]="partnerRegistrationForm_3" data-parsley-priority-enabled="false" novalidate="novalidate" (ngSubmit)="submitFunc('third_step')" style="">
+                              <div class="row">
+                                <div class="col-lg-5">
+                                <fieldset class="padding-top-1">
+                                  <legend class="required">What type of partner are you ?</legend>
+                                  <div class="" *ngFor="let type of partnerTypes; let i = index">
+                                    <input [checked]="type.checked == true ? 'checked':null" type="checkbox" (change)="partnerTypeChooseFunc($event, type.symbol, i)" value="{{type.id}}" id="{{ type.text }}">
+                                    <label>{{ type.text }}</label>
+                                  </div>
+                                  </fieldset>
+                                </div>
+
+                                <div class="col-lg-7">
+                                  <fieldset>
+                                  <div class="form-group">
+                                    <label class="required" for="con-contact3">Your core business</label>
+                                    <div class="col-md-12 col-xs-12 style-padding-nospace">
+                                      <ng-select [allowClear]="true" [items]="items" (data)="refreshValue($event)" (selected)="selected($event)" (removed)="removed($event)"
+                    (typed)="typed($event)" placeholder="Please select core business" formControlName="core_business"> </ng-select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="focused">Focused customer vertical</label>
+                                    <div class="col-md-12 col-xs-12 style-padding-nospace">
+                                      <ng-select [multiple]="true" [items]="customerItems" (data)="customerRefreshValue($event)" (selected)="customerSelected($event)" (removed)="customerRemoved($event)"
+                    (typed)="customerTyped($event)" placeholder="Please select your customer vertical" formControlName="focused_customer"> </ng-select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="required" for="focused">Select your interested workloads to work with Redington</label>
+                                    <div class="col-md-12 col-xs-12 style-padding-nospace">
+                                      <ng-select [multiple]="true" [items]="workloadItems" (data)="workloadRefreshValue($event)" (selected)="workloadSelected($event)" (removed)="workloadRemoved($event)"
+                    (typed)="workloadTyped($event)" placeholder="Please select your interested workloads" formControlName="interested_workloads"> </ng-select>
+                                    </div>
+                                  </div>
+                                  </fieldset>
+                                </div>
+                              </div>
+                              <!--Footer section-->
+                              <ul class="pager wizard page-prenext" style="margin: 34px -20px -80px 0; float: right;">
+                                <li class="next">
+                                  <button type="button" class="btn btn-primary btn-rounded pull-right">
+                                    Next &nbsp;
+                                    <!--<i class="fa fa-caret-right"></i> -->
+                                  </button>
+                                </li>
+                                <li *ngIf="registration=='progress'" class="finish" style="display: none">
+                                  <button type="submit" [disabled]="!partnerRegistrationForm_3.valid || !partnerType" class="btn btn-success btn-rounded pull-right">
+                                    Finish &nbsp;
+                                    <!--<i class="glyphicon glyphicon-ok"></i> -->
+                                  </button>
+                                </li>
+                                <li *ngIf="registration=='completed'" class="finish">
+                                  <button type="submit" [disabled]="true" class="btn btn-success btn-rounded pull-right">
+                                    Finishing &nbsp;
+                                    <!--<i class="fa fa-spinner fa-spin"></i> -->
+                                  </button>
+                                </li>
+                                <li class="previous" *ngIf="registration=='progress'">
+                                  <button type="button" class="btn btn-warning btn-rounded pull-left">
+                                    <!--<i class="fa fa-caret-left"></i> -->
+                                    &nbsp; Previous
+                                  </button>
+                                </li>
+                                <li class="previous" *ngIf="registration=='completed'">
+                                  <button type="button" [disabled]="true" class="btn btn-warning btn-rounded pull-left">
+                                    <!--<i class="fa fa-caret-left"></i> -->
+                                    &nbsp; Previous
+                                  </button>
+                                </li>
+                              </ul>
+                              <!--/. Footer section-->
+                            </form>
+                          </div>
+                          <!--/. Third step-->
+                        </div>
+                        <!--/. Tabs section-->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div>&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="modal fade" role="dialog" id="confirmationModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" >Confirmation</h4>
+			</div>
+			<div class="modal-body" style="color:green">
+				<p>Thank you for your partnership. We will process your registration and get back to you shortly</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" (click)="backToLogin()" class="btn btn-default">ok</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Terms & Conditions modal box-->
+<div class="modal fade" id="terms-conditions-modal" role="dialog" #termsAndConditions>
+<div class="modal-dialog">
+    <!--Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Please Read and agree to the Terms & Conditions</h4>
+        </div>
+        <div class="modal-body" style="position: relative;padding: 15px;height: 550px;overflow-y: auto;">
+            <div id="scroll" [innerHTML]="termsAndConditionsContent"></div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" (click)="agreePolicies = false" class="btn btn-default">Disagree</button>
+                <button type="button" data-dismiss="modal" (click)="agreePolicies = true" class="btn btn-primary">Agree</button>
+            </div>
+    </div>
+</div>
+</div>
+</div>
+  </div>
+
+  <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="row inline-row footer-widget-area" role="complementary" style="position: relative; height:370px;">
+        <div id="black-studio-tinymce-3" class="widget inline-column col-md-4 col-sm-6 col-xs-12 count-3 widget_black_studio_tinymce" style="position: absolute; left: 0px; top: 0px;">
+          <div class="textwidget">
+            <h4><span style="color: #008000;">ABOUT US</span></h4>
+            <p><span style="font-size: 14px;">TRUSTWORTHY. STABLE. EXPERT. DIVERSE.</span></p>
+            <p style="line-height: 20px;">This is Redington Cloud Solution Group for you. A vertical of the leading conglomerate Redington Group, Redington Cloud Solution Group endeavors to function as a One-Stop-Shop for cloud services.</p>
+          </div>
+        </div>
+        <div id="black-studio-tinymce-4" class="widget inline-column col-md-4 col-sm-6 col-xs-12 count-3 widget_black_studio_tinymce" style="position: absolute; left: 404px; top: 0px;">
+          <div class="textwidget">
+            <h4><span style="color: #008000;">GET IN TOUCH</span></h4>
+            <div role="form" class="wpcf7">
+              <div class="screen-reader-response"></div>
+              <form action="/become-a-partner/#wpcf7-f4-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+                <div class="contact-form-footer">
+                  <div class="form-group your-name">
+                    <input class="form-control" name="your-name" type="text" value="" placeholder="Your name" aria-invalid="false" aria-required="true" required="">
+                  </div>
+                  <div class="form-group your-email">
+                    <input class="form-control" name="your-email" type="email" value="" placeholder="Your email" aria-invalid="false" aria-required="true" required="">
+                  </div>
+                  <div class="form-group your-message">
+                    <textarea class="form-control" name="your-message" rows="4" placeholder="Your message" aria-invalid="false"></textarea>
+                  </div>
+                  <div>
+                    <div class="form-group">
+                      <div>
+                        <input class="wpcf7-submit btn btn-primary" type="submit" value="Send">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="black-studio-tinymce-5" class="widget inline-column col-md-4 col-sm-6 col-xs-12 count-3 widget_black_studio_tinymce" style="position: absolute; left: 808px; top: 52px;">
+          <div class="textwidget social_media">
+            <p> <a href="https://www.facebook.com/redingtoncloudsolutions/?utm_source=Footer&amp;utm_medium=website" target="_blank"> <img class="alignnone size-full wp-image-24959" src="http://www.redington.vinbytes.com/wp-content/uploads/2017/04/fb.png" alt="" width="31" height="31"> </a> <a href="https://twitter.com/RedingtonCloud?utm_source=Footer&amp;utm_medium=website" target="_blank"> <img class="alignnone size-full wp-image-24965" src="http://redington.vinbytes.com/wp-content/uploads/2017/04/twitter.png" alt="" width="31" height="31"> </a> <a href="https://plus.google.com/b/101514393255720721546/101514393255720721546" target="_blank"> <img class="alignnone size-medium wp-image-24960" src="http://redington.vinbytes.com/wp-content/uploads/2017/04/g.png" alt="" width="31" height="31"> </a> <a href="https://www.linkedin.com/company/redington-cloud-solutions?utm_source=Footer&amp;utm_medium=website" target="_blank"> <img class="alignnone size-medium wp-image-24961" src="http://redington.vinbytes.com/wp-content/uploads/2017/04/linkedin.png" alt="" width="31" height="31"> </a> <a href="https://m.youtube.com/channel/UCYbhGDagFWLBi_uEAqHcSzw" target="_blank"> <img class="alignnone wp-image-25099" src="https://redingtoncloud.com/wp-content/uploads/2017/04/New_youtube_logo.png" alt="" width="31" height="31"> </a> </p>
+            <hr>
+            <p> <img class="alignnone size-full wp-image-24962" src="http://redington.vinbytes.com/wp-content/uploads/2017/04/ph.png" alt="" width="31" height="31">&nbsp;&nbsp;&nbsp; <span style="font-size: 15px;">+91 81 4411 2222</span> </p>
+            <hr>
+            <p> <a href="https://redingtoncloud.com/home/homepage-agency-bright-test/#portfolio" target="_blank">Cloud Portfolio</a> | <a href="https://redingtoncloud.com/home/homepage-agency-bright-test/#services" target="_blank">Cloud Services</a> | <a href="">Become a Partner</a> </p>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <!-- .footer-widget-area -->
+    </div>
+  </footer>
+
+  <footer id="footer-nav" class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="footer-site-info">
+            <p align="center">Copyright © Redington 2017. All rights reserved. <a href="#">Privacy</a> <a href="#">Legal</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

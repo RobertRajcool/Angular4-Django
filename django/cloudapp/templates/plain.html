@@ -1,0 +1,22 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    Title
+{% endblock %}
+
+{% block content %}
+    {#    Domain name#}
+    {% if domain_name %}
+        <p style="width: 710px; float: right; padding: 0px;">
+            <a href="" style="text-decoration:none !important;
+                        text-align: right !important;
+                        font-size: smaller;
+                        color: lightgray !important;
+                        float: right;">{{ domain_name }}</a></p>
+    {% endif %}
+
+{#    Email message#}
+    <p>{{ message | safe }}</p>
+
+
+{% endblock %}

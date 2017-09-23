@@ -1,0 +1,11 @@
+<div>
+    <app-red-table [screenName]="'List of Customers'"
+                   [columns]="cols"
+                   [fetchUrl]="fetchUrl"
+                   [addButtonInfo]="addButtonInfo"
+                   [commonFilter]="commonFilter"
+                   [limit]= "5"
+                   (event)="eventListener($event)"
+    >
+    </app-red-table>
+</div>
