@@ -193,9 +193,6 @@ WKHTMLTOPDF_CMD_OPTIONS = {
     'quiet': True,
 }
 # Email settings
-SENDGRID_API_KEY = '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'
-EMAIL_BACKEND = "sgbackend.SendGridBackend"
-EMAIL_USE_TLS = True
 #EMAIL_USE_SSL = True
 #EMAIL_HOST = 'mail.redington.co.in'
 #EMAIL_HOST_USER = 'cloudsupport'
